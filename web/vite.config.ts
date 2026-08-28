@@ -69,6 +69,7 @@ function poormadDevToken(): Plugin {
 }
 
 export default defineConfig({
+  base: "./",
   plugins: [
     react(),
     babel({ presets: [compilerPreset()] }),
@@ -100,7 +101,7 @@ export default defineConfig({
     ],
   },
   build: {
-    outDir: "../poormad_cli/web_dist",
+    outDir: "../web-dist",
     emptyOutDir: true,
     // Shell stays a bit over Vite's 500 kB default after vendor splits;
     // page/xterm chunks load on demand. Keep a modest ceiling so a true

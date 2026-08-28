@@ -23,6 +23,7 @@ import {
 
 import { POORMAD_BASE_PATH, buildWsAuthParam } from "@/lib/api";
 import { maybeReloadForLoopbackWsAuthFailure } from "@/lib/dashboard-auth-reload";
+import { readGatewayWsUrl, readGatewayToken, saveGatewayToken } from "@/lib/gatewayConfig";
 
 export type { ConnectionState, GatewayEvent, GatewayEventName };
 
@@ -42,9 +43,25 @@ export class GatewayClient extends JsonRpcGatewayClient {
       return;
     }
 
-    // Gated mode: legacy ``?token=`` is rejected by ``_ws_auth_ok``; the SPA
-    // must fetch a single-use ticket. Explicit ``token`` keeps the test-only
-    // override path.
+    // Static-deploy mode: the portal is served without the Python dashboard
+    // server, so resolve the gateway WS URL + token from the page/config
+    // instead of the dashboard-injected ticket flow.
+    const wsUrl = readGatewayWsUrl();
+    const effectiveToken = token ?? readGatewayToken();
+    if (effectiveToken) saveGatewayToken(effectiveToken);
+
+    if (wsUrl !== "/api/ws") {
+      // Remote gateway: build the URL directly with the configured token.
+      const url = new URL(wsUrl);
+      if (effectiveToken) {
+        url.searchParams.set("token", effectiveToken);
+      }
+      await super.connect(url.toString());
+      return;
+    }
+
+    // Loopback mode (served by the dashboard server): use the injected token /
+    // single-use ticket as before.
     const authParam = token ? (["token", token] as const) : await buildWsAuthParam();
     if (!authParam[1]) {
       throw new Error(
