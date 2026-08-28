@@ -4,7 +4,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
   title: 'PoorMad',
-  tagline: 'The self-improving AI agent',
+  tagline: 'Poor in cost. Mad in capability.',
   favicon: 'img/favicon.ico',
 
   url: 'https://poormad.dev',

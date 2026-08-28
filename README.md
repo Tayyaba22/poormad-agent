@@ -2,7 +2,13 @@
   <img src="assets/banner.png" alt="PoorMad" width="100%">
 </p>
 
-# PoorMad ☤
+# PoorMad ⚡
+
+<p align="center">
+  <b>Poor in cost. Mad in capability.</b><br>
+  The agent that runs on a $5 VPS but outperforms setups 100x its price.
+</p>
+
 <p align="center">
   <a href="https://poormad.dev/">PoorMad</a> | <a href="https://poormad.dev/">PoorMad Desktop</a>
 </p>
@@ -16,7 +22,7 @@
   <a href="README.es.md"><img src="https://img.shields.io/badge/Lang-Español-orange?style=for-the-badge" alt="Español"></a>
 </p>
 
-**The self-improving AI agent built by [PoorMad](https://poormad.com).** It's the only agent with a built-in learning loop — it creates skills from experience, improves them during use, nudges itself to persist knowledge, searches its own past conversations, and builds a deepening model of who you are across sessions. Run it on a $5 VPS, a GPU cluster, or serverless infrastructure that costs nearly nothing when idle. It's not tied to your laptop — talk to it from Telegram while it works on a cloud VM.
+**PoorMad is the agent with a learning loop.** It gets smarter the longer you run it — creating skills from experience, improving them during use, nudging itself to persist knowledge, searching its own past conversations, and building a deepening model of who you are across sessions. Run it on a $5 VPS, a GPU cluster, or serverless infrastructure that costs nearly nothing when idle. It's not tied to your laptop — talk to it from Telegram while it works on a cloud VM.
 
 Use any model you want — [PoorMad Portal](https://portal.poormad.dev), OpenRouter, OpenAI, your own endpoint, and [many others](https://poormad.dev/docs/integrations/providers). Switch with `poormad model` — no code changes, no lock-in.
 
