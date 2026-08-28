@@ -1,0 +1,45 @@
+# PoorMad house theme — space-black + violet/lavender nebula accent.
+# Set `display.skin: poormad-dark` in config.yaml.
+name: poormad-dark
+description: PoorMad house theme — space-black with violet nebula accent
+
+colors:
+  # Base surface
+  background: "#0a0a0f"
+
+  # Brand accent — violet nebula
+  ui_accent: "#8b5cf6"
+  banner_accent: "#8b5cf6"
+
+  # Text hierarchy
+  banner_title: "#c4b5fd"   # lavender
+  banner_text: "#e5e0f0"    # body foreground
+  ui_text: "#e5e0f0"
+  banner_dim: "#6b6480"     # muted
+  banner_border: "#1e1b2e"
+  ui_border: "#1e1b2e"
+
+  # Semantic status
+  ui_ok: "#34d399"
+  ui_warn: "#fbbf24"
+  ui_error: "#f87171"
+
+  # CLI / TUI chrome
+  prompt: "#c4b5fd"
+  input_rule: "#8b5cf6"
+  response_border: "#c4b5fd"
+  status_bar_bg: "#0d0d16"
+  status_bar_text: "#e5e0f0"
+  status_bar_good: "#34d399"
+  status_bar_warn: "#fbbf24"
+  status_bar_critical: "#f87171"
+  session_label: "#c4b5fd"
+  session_border: "#1e1b2e"
+
+# Optional flavor
+branding:
+  agent_name: PoorMad
+  prompt_symbol: "🌑"
+  help_header: "🌑 PoorMad Commands"
+
+tool_prefix: "┊"

@@ -1,0 +1,45 @@
+# PoorMad terminal theme — amber-on-black retro (TUI focus).
+# Set `display.skin: poormad-terminal` in config.yaml.
+name: poormad-terminal
+description: PoorMad terminal — amber phosphor on black, retro TUI
+
+colors:
+  # Base surface
+  background: "#0a0a0a"
+
+  # Brand accent — amber phosphor
+  ui_accent: "#ffb000"
+  banner_accent: "#ffb000"
+
+  # Text hierarchy
+  banner_title: "#ffd75e"
+  banner_text: "#d8c9a3"
+  ui_text: "#d8c9a3"
+  banner_dim: "#7a6f52"
+  banner_border: "#2a2418"
+  ui_border: "#2a2418"
+
+  # Semantic status
+  ui_ok: "#5af7b0"
+  ui_warn: "#ffb000"
+  ui_error: "#ff6b6b"
+
+  # CLI / TUI chrome
+  prompt: "#ffd75e"
+  input_rule: "#ffb000"
+  response_border: "#ffd75e"
+  status_bar_bg: "#0e0d0a"
+  status_bar_text: "#d8c9a3"
+  status_bar_good: "#5af7b0"
+  status_bar_warn: "#ffb000"
+  status_bar_critical: "#ff6b6b"
+  session_label: "#ffd75e"
+  session_border: "#2a2418"
+
+# Optional flavor
+branding:
+  agent_name: PoorMad
+  prompt_symbol: "❯"
+  help_header: "> PoorMad Commands"
+
+tool_prefix: ">"

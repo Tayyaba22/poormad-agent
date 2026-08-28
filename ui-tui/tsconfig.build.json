@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@poormad/ink": ["src/types/poormad-ink.d.ts"]
+    }
+  }
+}

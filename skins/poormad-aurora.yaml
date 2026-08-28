@@ -1,0 +1,45 @@
+# PoorMad aurora theme — animated gradient headers (desktop + TUI).
+# Set `display.skin: poormad-aurora` in config.yaml.
+name: poormad-aurora
+description: PoorMad aurora — deep space with animated violet-teal gradients
+
+colors:
+  # Base surface
+  background: "#0b0b14"
+
+  # Brand accent — aurora gradient (violet -> teal)
+  ui_accent: "#a78bfa"
+  banner_accent: "#5eead4"
+
+  # Text hierarchy
+  banner_title: "#a78bfa"
+  banner_text: "#e5e0f0"
+  ui_text: "#e5e0f0"
+  banner_dim: "#6b6480"
+  banner_border: "#1e2a33"
+  ui_border: "#1e2a33"
+
+  # Semantic status
+  ui_ok: "#34d399"
+  ui_warn: "#fbbf24"
+  ui_error: "#f87171"
+
+  # CLI / TUI chrome
+  prompt: "#a78bfa"
+  input_rule: "#5eead4"
+  response_border: "#a78bfa"
+  status_bar_bg: "#0e1018"
+  status_bar_text: "#e5e0f0"
+  status_bar_good: "#34d399"
+  status_bar_warn: "#fbbf24"
+  status_bar_critical: "#f87171"
+  session_label: "#5eead4"
+  session_border: "#1e2a33"
+
+# Optional flavor
+branding:
+  agent_name: PoorMad
+  prompt_symbol: "🌌"
+  help_header: "🌌 PoorMad Commands"
+
+tool_prefix: "┊"

@@ -1,0 +1,45 @@
+# PoorMad light theme — clean light variant, same violet accent.
+# Set `display.skin: poormad-light` in config.yaml.
+name: poormad-light
+description: PoorMad light — clean white with violet accent
+
+colors:
+  # Base surface
+  background: "#f7f5ff"
+
+  # Brand accent — violet nebula
+  ui_accent: "#7c3aed"
+  banner_accent: "#7c3aed"
+
+  # Text hierarchy
+  banner_title: "#4c1d95"
+  banner_text: "#1f1b2e"
+  ui_text: "#1f1b2e"
+  banner_dim: "#8b87a0"
+  banner_border: "#ddd6fe"
+  ui_border: "#ddd6fe"
+
+  # Semantic status
+  ui_ok: "#059669"
+  ui_warn: "#b45309"
+  ui_error: "#dc2626"
+
+  # CLI / TUI chrome
+  prompt: "#4c1d95"
+  input_rule: "#7c3aed"
+  response_border: "#7c3aed"
+  status_bar_bg: "#ede9fe"
+  status_bar_text: "#1f1b2e"
+  status_bar_good: "#059669"
+  status_bar_warn: "#b45309"
+  status_bar_critical: "#dc2626"
+  session_label: "#4c1d95"
+  session_border: "#ddd6fe"
+
+# Optional flavor
+branding:
+  agent_name: PoorMad
+  prompt_symbol: "🌑"
+  help_header: "🌑 PoorMad Commands"
+
+tool_prefix: "┊"

@@ -1,0 +1,60 @@
+name: Deploy PoorMad Docs to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'website/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: website/package-lock.json
+
+      - name: grab npm 12 (website requires >=11.17)
+        run: npm i -g npm@12
+
+      - name: Install dependencies
+        working-directory: website
+        run: npm ci --no-audit --no-fund
+
+      - name: Build Docusaurus (en)
+        working-directory: website
+        run: npm run build:fast
+
+      - name: Stage site at /docs/
+        run: |
+          mkdir -p _site/docs
+          cp -r website/build/* _site/docs/
+          if [ -f website/build/llms.txt ]; then cp website/build/llms.txt _site/llms.txt; fi
+          if [ -f website/build/llms-full.txt ]; then cp website/build/llms-full.txt _site/llms-full.txt; fi
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

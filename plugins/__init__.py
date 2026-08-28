@@ -1,0 +1,1 @@
+# PoorMad plugins package
