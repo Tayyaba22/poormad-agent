@@ -89,6 +89,13 @@ export interface DesktopTheme {
   name: string
   label: string
   description: string
+  /**
+   * Unique window/app title for this skin. When set, the renderer paints
+   * `document.title` (and the native titlebar) with this instead of the
+   * generic "PoorMad HUD". Lets each skin carry its own identity
+   * (e.g. "J.A.R.V.I.S.", "STARK OS", "VANGUARD").
+   */
+  title?: string
   /** Light palette (also reused for dark when `darkColors` is omitted). */
   colors: DesktopThemeColors
   /** Hand-tuned dark palette. Skins like `nous` ship one. */

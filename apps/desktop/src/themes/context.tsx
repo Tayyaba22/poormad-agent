@@ -458,6 +458,13 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => applyTheme(paintedTheme, paintedMode), [paintedTheme, paintedMode])
 
+  // Each skin carries its own identity — paint the window/app title from the
+  // active theme's `title` (e.g. "J.A.R.V.I.S.", "STARK OS", "VANGUARD"),
+  // falling back to the generic "PoorMad HUD" when the theme defines none.
+  useEffect(() => {
+    document.title = paintedTheme.title ?? 'PoorMad HUD'
+  }, [paintedTheme])
+
   // Keep the native window appearance pinned to the app theme (vibrancy
   // material, titlebar, new-window pre-paint background).
   useEffect(() => syncNativeTheme(mode, renderedMode), [mode, renderedMode])

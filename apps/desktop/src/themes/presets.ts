@@ -845,7 +845,390 @@ export const slateTheme: DesktopTheme = {
   }
 }
 
+/**
+ * MONO-HUE THEME FAMILY
+ * Each theme is mono-hue: one dominant accent hue over a neutral surface
+ * ladder (like Hermes). No second competing hue — the accent tints every
+ * semantic token, neutrals carry the rest. Each ships its own matching
+ * font (loaded via `typography.fontUrl`) and a unique app title.
+ */
+
+/** J.A.R.V.I.S. — mono-hue cyan, arc-reactor calm. */
+export const jarvisTheme: DesktopTheme = {
+  name: 'jarvis',
+  label: 'J.A.R.V.I.S.',
+  description: 'Mono-hue cyan HUD — arc-reactor calm',
+  title: 'J.A.R.V.I.S.',
+  colors: {
+    background: '#02101e',
+    foreground: '#cfeaff',
+    card: '#04182c',
+    cardForeground: '#cfeaff',
+    muted: '#06283f',
+    mutedForeground: '#7fb6e6',
+    popover: '#04233f',
+    popoverForeground: '#cfeaff',
+    primary: '#36c5f0',
+    primaryForeground: '#02101e',
+    secondary: '#062a4a',
+    secondaryForeground: '#cfeaff',
+    accent: '#06304f',
+    accentForeground: '#7fd8f5',
+    border: '#0a3a63',
+    input: '#0a3a63',
+    ring: '#36c5f0',
+    midground: '#36c5f0',
+    midgroundForeground: '#02101e',
+    composerRing: '#36c5f0',
+    destructive: '#e8779a',
+    destructiveForeground: '#02101e',
+    sidebarBackground: '#03182b',
+    sidebarBorder: '#0a3a63',
+    userBubble: '#06283f',
+    userBubbleBorder: '#0a3a63'
+  },
+  typography: {
+    fontSans: `"Rajdhani", ${SYSTEM_SANS}`,
+    fontMono: `"Share Tech Mono", ${SYSTEM_MONO}`,
+    fontUrl: 'https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Share+Tech+Mono&display=swap'
+  }
+}
+
+/** STARK OS — mono-hue amber, repulsor heat. */
+export const ironmanTheme: DesktopTheme = {
+  name: 'ironman',
+  label: 'STARK OS',
+  description: 'Mono-hue amber HUD — repulsor heat',
+  title: 'STARK OS',
+  colors: {
+    background: '#1a0d05',
+    foreground: '#ffd9a8',
+    card: '#241207',
+    cardForeground: '#ffd9a8',
+    muted: '#341c0a',
+    mutedForeground: '#e0a766',
+    popover: '#2b1608',
+    popoverForeground: '#ffd9a8',
+    primary: '#ff7a18',
+    primaryForeground: '#1a0d05',
+    secondary: '#341c0a',
+    secondaryForeground: '#ffd9a8',
+    accent: '#3a1d08',
+    accentForeground: '#ffb86b',
+    border: '#4a2a0e',
+    input: '#4a2a0e',
+    ring: '#ff7a18',
+    midground: '#ff7a18',
+    midgroundForeground: '#1a0d05',
+    composerRing: '#ff7a18',
+    destructive: '#e87b6b',
+    destructiveForeground: '#1a0d05',
+    sidebarBackground: '#231207',
+    sidebarBorder: '#4a2a0e',
+    userBubble: '#341c0a',
+    userBubbleBorder: '#4a2a0e'
+  },
+  typography: {
+    fontSans: `"Chakra Petch", ${SYSTEM_SANS}`,
+    fontMono: `"Oxanium", ${SYSTEM_MONO}`,
+    fontUrl: 'https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Oxanium:wght@500;700&display=swap'
+  }
+}
+
+/** AETHER-9 — mono-hue teal, orbital clean. */
+export const scifiTheme: DesktopTheme = {
+  name: 'scifi',
+  label: 'AETHER-9',
+  description: 'Mono-hue teal — orbital clean',
+  title: 'AETHER-9',
+  colors: {
+    background: '#04140f',
+    foreground: '#bff5dc',
+    card: '#072018',
+    cardForeground: '#bff5dc',
+    muted: '#0a3427',
+    mutedForeground: '#7fd6b3',
+    popover: '#082a1f',
+    popoverForeground: '#bff5dc',
+    primary: '#2dd4a7',
+    primaryForeground: '#04140f',
+    secondary: '#0a3427',
+    secondaryForeground: '#bff5dc',
+    accent: '#08392b',
+    accentForeground: '#7fe6c8',
+    border: '#0f4734',
+    input: '#0f4734',
+    ring: '#2dd4a7',
+    midground: '#2dd4a7',
+    midgroundForeground: '#04140f',
+    composerRing: '#2dd4a7',
+    destructive: '#e89a9a',
+    destructiveForeground: '#04140f',
+    sidebarBackground: '#052016',
+    sidebarBorder: '#0f4734',
+    userBubble: '#0a3427',
+    userBubbleBorder: '#0f4734'
+  },
+  typography: {
+    fontSans: `"Rajdhani", ${SYSTEM_SANS}`,
+    fontMono: `"Share Tech Mono", ${SYSTEM_MONO}`,
+    fontUrl: 'https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Share+Tech+Mono&display=swap'
+  }
+}
+
+/** NIGHT CITY — mono-hue magenta, neon-noir. (Cyan/magenta duotone dropped for mono-hue.) */
+export const cyberpunkThemeMono: DesktopTheme = {
+  name: 'cyberpunk',
+  label: 'NIGHT CITY',
+  description: 'Mono-hue magenta — neon-noir',
+  title: 'NIGHT CITY',
+  colors: {
+    background: '#0a0612',
+    foreground: '#f7d9ff',
+    card: '#120a1f',
+    cardForeground: '#f7d9ff',
+    muted: '#1d1230',
+    mutedForeground: '#c79bdd',
+    popover: '#160d24',
+    popoverForeground: '#f7d9ff',
+    primary: '#ff2d9b',
+    primaryForeground: '#0a0612',
+    secondary: '#1d1230',
+    secondaryForeground: '#f7d9ff',
+    accent: '#240f3a',
+    accentForeground: '#ff8fc8',
+    border: '#2a1845',
+    input: '#2a1845',
+    ring: '#ff2d9b',
+    midground: '#ff2d9b',
+    midgroundForeground: '#0a0612',
+    composerRing: '#ff2d9b',
+    destructive: '#ff6b9a',
+    destructiveForeground: '#0a0612',
+    sidebarBackground: '#0e0820',
+    sidebarBorder: '#2a1845',
+    userBubble: '#1d1230',
+    userBubbleBorder: '#2a1845'
+  },
+  typography: {
+    fontSans: `"Oxanium", ${SYSTEM_SANS}`,
+    fontMono: `"Share Tech Mono", ${SYSTEM_MONO}`,
+    fontUrl: 'https://fonts.googleapis.com/css2?family=Oxanium:wght@500;700&family=Share+Tech+Mono&display=swap'
+  }
+}
+
+/** LUMEN — mono-hue violet, ethereal glow. */
+export const neonTheme: DesktopTheme = {
+  name: 'neon',
+  label: 'LUMEN',
+  description: 'Mono-hue violet — ethereal glow',
+  title: 'LUMEN',
+  colors: {
+    background: '#04030a',
+    foreground: '#e8e0ff',
+    card: '#0a0814',
+    cardForeground: '#e8e0ff',
+    muted: '#120f24',
+    mutedForeground: '#b3a4e6',
+    popover: '#0d0a1c',
+    popoverForeground: '#e8e0ff',
+    primary: '#b14bff',
+    primaryForeground: '#04030a',
+    secondary: '#120f24',
+    secondaryForeground: '#e8e0ff',
+    accent: '#1a0f33',
+    accentForeground: '#d3a8ff',
+    border: '#211a3d',
+    input: '#211a3d',
+    ring: '#b14bff',
+    midground: '#b14bff',
+    midgroundForeground: '#04030a',
+    composerRing: '#b14bff',
+    destructive: '#e89a9a',
+    destructiveForeground: '#04030a',
+    sidebarBackground: '#080614',
+    sidebarBorder: '#211a3d',
+    userBubble: '#120f24',
+    userBubbleBorder: '#211a3d'
+  },
+  typography: {
+    fontSans: `"Oxanium", ${SYSTEM_SANS}`,
+    fontMono: `"Fira Code", ${SYSTEM_MONO}`,
+    fontUrl: 'https://fonts.googleapis.com/css2?family=Oxanium:wght@500;700&family=Fira+Code:wght@400;600&display=swap'
+  }
+}
+
+/** UNIT-7 — mono-hue steel-teal, robotic standby. */
+export const roboticTheme: DesktopTheme = {
+  name: 'robotic',
+  label: 'UNIT-7',
+  description: 'Mono-hue steel-teal — robotic',
+  title: 'UNIT-7',
+  colors: {
+    background: '#0c0f12',
+    foreground: '#c9d4dc',
+    card: '#13171b',
+    cardForeground: '#c9d4dc',
+    muted: '#1e242a',
+    mutedForeground: '#8a99a6',
+    popover: '#171c20',
+    popoverForeground: '#c9d4dc',
+    primary: '#5ad1c4',
+    primaryForeground: '#0c0f12',
+    secondary: '#1e242a',
+    secondaryForeground: '#c9d4dc',
+    accent: '#112420',
+    accentForeground: '#8fe6dc',
+    border: '#2a323a',
+    input: '#2a323a',
+    ring: '#5ad1c4',
+    midground: '#5ad1c4',
+    midgroundForeground: '#0c0f12',
+    composerRing: '#5ad1c4',
+    destructive: '#e89a9a',
+    destructiveForeground: '#0c0f12',
+    sidebarBackground: '#101417',
+    sidebarBorder: '#2a323a',
+    userBubble: '#1e242a',
+    userBubbleBorder: '#2a323a'
+  },
+  typography: {
+    fontSans: `"Chakra Petch", ${SYSTEM_SANS}`,
+    fontMono: `"IBM Plex Mono", ${SYSTEM_MONO}`,
+    fontUrl: 'https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap'
+  }
+}
+
+/** POORMAD PIXEL — mono-hue violet, 8-bit mascot. */
+export const pixelTheme: DesktopTheme = {
+  name: 'pixel',
+  label: 'POORMAD',
+  description: 'Mono-hue violet — 8-bit mascot',
+  title: 'POORMAD',
+  colors: {
+    background: '#0c0a16',
+    foreground: '#ece9fb',
+    card: '#14111f',
+    cardForeground: '#ece9fb',
+    muted: '#1b1730',
+    mutedForeground: '#b3a9d6',
+    popover: '#1b1730',
+    popoverForeground: '#ece9fb',
+    primary: '#8b5cf6',
+    primaryForeground: '#0c0a16',
+    secondary: '#1b1730',
+    secondaryForeground: '#ece9fb',
+    accent: '#1f1535',
+    accentForeground: '#c4b5fd',
+    border: '#2c2647',
+    input: '#2c2647',
+    ring: '#8b5cf6',
+    midground: '#8b5cf6',
+    midgroundForeground: '#0c0a16',
+    composerRing: '#8b5cf6',
+    destructive: '#e8779a',
+    destructiveForeground: '#0c0a16',
+    sidebarBackground: '#100d1c',
+    sidebarBorder: '#2c2647',
+    userBubble: '#1b1730',
+    userBubbleBorder: '#2c2647'
+  },
+  typography: {
+    fontSans: `"Press Start 2P", ${SYSTEM_SANS}`,
+    fontMono: `"Press Start 2P", ${SYSTEM_MONO}`,
+    fontUrl: 'https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'
+  }
+}
+
+/** VANGUARD — mono-hue gold, heroic. */
+export const heroicTheme: DesktopTheme = {
+  name: 'heroic',
+  label: 'VANGUARD',
+  description: 'Mono-hue gold — heroic',
+  title: 'VANGUARD',
+  colors: {
+    background: '#0a0712',
+    foreground: '#f3e9ff',
+    card: '#140d22',
+    cardForeground: '#f3e9ff',
+    muted: '#1a1130',
+    mutedForeground: '#c4a8e6',
+    popover: '#1a1130',
+    popoverForeground: '#f3e9ff',
+    primary: '#ffd23f',
+    primaryForeground: '#0a0712',
+    secondary: '#1a1130',
+    secondaryForeground: '#f3e9ff',
+    accent: '#261a40',
+    accentForeground: '#ffe18a',
+    border: '#33245c',
+    input: '#33245c',
+    ring: '#ffd23f',
+    midground: '#ffd23f',
+    midgroundForeground: '#0a0712',
+    composerRing: '#ffd23f',
+    destructive: '#e89a9a',
+    destructiveForeground: '#0a0712',
+    sidebarBackground: '#0c0818',
+    sidebarBorder: '#33245c',
+    userBubble: '#1a1130',
+    userBubbleBorder: '#33245c'
+  },
+  typography: {
+    fontSans: `"Rajdhani", ${SYSTEM_SANS}`,
+    fontMono: `"Oxanium", ${SYSTEM_MONO}`,
+    fontUrl: 'https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Oxanium:wght@500;700&display=swap'
+  }
+}
+
+/**
+ * PoorMad Dark — the canonical PoorMad desktop identity. Space-black surface
+ * with a violet/lavender nebula accent and the pixel-moon brand. Hand-tuned
+ * (not the naive CLI-skin auto-convert) so the GUI reads as a first-class
+ * product, distinct from the upstream Hermes/nous GitHub-fork look.
+ */
+export const poormadDarkTheme: DesktopTheme = {
+  name: 'poormad-dark',
+  label: 'PoorMad Dark',
+  description: 'Space-black with violet nebula accent — the PoorMad house theme',
+  title: 'PoorMad',
+  colors: {
+    background: '#0a0a0f',
+    foreground: '#e5e0f0',
+    card: '#12111c',
+    cardForeground: '#e5e0f0',
+    muted: '#16141f',
+    mutedForeground: '#8f899e',
+    popover: '#12111c',
+    popoverForeground: '#e5e0f0',
+    primary: '#8b5cf6',
+    primaryForeground: '#0a0a0f',
+    secondary: '#1c1830',
+    secondaryForeground: '#c4b5fd',
+    accent: '#1f1535',
+    accentForeground: '#c4b5fd',
+    border: '#1e1b2e',
+    input: '#1e1b2e',
+    ring: '#8b5cf6',
+    midground: '#8b5cf6',
+    midgroundForeground: '#0a0a0f',
+    composerRing: '#8b5cf6',
+    destructive: '#f87171',
+    destructiveForeground: '#0a0a0f',
+    sidebarBackground: '#0c0b12',
+    sidebarBorder: '#1e1b2e',
+    userBubble: '#1a1230',
+    userBubbleBorder: '#2a1f47'
+  },
+  typography: {
+    fontSans: `"Inter", ${SYSTEM_SANS}`,
+    fontMono: `"JetBrains Mono", ${SYSTEM_MONO}`,
+    fontUrl: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap'
+  }
+}
+
 export const BUILTIN_THEMES: Record<string, DesktopTheme> = {
+  'poormad-dark': poormadDarkTheme,
   nous: nousTheme,
   github: githubTheme,
   catppuccin: catppuccinTheme,
@@ -856,10 +1239,17 @@ export const BUILTIN_THEMES: Record<string, DesktopTheme> = {
   ember: emberTheme,
   mono: monoTheme,
   slate: slateTheme,
-  cyberpunk: cyberpunkTheme
+  cyberpunk: cyberpunkThemeMono,
+  jarvis: jarvisTheme,
+  ironman: ironmanTheme,
+  scifi: scifiTheme,
+  neon: neonTheme,
+  robotic: roboticTheme,
+  pixel: pixelTheme,
+  heroic: heroicTheme
 }
 
 export const BUILTIN_THEME_LIST = Object.values(BUILTIN_THEMES)
 
 /** Skin used when nothing is persisted or the persisted name is retired. */
-export const DEFAULT_SKIN_NAME = 'nous'
+export const DEFAULT_SKIN_NAME = 'poormad-dark'

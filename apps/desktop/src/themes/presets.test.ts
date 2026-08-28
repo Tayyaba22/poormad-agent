@@ -6,7 +6,8 @@ import {
   DEFAULT_SKIN_NAME,
   DEFAULT_TYPOGRAPHY,
   EMOJI_FALLBACK,
-  nousAltTheme
+  nousAltTheme,
+  poormadDarkTheme
 } from './presets'
 
 // #40364: none of the UI text/mono fonts carry emoji glyphs, so every font
@@ -40,10 +41,11 @@ describe('theme typography emoji fallback (#40364)', () => {
 })
 
 // The pre-GitHub PoorMad palette stays available as nous-alt; the default name
-// still means GitHub chrome + brand blue.
-describe('nous-alt is the retired PoorMad, not the default', () => {
-  it('is registered under its own name and leaves nous as the default', () => {
-    expect(DEFAULT_SKIN_NAME).toBe('nous')
+// now means the PoorMad house theme (space-black + violet nebula).
+describe('nous-alt is the retired PoorMad, distinct from the default', () => {
+  it('is registered under its own name and leaves poormad-dark as the default', () => {
+    expect(DEFAULT_SKIN_NAME).toBe('poormad-dark')
+    expect(BUILTIN_THEMES['poormad-dark']).toBe(poormadDarkTheme)
     expect(BUILTIN_THEMES['nous-alt']).toBe(nousAltTheme)
     expect(BUILTIN_THEMES.nous).not.toBe(nousAltTheme)
     expect(nousAltTheme.darkColors?.background).toBe('#0D2F86')
