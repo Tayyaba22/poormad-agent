@@ -2,7 +2,7 @@
   "name": "poormad",
   "productName": "PoorMad",
   "private": true,
-  "version": "0.17.0",
+  "version": "0.18.0",
   "description": "Native desktop shell for PoorMad.",
   "author": "PoorMad",
   "repository": {
