@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Docs — PoorMad</title>
+<meta name="description" content="PoorMad documentation: install, skills, memory, platforms, and the web portal." />
+<link rel="icon" href="assets/wordmark.png" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="index.html"><img src="assets/wordmark.png" alt="PoorMad" /></a>
+    <nav class="nav-links">
+      <a href="docs.html">Docs</a>
+      <a href="faq.html">FAQ</a>
+      <a href="portal/" target="_blank">Portal</a>
+      <a href="https://github.com/Tayyaba22/poormad-agent" target="_blank">GitHub</a>
+    </nav>
+    <a class="btn" href="index.html#download">Download</a>
+  </div>
+</header>
+
+<section class="section wrap">
+  <div class="docs-layout">
+    <aside class="docs-nav">
+      <span class="grp">Get started</span>
+      <a href="#install">Install</a>
+      <a href="#quickstart">Quick start</a>
+      <span class="grp">Concepts</span>
+      <a href="#skills">Skills</a>
+      <a href="#memory">Memory</a>
+      <a href="#platforms">Platforms</a>
+      <span class="grp">Surfaces</span>
+      <a href="#desktop">Desktop &amp; CLI</a>
+      <a href="#portal">Web Portal</a>
+    </aside>
+
+    <div class="doc">
+      <h2>Documentation</h2>
+      <p>PoorMad is a self-improving AI agent. It learns from experience, remembers across sessions, and runs across your terminal, desktop, web portal, and messaging platforms.</p>
+
+      <h3 id="install">Install</h3>
+      <p>Install the agent with pip, then run the setup flow:</p>
+      <div class="code">pip install poormad-agent<br/>poormad setup</div>
+      <p>Or grab a prebuilt installer from the <a href="index.html#download" style="color:var(--violet-bright)">download page</a> — Windows, macOS, and Linux are supported.</p>
+
+      <h3 id="quickstart">Quick start</h3>
+      <p>Launch the desktop app (which also starts the local gateway the portal connects to):</p>
+      <div class="code">poormad desktop</div>
+      <p>Or talk to it straight from the terminal:</p>
+      <div class="code">poormad "summarize my unread messages and draft replies"</div>
+
+      <h3 id="skills">Skills</h3>
+      <p>Skills are PoorMad's reusable units of capability. When it solves something non-trivial, it can write a skill capturing the approach, then reuse it next time — so repeated work gets faster and more reliable.</p>
+      <ul>
+        <li>Skills are plain, version-controlled files in your PoorMad home.</li>
+        <li>The agent curates and improves them as it uses them.</li>
+        <li>You can review, edit, or pin skills in the portal's Skills view.</li>
+      </ul>
+
+      <h3 id="memory">Memory</h3>
+      <p>PoorMad persists memory across sessions so it builds a deepening model of who you are and what you're working on. Past conversations are searchable via semantic recall — no re-explaining context every time.</p>
+
+      <h3 id="platforms">Platforms</h3>
+      <p>One agent, many surfaces. PoorMad connects to 20+ messaging platforms through a single gateway:</p>
+      <ul>
+        <li>Telegram, Discord, Slack, WhatsApp, Signal, Matrix</li>
+        <li>Email (IMAP/SMTP), Microsoft Teams, Google Chat, LINE</li>
+        <li>And more — sessions resume across every platform.</li>
+      </ul>
+
+      <h3 id="desktop">Desktop &amp; CLI</h3>
+      <p>The desktop app is a native Electron build with the PoorMad house theme (space-black + violet, pixel-moon brand). The CLI and TUI give you the same agent in the terminal. All surfaces share one gateway and one memory.</p>
+
+      <h3 id="portal">Web Portal</h3>
+      <p>The portal (Nous-Portal style) is a clean browser UI to chat, browse sessions, manage skills, and configure the agent — available at <a href="portal/" target="_blank" style="color:var(--violet-bright)">xingabot.com/portal</a>. It speaks the same gateway protocol as the desktop app, so it's one agent, many front-ends.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-in">
+      <div class="col" style="max-width:300px">
+        <a class="brand" href="index.html"><img src="assets/wordmark.png" alt="PoorMad" /></a>
+        <p class="tag">The self-improving AI agent. When the light is blocked, the stars align.</p>
+      </div>
+      <div class="col"><h4>Product</h4><a href="docs.html">Docs</a><a href="faq.html">FAQ</a><a href="portal/" target="_blank">Portal</a><a href="index.html#download">Download</a></div>
+      <div class="col"><h4>Resources</h4><a href="docs.html#skills">Skills</a><a href="docs.html#memory">Memory</a><a href="docs.html#platforms">Platforms</a><a href="faq.html">Troubleshooting</a></div>
+      <div class="col"><h4>Project</h4><a href="https://github.com/Tayyaba22/poormad-agent" target="_blank">GitHub</a><a href="https://github.com/Tayyaba22/poormad-agent/releases" target="_blank">Releases</a><a href="https://github.com/Tayyaba22/poormad-agent/blob/main/LICENSE" target="_blank">License</a></div>
+    </div>
+    <div class="footer-base">
+      <span>© 2026 PoorMad. All rights reserved.</span>
+      <span>MIT licensed · Built to be yours only</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
