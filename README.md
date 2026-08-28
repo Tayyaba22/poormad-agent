@@ -33,8 +33,29 @@ Use any model you want — [PoorMad Portal](https://portal.poormad.dev), OpenRou
 <tr><td><b>Scheduled automations</b></td><td>Built-in cron scheduler with delivery to any platform. Daily reports, nightly backups, weekly audits — all in natural language, running unattended.</td></tr>
 <tr><td><b>Delegates and parallelizes</b></td><td>Spawn isolated subagents for parallel workstreams. Write Python scripts that call tools via RPC, collapsing multi-step pipelines into zero-context-cost turns.</td></tr>
 <tr><td><b>Runs anywhere, not just your laptop</b></td><td>Seven terminal backends — local, Docker, SSH, Singularity, Modal, Daytona, and Vercel Sandbox. Daytona and Modal offer serverless persistence — your agent's environment hibernates when idle and wakes on demand, costing nearly nothing between sessions. Run it on a $5 VPS or a GPU cluster.</td></tr>
-<tr><td><b>Research-ready</b></td><td>Batch trajectory generation, trajectory compression for training the next generation of tool-calling models.</td></tr>
+| Research-ready | Batch trajectory generation, trajectory compression for training the next generation of tool-calling models. |
 </table>
+
+---
+
+## Make it yours — themes
+
+PoorMad ships with distinct, fully-branded terminal themes. Switch live with `/skin <name>` or set `display.skin` in your config. Each theme has its own box chrome, hero art, spinner animation, and color story — nothing borrowed.
+
+| Theme | Vibe | Look |
+|-------|------|------|
+| **default** (PoorMad) | Space-black + violet nebula, the house theme | Rounded `╭─` frame, glowing moon hero |
+| **jarvis** | Cyan ARC-reactor HUD | Rounded neon, reactor-core spinner |
+| **ironman** | Red & gold armored HUD | Heavy `┏━` frame, charging-bar spinner |
+| **agentic-os** | Matrix-green terminal OS | Raw ASCII `+--` frame, boot-sequence hero |
+| **aurora** | Animated violet↔teal nebula | Double `╔═` frame, breathing spinner |
+
+```text
+/skin aurora     # animated accent that breathes violet → teal
+/skin ironman    # red/gold HUD for that armored feel
+/skin jarvis     # cool cyan reactor
+/skin agentic-os # green terminal-OS aesthetic
+```
 
 ---
 
