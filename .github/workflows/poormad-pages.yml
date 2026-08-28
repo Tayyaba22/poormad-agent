@@ -49,6 +49,9 @@ jobs:
           cp -r website/build/* _site/docs/
           if [ -f website/build/llms.txt ]; then cp website/build/llms.txt _site/llms.txt; fi
           if [ -f website/build/llms-full.txt ]; then cp website/build/llms-full.txt _site/llms-full.txt; fi
+          # Root landing page (GitHub Pages serves index.html at the repo root)
+          cp website/static/index.html _site/index.html
+          cp website/static/index.html _site/404.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
