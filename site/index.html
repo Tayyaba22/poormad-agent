@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>PoorMad — The Self-Improving AI Agent</title>
-<meta name="description" content="PoorMad is a self-improving AI agent built by one person, from a room. Mono-forward, cosmic, interactive. When the light is blocked, the stars align." />
+<meta name="description" content="PoorMad is a self-improving AI agent. Cinematic, mono-forward, interactive — watch it learn in the terminal. When the light is blocked, the stars align." />
 <link rel="icon" href="favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,7 +16,7 @@
   --violet:#8b5cf6; --violet-bright:#a78bfa; --violet-dim:rgba(139,92,246,.5);
   --fg:#eceae1; --muted:#928ca6; --muted2:#5f5a72; --ok:#28c840; --err:#ff5f57;
   --display:'JetBrains Mono',ui-monospace,monospace; --mono:'IBM Plex Mono',ui-monospace,monospace;
-  --maxw:1120px;
+  --maxw:1180px;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
@@ -27,86 +27,93 @@ a{color:inherit;text-decoration:none}
 .kick{font-family:var(--mono);font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--violet-bright)}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
 
-/* cosmic backdrop layers */
 #stars,#stars2{position:fixed;inset:0;z-index:0;pointer-events:none}
 #stars2{opacity:.5}
-.crt{position:fixed;inset:0;z-index:1;pointer-events:none;mix-blend-mode:overlay;opacity:.38;
+.crt{position:fixed;inset:0;z-index:1;pointer-events:none;mix-blend-mode:overlay;opacity:.34;
   background:repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px 3px)}
 .vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
   background:radial-gradient(120% 85% at 50% -10%,transparent 55%,rgba(0,0,0,.62) 100%)}
-.glowblob{position:fixed;z-index:1;pointer-events:none;width:520px;height:520px;border-radius:50%;
-  background:radial-gradient(circle,rgba(139,92,246,.16),transparent 60%);filter:blur(30px);
-  transform:translate(-50%,-50%);left:50%;top:30%;transition:opacity .4s}
+.glowblob{position:fixed;z-index:1;pointer-events:none;width:560px;height:560px;border-radius:50%;
+  background:radial-gradient(circle,rgba(139,92,246,.15),transparent 60%);filter:blur(30px);
+  transform:translate(-50%,-50%);left:50%;top:30%}
 .content{position:relative;z-index:2;padding-left:84px}
 
-/* vertical dock */
+/* dock */
 .dock{position:fixed;left:0;top:0;bottom:0;width:84px;z-index:60;display:flex;flex-direction:column;
-  align-items:center;padding:26px 0;gap:6px;border-right:1px solid var(--border-soft);
-  background:rgba(6,6,11,.55);backdrop-filter:blur(10px)}
+  align-items:center;padding:26px 0;gap:6px;border-right:1px solid var(--border-soft);background:rgba(6,6,11,.55);backdrop-filter:blur(10px)}
 .dock .brand{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;margin-bottom:18px;
   background:radial-gradient(circle at 35% 35%,#c4b5fd,#7c3aed);box-shadow:0 0 18px var(--violet);
   font-family:var(--display);font-weight:800;font-size:15px;color:#0a0a0f;animation:pulse 2.6s infinite}
 @keyframes pulse{0%,100%{box-shadow:0 0 18px var(--violet)}50%{box-shadow:0 0 7px var(--violet)}}
-.dock a{position:relative;width:46px;height:46px;display:grid;place-items:center;border-radius:12px;
-  color:var(--muted2);transition:.25s}
+.dock a{position:relative;width:46px;height:46px;display:grid;place-items:center;border-radius:12px;color:var(--muted2);transition:.25s}
 .dock a .dot{width:8px;height:8px;border-radius:50%;background:var(--muted2);transition:.25s}
 .dock a .lab{position:absolute;left:58px;white-space:nowrap;font-family:var(--mono);font-size:11px;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--fg);background:rgba(10,10,18,.92);border:1px solid var(--border);
-  padding:6px 11px;border-radius:8px;opacity:0;transform:translateX(-8px);pointer-events:none;transition:.22s}
+  text-transform:uppercase;color:var(--fg);background:rgba(10,10,18,.92);border:1px solid var(--border);padding:6px 11px;border-radius:8px;
+  opacity:0;transform:translateX(-8px);pointer-events:none;transition:.22s}
 .dock a:hover{color:var(--violet-bright)}
 .dock a:hover .lab{opacity:1;transform:translateX(0)}
 .dock a:hover .dot{background:var(--violet-bright);box-shadow:0 0 10px var(--violet)}
 .dock a.on .dot{background:var(--violet-bright);box-shadow:0 0 12px var(--violet);transform:scale(1.3)}
 .dock a.on{color:var(--violet-bright)}
 .dock .spacer{flex:1}
-.dock .portal{min-width:46px;height:auto;padding:8px 0;font-family:var(--display);font-weight:700;font-size:15px;
-  color:#0a0a0f;background:var(--violet);border-radius:12px;box-shadow:0 0 18px rgba(139,92,246,.4)}
-.dock .portal:hover{background:var(--violet-bright);color:#0a0a0f}
+.dock .portal{min-width:46px;height:auto;padding:8px 0;font-family:var(--display);font-weight:700;font-size:15px;color:#0a0a0f;background:var(--violet);border-radius:12px;box-shadow:0 0 18px rgba(139,92,246,.4)}
+.dock .portal:hover{background:var(--violet-bright)}
 .dock .portal .lab{background:var(--violet);color:#0a0a0f;border-color:var(--violet)}
 
-/* hero */
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 0 90px;position:relative}
-.hero .kick{opacity:0;transform:translateY(14px);animation:rise .8s .1s forwards}
-.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(54px,12vw,150px);line-height:.92;
-  letter-spacing:-.02em;margin:20px 0 8px}
-.hero h1 .l{display:inline-block;opacity:0;transform:translateY(46px) rotateX(-55deg);transform-origin:bottom;
+/* buttons */
+.btn{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.03em;background:var(--violet);color:#0a0a0f;
+  padding:14px 26px;border-radius:999px;border:none;cursor:pointer;position:relative;will-change:transform;
+  transition:transform .18s,box-shadow .25s,background .2s;box-shadow:0 0 0 0 rgba(139,92,246,.5)}
+.btn:hover{transform:translateY(-2px);background:var(--violet-bright);box-shadow:0 10px 34px rgba(139,92,246,.45)}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--fg);border:1px solid var(--border-soft);backdrop-filter:blur(8px)}
+.btn-ghost:hover{background:rgba(255,255,255,.14);box-shadow:none}
+
+/* HERO — framer scale */
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 90px;position:relative}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center;width:100%}
+.hero .kick{opacity:0;animation:rise .8s .1s forwards}
+.hero h1{font-family:var(--display);font-weight:800;font-size:clamp(58px,11vw,138px);line-height:.9;letter-spacing:-.04em;margin:22px 0 10px}
+.hero h1 .l{display:inline-block;opacity:0;transform:translateY(50px) rotateX(-55deg);transform-origin:bottom;
   animation:letterIn .7s forwards;background:linear-gradient(110deg,#fff,#c4b5fd 45%,#8b5cf6 62%,#a78bfa 82%,#fff 100%);
   background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:letterIn .7s forwards,aurora 7s linear infinite}
 @keyframes letterIn{to{opacity:1;transform:none}}
 @keyframes aurora{to{background-position:220% 0}}
-.hero .tag{font-family:var(--mono);font-size:clamp(14px,2vw,18px);color:var(--muted);max-width:620px;margin-top:18px;min-height:1.6em}
+.hero .tag{font-family:var(--mono);font-size:clamp(15px,1.8vw,18px);color:var(--muted);max-width:520px;margin-top:18px;min-height:1.6em}
 .hero .tag .cur{display:inline-block;width:9px;height:1.05em;background:var(--violet);margin-left:2px;vertical-align:-2px;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
-.hero .lead{font-family:var(--mono);font-size:clamp(16px,2vw,19px);color:var(--fg);max-width:560px;margin-top:28px;opacity:0;animation:rise .9s .9s forwards}
-.hero .btn-row{margin-top:34px;opacity:0;animation:rise .9s 1.1s forwards}
+.hero .lead{font-family:var(--mono);font-size:clamp(15px,1.8vw,18px);color:var(--fg);max-width:520px;margin-top:24px;opacity:0;animation:rise .9s .9s forwards}
+.hero .btn-row{margin-top:32px;opacity:0;animation:rise .9s 1.1s forwards;display:flex;gap:14px;flex-wrap:wrap}
 .hero .dl{margin-top:14px;font-family:var(--mono);font-size:12px;color:var(--muted2);opacity:0;animation:rise .9s 1.3s forwards}
-.hero .dl a{color:var(--muted);border-bottom:1px solid var(--violet-dim)}
-.hero .dl a:hover{color:var(--violet-bright)}
+.hero .dl a{color:var(--muted);border-bottom:1px solid var(--violet-dim)}.hero .dl a:hover{color:var(--violet-bright)}
 @keyframes rise{to{opacity:1;transform:none}}
-.btn{font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.04em;background:var(--violet);
-  color:#0a0a0f;padding:13px 22px;border-radius:9px;border:none;cursor:pointer;position:relative;will-change:transform;
-  transition:transform .18s,box-shadow .25s,background .2s;box-shadow:0 0 0 0 rgba(139,92,246,.5)}
-.btn:hover{transform:translateY(-2px);background:var(--violet-bright);box-shadow:0 10px 34px rgba(139,92,246,.45)}
-.btn-ghost{background:var(--panel2);color:var(--fg);border:1px solid var(--border)}
-.btn-ghost:hover{background:rgba(255,255,255,.08);box-shadow:none}
-.btn-row{display:flex;gap:14px;flex-wrap:wrap}
+
+/* hero terminal product art (frosted) */
+.hero-term{background:rgba(12,12,20,.55);border:1px solid var(--border);border-radius:18px;overflow:hidden;
+  backdrop-filter:blur(14px);box-shadow:0 30px 90px rgba(0,0,0,.6),0 0 70px rgba(139,92,246,.16);
+  opacity:0;transform:translateY(30px);animation:rise 1s 1.1s forwards}
+.hero-term .bar{display:flex;align-items:center;gap:8px;padding:13px 16px;border-bottom:1px solid var(--border-soft);background:rgba(255,255,255,.03)}
+.hero-term .bar i{width:11px;height:11px;border-radius:50%}.hero-term .r{background:var(--err)}.hero-term .y{background:#febc2e}.hero-term .g{background:var(--ok)}
+.hero-term .bar span{font-family:var(--mono);font-size:12px;color:var(--muted2);margin-left:10px}
+.hero-term .body{font-family:var(--mono);font-size:13.5px;line-height:1.9;padding:22px 24px;color:#c9c2e6;min-height:300px}
+.hero-term .body .pr{color:var(--violet-bright)}.hero-term .body .ok{color:var(--ok)}.hero-term .body .mut{color:var(--muted2)}.hero-term .body .vi{color:var(--violet-bright)}
+.hero-term .body .cur{display:inline-block;width:8px;height:1em;background:var(--violet);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+.scrollcue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:11px;letter-spacing:.2em;color:var(--muted2);text-transform:uppercase}
+.scrollcue::after{content:"";display:block;width:1px;height:32px;margin:10px auto 0;background:linear-gradient(var(--violet),transparent);animation:drop 1.8s infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1)}100%{transform:scaleY(0);transform-origin:bottom}}
 
 /* sections */
 .sec{padding:120px 0;border-top:1px solid var(--border-soft);position:relative}
-.sec .idx{font-family:var(--mono);font-size:12px;color:var(--violet);letter-spacing:.28em;text-transform:uppercase;margin-bottom:16px;
-  opacity:0;transform:translateY(20px);transition:.7s}
-.sec h2{font-family:var(--display);font-weight:800;font-size:clamp(30px,5vw,58px);line-height:1.04;letter-spacing:-.01em;margin-bottom:22px;
-  opacity:0;transform:translateY(26px);transition:.7s .05s}
+.sec .idx{font-family:var(--mono);font-size:12px;color:var(--violet);letter-spacing:.28em;text-transform:uppercase;margin-bottom:16px;opacity:0;transform:translateY(20px);transition:.7s}
+.sec h2{font-family:var(--display);font-weight:800;font-size:clamp(32px,5.5vw,72px);line-height:1.02;letter-spacing:-.03em;margin-bottom:22px;opacity:0;transform:translateY(26px);transition:.7s .05s}
 .sec p{font-family:var(--mono);font-size:clamp(15px,1.8vw,17px);color:var(--muted);max-width:640px;opacity:0;transform:translateY(26px);transition:.7s .12s}
 .sec.in .idx,.sec.in h2,.sec.in p{opacity:1;transform:none}
 .reveal{opacity:0;transform:translateY(30px);transition:.7s}.sec.in .reveal{opacity:1;transform:none}
 
-/* story */
+/* story split */
 .split{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;margin-top:14px}
-.split .big{font-family:var(--display);font-weight:500;font-size:clamp(20px,2.6vw,28px);line-height:1.3;color:var(--fg);margin-bottom:20px}
+.split .big{font-family:var(--display);font-weight:500;font-size:clamp(20px,2.6vw,30px);line-height:1.28;color:var(--fg);margin-bottom:20px}
 .split .big b{color:var(--violet-bright);font-weight:700}
-.prev{background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden;cursor:pointer;
-  box-shadow:0 0 60px rgba(139,92,246,.12);transition:border-color .3s,transform .3s}
+.prev{background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden;cursor:pointer;box-shadow:0 0 60px rgba(139,92,246,.12);transition:border-color .3s,transform .3s}
 .prev:hover{border-color:var(--violet-dim);transform:translateY(-3px)}
 .prev .bar{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--border-soft);background:var(--panel2)}
 .prev .bar i{width:11px;height:11px;border-radius:50%}.prev .r{background:var(--err)}.prev .y{background:#febc2e}.prev .g{background:var(--ok)}
@@ -120,17 +127,15 @@ a{color:inherit;text-decoration:none}
 .cap{display:grid;grid-template-columns:1.35fr 1fr 1fr;gap:16px;margin-top:38px}
 .cap .feat{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:26px;position:relative;overflow:hidden;transition:border-color .3s,transform .3s}
 .cap .feat:hover{transform:translateY(-3px)}
-.cap .feat::after{content:"";position:absolute;inset:0;border-radius:inherit;opacity:0;pointer-events:none;
-  background:radial-gradient(220px 220px at var(--mx,50%) var(--my,50%),rgba(139,92,246,.18),transparent 60%);transition:opacity .3s}
+.cap .feat::after{content:"";position:absolute;inset:0;border-radius:inherit;opacity:0;pointer-events:none;background:radial-gradient(220px 220px at var(--mx,50%) var(--my,50%),rgba(139,92,246,.18),transparent 60%);transition:opacity .3s}
 .cap .feat:hover::after{opacity:1}
 .cap .feat .k{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--violet);margin-bottom:14px}
 .cap .feat h3{font-family:var(--display);font-weight:700;font-size:20px;margin-bottom:8px}
 .cap .feat p{font-family:var(--mono);font-size:14px;color:var(--muted);max-width:none}
-.cap .feat.lg{grid-row:span 2;display:flex;flex-direction:column;justify-content:flex-end;min-height:300px;
-  background:linear-gradient(180deg,rgba(139,92,246,.12),var(--panel) 60%)}
+.cap .feat.lg{grid-row:span 2;display:flex;flex-direction:column;justify-content:flex-end;min-height:300px;background:linear-gradient(180deg,rgba(139,92,246,.12),var(--panel) 60%)}
 .cap .feat.lg h3{font-size:26px}
 @media(max-width:880px){.cap{grid-template-columns:1fr 1fr}.cap .feat.lg{grid-column:1/-1;grid-row:auto}}
-@media(max-width:620px){.cap{grid-template-columns:1fr}.split{grid-template-columns:1fr;gap:30px}}
+@media(max-width:620px){.cap{grid-template-columns:1fr}.split{grid-template-columns:1fr;gap:30px}.hero-grid{grid-template-columns:1fr;gap:36px}.hero-term{order:-1}}
 
 /* chapters rail */
 .rail{display:grid;grid-template-columns:190px 1fr;gap:40px;margin-top:30px}
@@ -140,24 +145,21 @@ a{color:inherit;text-decoration:none}
 .chap{margin-bottom:60px;opacity:0;transform:translateY(30px);transition:.7s}
 .chap.in{opacity:1;transform:none}
 .chap .n{font-family:var(--mono);font-size:12px;color:var(--violet);letter-spacing:.2em}
-.chap h3{font-family:var(--display);font-weight:800;font-size:clamp(24px,4vw,40px);margin:10px 0 14px;letter-spacing:-.01em}
+.chap h3{font-family:var(--display);font-weight:800;font-size:clamp(24px,4vw,44px);margin:10px 0 14px;letter-spacing:-.02em}
 .chap p{font-family:var(--mono);color:var(--muted);font-size:16px;max-width:620px}
 @media(max-width:760px){.rail{grid-template-columns:1fr}.rail .nav-idx{display:none}}
 
 /* marquee */
-.marquee{position:relative;margin-top:54px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
-  mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.marquee{position:relative;margin-top:54px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
 .marquee .track{display:flex;gap:14px;width:max-content;animation:marq 34s linear infinite}
 .marquee:hover .track{animation-play-state:paused}
 @keyframes marq{to{transform:translateX(-50%)}}
-.chip-m{font-family:var(--mono);font-size:14px;color:var(--muted);border:1px solid var(--border-soft);background:var(--panel);
-  border-radius:999px;padding:11px 20px;white-space:nowrap;display:flex;align-items:center;gap:9px;transition:.25s}
+.chip-m{font-family:var(--mono);font-size:14px;color:var(--muted);border:1px solid var(--border-soft);background:var(--panel);border-radius:999px;padding:11px 20px;white-space:nowrap;display:flex;align-items:center;gap:9px;transition:.25s}
 .chip-m:hover{color:var(--violet-bright);border-color:var(--violet-dim);box-shadow:0 0 18px rgba(139,92,246,.22)}
 .chip-m .g{width:7px;height:7px;border-radius:50%;background:var(--violet);box-shadow:0 0 8px var(--violet)}
 
 /* terminal */
-.term{width:100%;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden;
-  box-shadow:0 0 70px rgba(139,92,246,.14)}
+.term{width:100%;display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--border);border-radius:14px;overflow:hidden;box-shadow:0 0 70px rgba(139,92,246,.14)}
 .term .bar{display:flex;align-items:center;gap:8px;padding:11px 14px;border-bottom:1px solid var(--border-soft);background:var(--panel2)}
 .term .bar i{width:11px;height:11px;border-radius:50%}.term .r{background:var(--err)}.term .y{background:#febc2e}.term .g{background:var(--ok)}
 .term .bar .t{margin-left:12px;font-family:var(--mono);font-size:12.5px;color:var(--muted)}
@@ -168,17 +170,15 @@ a{color:inherit;text-decoration:none}
 .term .cmd-echo{color:var(--fg)}.term .muted{color:var(--muted)}.term .dim{color:var(--muted2)}.term .ok{color:var(--ok)}.term .vi{color:var(--violet-bright)}
 .term a{color:var(--violet-bright);border-bottom:1px solid var(--violet-dim)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;padding:10px 14px;border-top:1px solid var(--border-soft);background:var(--panel2)}
-.chip{font-family:var(--mono);font-size:12.5px;color:var(--muted);border:1px solid var(--border);background:rgba(139,92,246,.06);
-  border-radius:999px;padding:7px 13px;cursor:pointer;transition:.2s;user-select:none}
+.chip{font-family:var(--mono);font-size:12.5px;color:var(--muted);border:1px solid var(--border);background:rgba(139,92,246,.06);border-radius:999px;padding:7px 13px;cursor:pointer;transition:.2s;user-select:none}
 .chip:hover{color:var(--violet-bright);border-color:var(--violet-dim);box-shadow:0 0 14px rgba(139,92,246,.2)}
 .term .inputrow{display:flex;align-items:center;gap:10px;padding:12px 16px;border-top:1px solid var(--border-soft);background:var(--panel2)}
 .term .inputrow .prompt{white-space:nowrap;font-family:var(--mono);font-size:14px}
 .term #cmd{flex:1;background:transparent;border:none;outline:none;color:var(--fg);font-family:var(--mono);font-size:14px;caret-color:var(--violet)}
 
 /* band */
-.band{border:1px solid var(--border);border-radius:24px;padding:64px 28px;text-align:center;
-  background:radial-gradient(700px 320px at 50% -20%,rgba(139,92,246,.18),transparent 60%),var(--panel)}
-.band h2{font-family:var(--display);font-weight:800;font-size:clamp(28px,5vw,50px);margin-bottom:14px;line-height:1.05}
+.band{border:1px solid var(--border);border-radius:24px;padding:64px 28px;text-align:center;background:radial-gradient(700px 320px at 50% -20%,rgba(139,92,246,.18),transparent 60%),var(--panel)}
+.band h2{font-family:var(--display);font-weight:800;font-size:clamp(28px,5vw,56px);margin-bottom:14px;line-height:1.04;letter-spacing:-.02em}
 .band p{font-family:var(--mono);color:var(--muted);max-width:520px;margin:0 auto 30px;font-size:15.5px}
 
 /* footer */
@@ -188,36 +188,27 @@ a{color:inherit;text-decoration:none}
 .footer .col a{display:block;color:var(--muted);font-family:var(--mono);font-size:13px;margin-bottom:9px;transition:.15s}
 .footer .col a:hover{color:var(--violet-bright)}
 .footer .tag{color:var(--muted2);font-family:var(--mono);font-size:12.5px;max-width:280px}
-.footer-base{border-top:1px solid var(--border-soft);margin-top:34px;padding-top:20px;color:var(--muted2);font-family:var(--mono);font-size:12px;
-  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.footer-base{border-top:1px solid var(--border-soft);margin-top:34px;padding-top:20px;color:var(--muted2);font-family:var(--mono);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .magic{color:var(--violet-bright)}
 
-/* cursor + progress + sound */
-.cursor{position:fixed;top:0;left:0;z-index:80;pointer-events:none;width:30px;height:30px;margin:-15px 0 0 -15px;
-  border:1px solid rgba(167,139,250,.6);border-radius:50%;mix-blend-mode:screen;transition:width .2s,height .2s,margin .2s,background .2s,opacity .3s}
+/* cursor/progress/sound */
+.cursor{position:fixed;top:0;left:0;z-index:80;pointer-events:none;width:30px;height:30px;margin:-15px 0 0 -15px;border:1px solid rgba(167,139,250,.6);border-radius:50%;mix-blend-mode:screen;transition:width .2s,height .2s,margin .2s,background .2s,opacity .3s}
 .cursor.hover{width:50px;height:50px;margin:-25px 0 0 -25px;background:rgba(139,92,246,.12);border-color:rgba(167,139,250,.9)}
 @media(hover:none),(pointer:coarse){.cursor{display:none}}
 .progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:90;background:linear-gradient(90deg,var(--violet),var(--violet-bright));box-shadow:0 0 12px var(--violet)}
-.sound{position:fixed;bottom:18px;right:18px;z-index:80;width:40px;height:40px;border-radius:50%;border:1px solid var(--border);
-  background:rgba(10,10,18,.7);backdrop-filter:blur(8px);cursor:pointer;display:grid;place-items:center;color:var(--muted);
-  font-family:var(--mono);font-size:15px;transition:.2s}
+.sound{position:fixed;bottom:18px;right:18px;z-index:80;width:40px;height:40px;border-radius:50%;border:1px solid var(--border);background:rgba(10,10,18,.7);backdrop-filter:blur(8px);cursor:pointer;display:grid;place-items:center;color:var(--muted);font-family:var(--mono);font-size:15px;transition:.2s}
 .sound:hover{color:var(--fg);border-color:var(--violet)}
 .sound.on{color:var(--violet-bright);border-color:var(--violet);box-shadow:0 0 16px rgba(139,92,246,.4)}
 @media(max-width:760px){.content{padding-left:0}.dock{width:60px}.dock .lab{display:none}.wrap{padding:0 20px}}
-@media(prefers-reduced-motion:reduce){.cursor{display:none}.hero h1 .l{opacity:1;transform:none;animation:none}.hero .kick,.hero .lead,.hero .btn-row,.hero .dl{opacity:1;transform:none}.marquee .track{animation:none}}
+@media(prefers-reduced-motion:reduce){.cursor{display:none}.hero h1 .l{opacity:1;transform:none;animation:none}.hero .kick,.hero .lead,.hero .btn-row,.hero .dl,.hero-term{opacity:1;transform:none}.marquee .track{animation:none}}
 </style>
 </head>
 <body>
-<canvas id="stars"></canvas>
-<canvas id="stars2"></canvas>
-<div class="crt"></div>
-<div class="vignette"></div>
-<div class="glowblob" id="glow"></div>
-<div class="progress" id="progress"></div>
-<div class="cursor" id="cursor"></div>
+<canvas id="stars"></canvas><canvas id="stars2"></canvas>
+<div class="crt"></div><div class="vignette"></div><div class="glowblob" id="glow"></div>
+<div class="progress" id="progress"></div><div class="cursor" id="cursor"></div>
 <button class="sound" id="sound" aria-label="Toggle sound" title="Sound: off">♪</button>
 
-<!-- vertical dock -->
 <nav class="dock" id="dock">
   <a class="brand" href="#top" title="PoorMad">P</a>
   <a href="#top" data-s="top"><span class="dot"></span><span class="lab">Top</span></a>
@@ -234,15 +225,24 @@ a{color:inherit;text-decoration:none}
 <div class="content">
 <!-- HERO -->
 <section class="hero wrap" id="top">
-  <div class="kick">// self-improving ai agent · built from one room</div>
-  <h1 id="hero-title" aria-label="PoorMad">POORMAD</h1>
-  <div class="tag"><span id="typed"></span><span class="cur"></span></div>
-  <p class="lead">An agent that writes its own skills, remembers who you are, and gets sharper with every session. Not a service. Not a black box. Yours.</p>
-  <div class="btn-row">
-    <a class="btn" id="dl-btn" href="https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-win-x64.exe">⬇ Download <span id="dl-os">for your OS</span></a>
-    <a class="btn btn-ghost" href="https://portal.xingabot.com" target="_blank" rel="noopener">Open Portal</a>
+  <div class="hero-grid">
+    <div>
+      <div class="kick">// self-improving ai agent · built from one room</div>
+      <h1 id="hero-title" aria-label="PoorMad">POORMAD</h1>
+      <div class="tag"><span id="typed"></span><span class="cur"></span></div>
+      <p class="lead">An agent that writes its own skills, remembers who you are, and gets sharper with every session. Not a service. Not a black box. Yours.</p>
+      <div class="btn-row">
+        <a class="btn" id="dl-btn" href="https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-win-x64.exe">⬇ Download <span id="dl-os">for your OS</span></a>
+        <a class="btn btn-ghost" href="https://portal.xingabot.com" target="_blank" rel="noopener">Open Portal</a>
+      </div>
+      <div class="dl">or <a href="https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-mac-arm64.dmg">macOS</a> · <a href="https://github.com/Tayyaba22/poormad-agent/releases/tag/v0.18.0">Linux</a> · <a href="https://github.com/Tayyaba22/poormad-agent/releases" target="_blank" rel="noopener">all releases ↗</a></div>
+    </div>
+    <div class="hero-term" id="heroTerm">
+      <div class="bar"><i class="r"></i><i class="y"></i><i class="g"></i><span>poormad — live session</span></div>
+      <div class="body" id="heroBody"></div>
+    </div>
   </div>
-  <div class="dl">or <a href="https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-mac-arm64.dmg">macOS</a> · <a href="https://github.com/Tayyaba22/poormad-agent/releases/tag/v0.18.0">Linux</a> · <a href="https://github.com/Tayyaba22/poormad-agent/releases" target="_blank" rel="noopener">all releases ↗</a></div>
+  <div class="scrollcue">scroll</div>
 </section>
 
 <!-- STORY -->
@@ -269,10 +269,7 @@ a{color:inherit;text-decoration:none}
   <h2>What it actually does.</h2>
   <p>Same brain across every surface. The agent compounds instead of resetting.</p>
   <div class="cap reveal">
-    <div class="feat lg">
-      <div class="k">skills</div><h3>Learns from experience</h3>
-      <p>When it solves something non-trivial, PoorMad writes a reusable skill — then sharpens it on the next run. Capability compounds locally, in your home, not in someone's datacenter.</p>
-    </div>
+    <div class="feat lg"><div class="k">skills</div><h3>Learns from experience</h3><p>When it solves something non-trivial, PoorMad writes a reusable skill — then sharpens it on the next run. Capability compounds locally, in your home, not in someone's datacenter.</p></div>
     <div class="feat"><div class="k">memory</div><h3>Recall that persists</h3><p>A deepening model of who you are — searchable by meaning. No re-explaining context every session.</p></div>
     <div class="feat"><div class="k">orchestration</div><h3>Tools &amp; subagents</h3><p>Scheduled jobs, delegation, tool registry. Point it at any model and let it coordinate.</p></div>
     <div class="feat"><div class="k">surfaces</div><h3>20+ platforms</h3><p>CLI, desktop, web portal, messengers — one gateway, one memory. Sessions resume anywhere.</p></div>
@@ -285,10 +282,8 @@ a{color:inherit;text-decoration:none}
   <div class="idx">02 — The why</div>
   <div class="rail">
     <div class="nav-idx">
-      <a href="#c-vision" data-c="c-vision">Vision</a>
-      <a href="#c-mission" data-c="c-mission">Mission</a>
-      <a href="#c-cause" data-c="c-cause">Cause</a>
-      <a href="#c-research" data-c="c-research">Research</a>
+      <a href="#c-vision" data-c="c-vision">Vision</a><a href="#c-mission" data-c="c-mission">Mission</a>
+      <a href="#c-cause" data-c="c-cause">Cause</a><a href="#c-research" data-c="c-research">Research</a>
     </div>
     <div>
       <div class="chap" id="c-vision"><div class="n">01 — VISION</div><h3>An intelligence that belongs to you.</h3><p>Most AI is rented. PoorMad lives on your side of the wall — learning, remembering, improving on your terms. A future where anyone can run an agent that compounds.</p></div>
@@ -299,25 +294,14 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<!-- PLATFORMS MARQUEE -->
+<!-- PLATFORMS -->
 <section class="sec wrap" id="platforms">
   <div class="idx">03 — Surfaces</div>
   <h2>Runs wherever you do.</h2>
   <p>One brain, twenty-plus fronts. CLI, desktop, web, and the messengers you already live in.</p>
-  <div class="marquee">
-    <div class="track" id="marq">
-      <span class="chip-m"><span class="g"></span>Telegram</span><span class="chip-m"><span class="g"></span>Discord</span>
-      <span class="chip-m"><span class="g"></span>Slack</span><span class="chip-m"><span class="g"></span>WhatsApp</span>
-      <span class="chip-m"><span class="g"></span>Signal</span><span class="chip-m"><span class="g"></span>iMessage</span>
-      <span class="chip-m"><span class="g"></span>Teams</span><span class="chip-m"><span class="g"></span>Matrix</span>
-      <span class="chip-m"><span class="g"></span>IRC</span><span class="chip-m"><span class="g"></span>Email</span>
-      <span class="chip-m"><span class="g"></span>Terminal / CLI</span><span class="chip-m"><span class="g"></span>Desktop</span>
-      <span class="chip-m"><span class="g"></span>Web Portal</span><span class="chip-m"><span class="g"></span>X / Twitter</span>
-      <span class="chip-m"><span class="g"></span>Reddit</span><span class="chip-m"><span class="g"></span>LINE</span>
-      <span class="chip-m"><span class="g"></span>WeChat</span><span class="chip-m"><span class="g"></span>Google Chat</span>
-      <span class="chip-m"><span class="g"></span>Twilio SMS</span>
-    </div>
-  </div>
+  <div class="marquee"><div class="track" id="marq">
+    <span class="chip-m"><span class="g"></span>Telegram</span><span class="chip-m"><span class="g"></span>Discord</span><span class="chip-m"><span class="g"></span>Slack</span><span class="chip-m"><span class="g"></span>WhatsApp</span><span class="chip-m"><span class="g"></span>Signal</span><span class="chip-m"><span class="g"></span>iMessage</span><span class="chip-m"><span class="g"></span>Teams</span><span class="chip-m"><span class="g"></span>Matrix</span><span class="chip-m"><span class="g"></span>IRC</span><span class="chip-m"><span class="g"></span>Email</span><span class="chip-m"><span class="g"></span>Terminal / CLI</span><span class="chip-m"><span class="g"></span>Desktop</span><span class="chip-m"><span class="g"></span>Web Portal</span><span class="chip-m"><span class="g"></span>X / Twitter</span><span class="chip-m"><span class="g"></span>Reddit</span><span class="chip-m"><span class="g"></span>LINE</span><span class="chip-m"><span class="g"></span>WeChat</span><span class="chip-m"><span class="g"></span>Google Chat</span><span class="chip-m"><span class="g"></span>Twilio SMS</span>
+  </div></div>
 </section>
 
 <!-- TERMINAL -->
@@ -329,16 +313,9 @@ a{color:inherit;text-decoration:none}
     <div class="bar"><i class="r"></i><i class="y"></i><i class="g"></i><span class="t">poormad — bash — 80×24</span></div>
     <div class="out" id="out"></div>
     <div class="chips" id="chips">
-      <span class="chip" data-c="help">help</span><span class="chip" data-c="about">about</span>
-      <span class="chip" data-c="vision">vision</span><span class="chip" data-c="download">download</span>
-      <span class="chip" data-c="portal">portal</span><span class="chip" data-c="skills">skills</span>
-      <span class="chip" data-c="neofetch">neofetch</span><span class="chip" data-c="banner">banner</span>
-      <span class="chip" data-c="clear">clear</span>
+      <span class="chip" data-c="help">help</span><span class="chip" data-c="about">about</span><span class="chip" data-c="vision">vision</span><span class="chip" data-c="download">download</span><span class="chip" data-c="portal">portal</span><span class="chip" data-c="skills">skills</span><span class="chip" data-c="neofetch">neofetch</span><span class="chip" data-c="banner">banner</span><span class="chip" data-c="clear">clear</span>
     </div>
-    <div class="inputrow">
-      <span class="prompt"><span class="u">visitor@poormad</span><span class="p">:~$</span></span>
-      <input id="cmd" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="terminal command" placeholder="type a command" />
-    </div>
+    <div class="inputrow"><span class="prompt"><span class="u">visitor@poormad</span><span class="p">:~$</span></span><input id="cmd" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="terminal command" placeholder="type a command" /></div>
   </div>
 </section>
 
@@ -351,133 +328,76 @@ a{color:inherit;text-decoration:none}
   </div>
 </section>
 
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer-in">
-      <div class="col" style="max-width:300px">
-        <div class="kick" style="margin-bottom:14px">POORMAD</div>
-        <p class="tag">The self-improving AI agent.<br/>When the light is blocked, the stars align.</p>
-      </div>
-      <div class="col"><h4>Story</h4><a href="#story">Story</a><a href="#c-vision">Vision</a><a href="#c-mission">Mission</a><a href="#c-cause">Cause</a><a href="#c-research">Research</a></div>
-      <div class="col"><h4>Product</h4><a href="https://portal.xingabot.com" target="_blank" rel="noopener">Portal</a><a href="https://github.com/Tayyaba22/poormad-agent/releases" target="_blank" rel="noopener">Downloads</a><a href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">Source</a></div>
-      <div class="col"><h4>Project</h4><a href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">GitHub</a><a href="https://github.com/Tayyaba22/poormad-agent/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a><a href="https://portal.xingabot.com" target="_blank" rel="noopener">Portal login</a></div>
-    </div>
-    <div class="footer-base">
-      <span>© 2026 PoorMad · built by one person, from one room.</span>
-      <span class="magic">MIT licensed · yours only</span>
-    </div>
+<footer class="footer"><div class="wrap">
+  <div class="footer-in">
+    <div class="col" style="max-width:300px"><div class="kick" style="margin-bottom:14px">POORMAD</div><p class="tag">The self-improving AI agent.<br/>When the light is blocked, the stars align.</p></div>
+    <div class="col"><h4>Story</h4><a href="#story">Story</a><a href="#c-vision">Vision</a><a href="#c-mission">Mission</a><a href="#c-cause">Cause</a><a href="#c-research">Research</a></div>
+    <div class="col"><h4>Product</h4><a href="https://portal.xingabot.com" target="_blank" rel="noopener">Portal</a><a href="https://github.com/Tayyaba22/poormad-agent/releases" target="_blank" rel="noopener">Downloads</a><a href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">Source</a></div>
+    <div class="col"><h4>Project</h4><a href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">GitHub</a><a href="https://github.com/Tayyaba22/poormad-agent/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a><a href="https://portal.xingabot.com" target="_blank" rel="noopener">Portal login</a></div>
   </div>
-</footer>
+  <div class="footer-base"><span>© 2026 PoorMad · built by one person, from one room.</span><span class="magic">MIT licensed · yours only</span></div>
+</div></footer>
 </div>
 
 <script>
 (function(){
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* hero letters */
   var title=document.getElementById('hero-title'),txt=title.getAttribute('aria-label');title.textContent='';
-  for(var i=0;i<txt.length;i++){var s=document.createElement('span');s.className='l';s.textContent=txt[i];
-    s.style.animationDelay=(0.15+i*0.07)+'s, '+(i*0.08)+'s';title.appendChild(s);}
-
-  /* typed subtitle */
+  for(var i=0;i<txt.length;i++){var s=document.createElement('span');s.className='l';s.textContent=txt[i];s.style.animationDelay=(0.15+i*0.07)+'s, '+(i*0.08)+'s';title.appendChild(s);}
   var lines=["An agent that learns from every session.","Built by one person, from a room.","Yours. Local-first. Open source.","When the light is blocked, the stars align."];
   var typed=document.getElementById('typed'),li=0,ci=0,del=false;
   function type(){if(reduce){typed.textContent=lines[0];return;}var cur=lines[li];
     if(!del){typed.textContent=cur.slice(0,++ci);if(ci===cur.length){del=true;setTimeout(type,1600);return;}}
-    else{typed.textContent=cur.slice(0,--ci);if(ci===0){del=false;li=(li+1)%lines.length;}}setTimeout(type,del?38:62);}
-  type();
-
-  /* download OS detect */
-  (function(){var WIN='https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-win-x64.exe',
-    DMG='https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-mac-arm64.dmg',
-    TAG='https://github.com/Tayyaba22/poormad-agent/releases/tag/v0.18.0';
+    else{typed.textContent=cur.slice(0,--ci);if(ci===0){del=false;li=(li+1)%lines.length;}}setTimeout(type,del?38:62);}type();
+  (function(){var WIN='https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-win-x64.exe',DMG='https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-mac-arm64.dmg',TAG='https://github.com/Tayyaba22/poormad-agent/releases/tag/v0.18.0';
     var btn=document.getElementById('dl-btn'),os=document.getElementById('dl-os'),ua=navigator.userAgent;
-    if(/Mac|iPhone|iPad/i.test(ua)){btn.href=DMG;os.textContent='for macOS';}
-    else if(/Win/i.test(ua)){btn.href=WIN;os.textContent='for Windows';}
-    else{btn.href=TAG;os.textContent='for Linux';}})();
-
-  /* scroll reveal + dock scroll-spy + chapter spy */
+    if(/Mac|iPhone|iPad/i.test(ua)){btn.href=DMG;os.textContent='for macOS';}else if(/Win/i.test(ua)){btn.href=WIN;os.textContent='for Windows';}else{btn.href=TAG;os.textContent='for Linux';}})();
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.16});
   document.querySelectorAll('.sec,.chap').forEach(function(c){io.observe(c);});
   var dockLinks=document.querySelectorAll('.dock a[data-s]');
-  var spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){
-    dockLinks.forEach(function(a){a.classList.toggle('on',a.dataset.s===e.target.id);});}});},{threshold:.4});
+  var spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){dockLinks.forEach(function(a){a.classList.toggle('on',a.dataset.s===e.target.id);});}});},{threshold:.4});
   ['top','story','capabilities','chapters','platforms','terminal','portal'].forEach(function(id){var el=document.getElementById(id);if(el)spy.observe(el);});
   var railLinks=document.querySelectorAll('.nav-idx a');
-  var chapIO=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){
-    railLinks.forEach(function(a){a.classList.toggle('on',a.dataset.c===e.target.id);});}});},{threshold:.5});
+  var chapIO=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){railLinks.forEach(function(a){a.classList.toggle('on',a.dataset.c===e.target.id);});}});},{threshold:.5});
   document.querySelectorAll('.chap').forEach(function(c){chapIO.observe(c);});
-
-  /* preview auto-typer */
+  /* hero live terminal demo */
+  var hb=document.getElementById('heroBody');
+  if(hb){var hscript=['<span class="pr">$</span> poormad "plan my week"','<span class="mut">› resuming context, no re-explain ...... </span><span class="ok">ok</span>','<span class="mut">› wrote skill: schedule-blocks ........ </span><span class="ok">+skill</span>','<span class="vi">agent:</span> blocked 3 meetings. Protected your deep-work window.','<span class="mut">› memory updated .................... </span><span class="ok">ok</span>','<span class="pr">$</span> poormad learn<span class="cur"></span>'];
+    if(reduce){hb.innerHTML=hscript.join('<br/>');}else{(function st(i){if(i>=hscript.length)return;hb.innerHTML+=hscript[i]+(i<hscript.length-1?'<br/>':'');setTimeout(function(){st(i+1);},i===hscript.length-1?0:520);})(0);}}
   var prev=document.getElementById('prevBody');
-  if(prev){var script=['<span class="pr">$</span> poormad "who am I?"','<span class="mut">› loading memory store ............ </span><span class="ok">ok</span>',
-    '<span class="mut">› 14 sessions, 1 human ............ </span><span class="ok">ok</span>','<span class="ok">you are the one who builds me.</span>','<span class="pr">$</span> poormad learn<span class="cur"></span>'];
-    if(reduce){prev.innerHTML=script.join('<br/>');}
-    else{(function st(i){if(i>=script.length)return;prev.innerHTML+=script[i]+(i<script.length-1?'<br/>':'');setTimeout(function(){st(i+1);},i===script.length-1?0:420);})(0);}
+  if(prev){var pscript=['<span class="pr">$</span> poormad "who am I?"','<span class="mut">› loading memory store ............ </span><span class="ok">ok</span>','<span class="mut">› 14 sessions, 1 human ............ </span><span class="ok">ok</span>','<span class="ok">you are the one who builds me.</span>','<span class="pr">$</span> poormad learn<span class="cur"></span>'];
+    if(reduce){prev.innerHTML=pscript.join('<br/>');}else{(function st(i){if(i>=pscript.length)return;prev.innerHTML+=pscript[i]+(i<pscript.length-1?'<br/>':'');setTimeout(function(){st(i+1);},i===pscript.length-1?0:420);})(0);}
     prev.closest('.prev').addEventListener('click',function(){document.getElementById('terminal').scrollIntoView({behavior:'smooth'});setTimeout(function(){document.getElementById('cmd').focus();},500);});}
-
-  /* marquee duplicate */
   (function(){var t=document.getElementById('marq');if(t)t.innerHTML=t.innerHTML+t.innerHTML;})();
-
   /* terminal engine */
   var out=document.getElementById('out'),cmd=document.getElementById('cmd');
   function line(html,cls){var d=document.createElement('div');d.className='line'+(cls?' '+cls:'');d.innerHTML=html;out.appendChild(d);out.scrollTop=out.scrollHeight;return d;}
+  function blank(){line('&nbsp;');}
   function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
   function link(u,t){return '<a href="'+u+'" target="_blank" rel="noopener">'+esc(t||u)+'</a>';}
   var UA=navigator.userAgent;
-  var DL={win:'https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-win-x64.exe',
-          mac:'https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-mac-arm64.dmg',
-          tag:'https://github.com/Tayyaba22/poormad-agent/releases/tag/v0.18.0'};
+  var DL={win:'https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-win-x64.exe',mac:'https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-mac-arm64.dmg',tag:'https://github.com/Tayyaba22/poormad-agent/releases/tag/v0.18.0'};
   function dlURL(){if(/Mac|iPhone|iPad/i.test(UA))return DL.mac;if(/Win/i.test(UA))return DL.win;return DL.tag;}
   function dlLabel(){if(/Mac|iPhone|iPad/i.test(UA))return 'macOS (.dmg)';if(/Win/i.test(UA))return 'Windows (.exe)';return 'Linux';}
-  var BANNER=
-"  ____   ___  ___  _   _ ___ ___  _   ___     ___    ___ \n"+
-" |  _ \\ / _ \\/ _ \\| \\ | |_ _/ _ \\| | | \\ \\   / / |  | __|\n"+
-" | |_) | | | | | | |\\| || | | | | | |  \\ \\ / /| |  | _| \n"+
-" |  __/| |_| | |_| | |\\  || | |_| | |_|   \\ V / | |__| |  \n"+
-" |_|    \\___/ \\___/|_| \\_|___\\___/|___/     \\_/  |____|_|  ";
-  var MOON=
-"        _.--\"\"--._\n"+
-"     .-'          '-.\n"+
-"   .'   _        _    '.\n"+
-"  /   / \\      / \\     \\\n"+
-" |   |   |    |   |    |\n"+
-" |    \\ _/    \\_ /     |\n"+
-"  \\    '.      .'    /\n"+
-"   '.   '--__--'   .'\n"+
-"     '-.________.-'";
+  var BANNER="  ____   ___  ___  _   _ ___ ___  _   ___     ___    ___ \n |  _ \\ / _ \\/ _ \\| \\ | |_ _/ _ \\| | | \\ \\   / / |  | __|\n | |_) | | | | | | |\\| || | | | | | |  \\ \\ / /| |  | _| \n |  __/| |_| | |_| | |\\  || | |_| | |_|   \\ V / | |__| |  \n |_|    \\___/ \\___/|_| \\_|___\\___/|___/     \\_/  |____|_|  ";
+  var MOON="        _.--\"\"--._\n     .-'          '-.\n   .'   _        _    '.\n  /   / \\      / \\     \\\n |   |   |    |   |    |\n |    \\ _/    \\_ /     |\n  \\    '.      .'    /\n   '.   '--__--'   .'\n     '-.________.-'";
   var CMDS={
-    help:function(){line('Available commands:','muted');
-      [['help','this list'],['about','what PoorMad is'],['vision','why it exists'],['mission','what we build'],['cause','sovereignty & OSS'],
-       ['research','the learning loop'],['skills','capability list'],['download','get installer ('+dlLabel()+')'],['portal','open web portal'],
-       ['whoami','who you are here'],['neofetch','system + project'],['banner','show wordmark'],['theme','cycle accent'],['sudo','privileged'],['clear','clear']].forEach(function(r){
-        line('  <span class="vi">'+r[0].padEnd(10)+'</span><span class="dim">'+r[1]+'</span>');});
-      blank();line('↑/↓ history · Tab completes · or tap a chip.','dim');},
-    about:function(){line('PoorMad is a <span class="vi">self-improving AI agent</span> built by one person, from a room.');
-      line('It writes its own skills, remembers who you are, and gets sharper the longer you keep it.');line('Not a service. Not a black box. <span class="vi">Yours.</span>');blank();line('When the light is blocked, the stars align.','vi');},
+    help:function(){line('Available commands:','muted');[['help','this list'],['about','what PoorMad is'],['vision','why it exists'],['mission','what we build'],['cause','sovereignty & OSS'],['research','the learning loop'],['skills','capability list'],['download','get installer ('+dlLabel()+')'],['portal','open web portal'],['whoami','who you are here'],['neofetch','system + project'],['banner','show wordmark'],['theme','cycle accent'],['sudo','privileged'],['clear','clear']].forEach(function(r){line('  <span class="vi">'+r[0].padEnd(10)+'</span><span class="dim">'+r[1]+'</span>');});blank();line('↑/↓ history · Tab completes · or tap a chip.','dim');},
+    about:function(){line('PoorMad is a <span class="vi">self-improving AI agent</span> built by one person, from a room.');line('It writes its own skills, remembers who you are, and gets sharper the longer you keep it.');line('Not a service. Not a black box. <span class="vi">Yours.</span>');blank();line('When the light is blocked, the stars align.','vi');},
     vision:function(){line('<span class="vi">01 — VISION</span>');line('An intelligence that belongs to you.');blank();line('Most AI is rented. PoorMad lives on your side of the wall — learning, remembering, improving on your terms.');},
     mission:function(){line('<span class="vi">02 — MISSION</span>');line('Ship a real agent. From a laptop to a fleet.');blank();line('One person, one room, one laptop — a refusal to accept capable AI must be closed and extractive.');},
     cause:function(){line('<span class="vi">03 — CAUSE</span>');line('Sovereignty over your own intelligence.');blank();line('Privacy by default. Local-first. Open source (MIT). Built to be yours only.');},
-    research:function(){line('<span class="vi">04 — RESEARCH</span>');line('The learning loop: better from use, without a central model.');blank();
-      line('  <span class="vi">skills</span>     experience → reusable, sharpened skills');line('  <span class="vi">memory</span>     semantic recall across sessions');
-      line('  <span class="vi">orchestration</span> tools, subagents, scheduled jobs');line('  <span class="vi">surfaces</span>  one brain: CLI, desktop, web, 20+ messengers');},
-    skills:function(){line('Current capability surface:','muted');
-      ['self-improvement via skills','cross-session memory','tool & subagent orchestration','scheduled/cron jobs','20+ messaging platforms','desktop + CLI + web','model-agnostic','local-first, private'].forEach(function(s){line('  <span class="ok">✓</span> '+s);});},
+    research:function(){line('<span class="vi">04 — RESEARCH</span>');line('The learning loop: better from use, without a central model.');blank();line('  <span class="vi">skills</span>     experience → reusable, sharpened skills');line('  <span class="vi">memory</span>     semantic recall across sessions');line('  <span class="vi">orchestration</span> tools, subagents, scheduled jobs');line('  <span class="vi">surfaces</span>  one brain: CLI, desktop, web, 20+ messengers');},
+    skills:function(){line('Current capability surface:','muted');['self-improvement via skills','cross-session memory','tool & subagent orchestration','scheduled/cron jobs','20+ messaging platforms','desktop + CLI + web','model-agnostic','local-first, private'].forEach(function(s){line('  <span class="ok">✓</span> '+s);});},
     download:function(){line('Downloading for <span class="vi">'+dlLabel()+'</span> — '+link(dlURL(),dlURL().split('/').pop()));line('All releases: '+link('https://github.com/Tayyaba22/poormad-agent/releases','github.com/.../releases'),'dim');},
     portal:function(){line('The Portal is where PoorMad meets you in the browser.');blank();line('→ '+link('https://portal.xingabot.com','portal.xingabot.com'));},
     whoami:function(){line('visitor — a curious human exploring PoorMad from a terminal.');line('No account needed. Type <span class="vi">download</span> to take it with you.','dim');},
-    neofetch:function(){line('<span style="color:var(--violet);text-shadow:0 0 14px var(--violet-dim);white-space:pre">'+MOON+'</span>');
-      line('<span class="vi">poormad</span>@xingabot');line('─────────────────');
-      line('<span class="muted">project  </span> PoorMad — self-improving agent');line('<span class="muted">built by </span> 1 person, 1 room, 1 laptop');
-      line('<span class="muted">license  </span> MIT (open source)');line('<span class="muted">platforms</span> 20+ (CLI, desktop, web, messengers)');
-      line('<span class="muted">mood     </span> <span class="vi">when the light is blocked, the stars align</span>');},
+    neofetch:function(){line('<span style="color:var(--violet);text-shadow:0 0 14px var(--violet-dim);white-space:pre">'+MOON+'</span>');line('<span class="vi">poormad</span>@xingabot');line('─────────────────');line('<span class="muted">project  </span> PoorMad — self-improving agent');line('<span class="muted">built by </span> 1 person, 1 room, 1 laptop');line('<span class="muted">license  </span> MIT (open source)');line('<span class="muted">platforms</span> 20+ (CLI, desktop, web, messengers)');line('<span class="muted">mood     </span> <span class="vi">when the light is blocked, the stars align</span>');},
     banner:function(){line('<span style="color:var(--violet);text-shadow:0 0 14px var(--violet-dim);white-space:pre">'+BANNER+'</span>');},
-    theme:function(){var a=[['#8b5cf6','violet'],['#5fd7ff','cyan'],['#febc2e','amber'],['#28c840','green'],['#ff6ad5','pink']];themeI=(themeI+1)%a.length;var c=a[themeI];
-      document.documentElement.style.setProperty('--violet',c[0]);document.documentElement.style.setProperty('--violet-bright',c[0]);line('accent set to <span class="vi">'+c[1]+'</span> '+c[0]);},
+    theme:function(){var a=[['#8b5cf6','violet'],['#5fd7ff','cyan'],['#febc2e','amber'],['#28c840','green'],['#ff6ad5','pink']];themeI=(themeI+1)%a.length;var c=a[themeI];document.documentElement.style.setProperty('--violet',c[0]);document.documentElement.style.setProperty('--violet-bright',c[0]);line('accent set to <span class="vi">'+c[1]+'</span> '+c[0]);},
     sudo:function(){line('visitor is not in the sudoers file. This incident will be reported.','err');line('(just kidding — PoorMad is yours. try <span class="vi">whoami</span>)','dim');},
     clear:function(){out.innerHTML='';}
   };
-  function blank(){line('&nbsp;');}
   var themeI=0;var ALIAS={v:'vision',m:'mission',c:'cause',r:'research',d:'download',p:'portal',a:'about',h:'help','?':'help'};
   function run(raw){var s=raw.trim();if(!s)return;line('<span class="prompt"><span class="u">visitor@poormad</span><span class="p">:~$</span></span> <span class="cmd-echo">'+esc(s)+'</span>');
     var p=s.split(/\s+/),n=p[0].toLowerCase(),args=p.slice(1);if(ALIAS[n])n=ALIAS[n];
@@ -486,49 +406,25 @@ a{color:inherit;text-decoration:none}
   cmd.addEventListener('keydown',function(e){if(e.key==='Enter'){var v=cmd.value;if(v.trim()){hist.push(v);hi=hist.length;}run(v);cmd.value='';}
     else if(e.key==='ArrowUp'){if(hi>0){hi--;cmd.value=hist[hi]||'';}e.preventDefault();}
     else if(e.key==='ArrowDown'){if(hi<hist.length-1){hi++;cmd.value=hist[hi]||'';}else{hi=hist.length;cmd.value='';}e.preventDefault();}
-    else if(e.key==='Tab'){e.preventDefault();var pv=cmd.value.trim().toLowerCase();
-      var m=Object.keys(CMDS).concat(Object.keys(ALIAS)).filter(function(k){return k.indexOf(pv)===0;});if(m.length===1)cmd.value=m[0]+' ';}});
+    else if(e.key==='Tab'){e.preventDefault();var pv=cmd.value.trim().toLowerCase();var m=Object.keys(CMDS).concat(Object.keys(ALIAS)).filter(function(k){return k.indexOf(pv)===0;});if(m.length===1)cmd.value=m[0]+' ';}});
   document.getElementById('chips').addEventListener('click',function(e){var c=e.target.closest('.chip');if(!c)return;run(c.dataset.c);cmd.focus();});
   var BOOT=['booting poormad shell v0.18.0 ...','loading memory store ............ <span class="ok">ok</span>','mounting skills registry ............ <span class="ok">ok</span>','connecting gateway (local) ...... <span class="ok">ok</span>','','<span class="vi">Welcome to PoorMad.</span> Type <span class="vi">help</span> to begin.','<span class="dim">when the light is blocked, the stars align</span>'];
   (function bt(i){if(i>=BOOT.length)return;line('<span class="muted">'+BOOT[i]+'</span>');setTimeout(function(){bt(i+1);},reduce?0:230);})(0);
-
   /* double starfield parallax */
-  function makeStars(id,count,sp,col){var cv=document.getElementById(id);if(!cv)return null;var cx=cv.getContext('2d'),st=[],w,h;
-    function sz(){w=cv.width=innerWidth;h=cv.height=innerHeight;}sz();addEventListener('resize',sz);
-    for(var i=0;i<count;i++)st.push({x:Math.random()*w,y:Math.random()*h,z:Math.random()*1.6+.4,r:Math.random()*1.3+.3,t:Math.random()*6.28,s:Math.random()*.01+.003});
-    return {cv:cv,cx:cx,st:st,sp:sp};}
-  var L1=makeStars('stars',reduce?0:90,0.05,'rgba(200,190,255,'),L2=makeStars('stars2',reduce?0:50,0.12,'rgba(167,139,250,');
-  var sy=0,mouse={x:-999,y:-999};addEventListener('scroll',function(){sy=window.scrollY||0;},{passive:true});
-  addEventListener('mousemove',function(e){mouse.x=e.clientX;mouse.y=e.clientY;});
-  function draw(){if(L1){var w=L1.cv.width,h=L1.cv.height;L1.cx.clearRect(0,0,w,h);
-    var g=L1.cx.createRadialGradient(w*0.78,h*0.12-sy*0.03,0,w*0.78,h*0.12-sy*0.03,h*0.7);
-    g.addColorStop(0,'rgba(139,92,246,0.10)');g.addColorStop(1,'rgba(139,92,246,0)');L1.cx.fillStyle=g;L1.cx.fillRect(0,0,w,h);
-    drawStars(L1,sy,0.02);}
-    if(L2){var w2=L2.cv.width,h2=L2.cv.height;L2.cx.clearRect(0,0,w2,h2);drawStars(L2,sy,0.05);}
-    requestAnimationFrame(draw);}
-  function drawStars(L,sy,base){for(var i=0;i<L.st.length;i++){var st=L.st[i];st.t+=st.s;st.y+=st.z*0.1;if(st.y>innerHeight){st.y=0;st.x=Math.random()*innerWidth;}
-    var py=(st.y-sy*(base+st.z*0.05))%innerHeight;if(py<0)py+=innerHeight;var dx=st.x-mouse.x,dy=st.y-mouse.y,dd=Math.sqrt(dx*dx+dy*dy);
-    var px=st.x+Math.sin(st.t)*Math.min(12,dd/40);L.cx.beginPath();L.cx.arc(px,py,st.r,0,7);
-    L.cx.fillStyle='rgba(200,190,255,'+(0.4+Math.sin(st.t*2)*0.3)+')';L.cx.fill();}}
+  function mk(id,count,sp){var cv=document.getElementById(id);if(!cv)return null;var cx=cv.getContext('2d'),st=[],w,h;function sz(){w=cv.width=innerWidth;h=cv.height=innerHeight;}sz();addEventListener('resize',sz);for(var i=0;i<count;i++)st.push({x:Math.random()*w,y:Math.random()*h,z:Math.random()*1.6+.4,r:Math.random()*1.3+.3,t:Math.random()*6.28,s:Math.random()*.01+.003});return {cv:cv,cx:cx,st:st};}
+  var L1=mk('stars',reduce?0:90),L2=mk('stars2',reduce?0:50),sy=0,mouse={x:-999,y:-999};
+  addEventListener('scroll',function(){sy=window.scrollY||0;},{passive:true});addEventListener('mousemove',function(e){mouse.x=e.clientX;mouse.y=e.clientY;});
+  function drawStars(L,base){for(var i=0;i<L.st.length;i++){var st=L.st[i];st.t+=st.s;st.y+=st.z*0.1;if(st.y>innerHeight){st.y=0;st.x=Math.random()*innerWidth;}var py=(st.y-sy*(base+st.z*0.05))%innerHeight;if(py<0)py+=innerHeight;var dx=st.x-mouse.x,dy=st.y-mouse.y,dd=Math.sqrt(dx*dx+dy*dy);var px=st.x+Math.sin(st.t)*Math.min(12,dd/40);L.cx.beginPath();L.cx.arc(px,py,st.r,0,7);L.cx.fillStyle='rgba(200,190,255,'+(0.4+Math.sin(st.t*2)*0.3)+')';L.cx.fill();}}
+  function draw(){if(L1){var w=L1.cv.width,h=L1.cv.height;L1.cx.clearRect(0,0,w,h);var g=L1.cx.createRadialGradient(w*0.78,h*0.12-sy*0.03,0,w*0.78,h*0.12-sy*0.03,h*0.7);g.addColorStop(0,'rgba(139,92,246,0.10)');g.addColorStop(1,'rgba(139,92,246,0)');L1.cx.fillStyle=g;L1.cx.fillRect(0,0,w,h);drawStars(L1,0.02);}if(L2){L2.cx.clearRect(0,0,L2.cv.width,L2.cv.height);drawStars(L2,0.05);}requestAnimationFrame(draw);}
   if(!reduce)draw();
-
-  /* cursor glow blob + custom cursor + progress + sound */
-  var glow=document.getElementById('glow');
-  if(glow&&!reduce){addEventListener('mousemove',function(e){glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px';});}
+  var glow=document.getElementById('glow');if(glow&&!reduce)addEventListener('mousemove',function(e){glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px';});
   var cur=document.getElementById('cursor'),cx2=innerWidth/2,cy2=innerHeight/2,tx=cx2,ty=cy2;
-  if(cur&&!reduce&&matchMedia('(hover:hover)').matches){addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY;
-    cur.classList.toggle('hover',!!e.target.closest('a,button,.chip,input,.feat,.prev,.dock a'));});
-    (function lp(){cx2+=(tx-cx2)*.2;cy2+=(ty-cy2)*.2;cur.style.transform='translate('+cx2+'px,'+cy2+'px)';requestAnimationFrame(lp);})();}
-  var prog=document.getElementById('progress');addEventListener('scroll',function(){if(!prog)return;var d=document.documentElement;
-    prog.style.width=((d.scrollTop/(d.scrollHeight-d.clientHeight||1))*100)+'%';});
-  document.querySelectorAll('.feat').forEach(function(c){c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect();
-    c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px');});});
-  var actx=null,sb=document.getElementById('sound'),son=false;
-  function ctx(){if(!actx){try{actx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}}if(actx&&actx.state==='suspended')actx.resume();}
-  function blip(f,d,v){if(!son||!actx)return;var o=actx.createOscillator(),g=actx.createGain();o.type='sine';o.frequency.value=f;o.connect(g);g.connect(actx.destination);
-    var t=actx.currentTime;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v||.05,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+(d||.1));o.start(t);o.stop(t+(d||.1)+.02);}
-  if(sb){sb.addEventListener('click',function(){son=!son;ctx();sb.classList.toggle('on',son);sb.textContent=son?'♫':'♪';sb.title='Sound: '+(son?'on':'off');if(son)blip(660,.18,.08);});
-    document.addEventListener('click',function(e){if(e.target.closest('a,button,.chip'))blip(520+Math.random()*120,.1,.04);});}
+  if(cur&&!reduce&&matchMedia('(hover:hover)').matches){addEventListener('mousemove',function(e){tx=e.clientX;ty=e.clientY;cur.classList.toggle('hover',!!e.target.closest('a,button,.chip,input,.feat,.prev,.dock a'));});(function lp(){cx2+=(tx-cx2)*.2;cy2+=(ty-cy2)*.2;cur.style.transform='translate('+cx2+'px,'+cy2+'px)';requestAnimationFrame(lp);})();}
+  var prog=document.getElementById('progress');addEventListener('scroll',function(){if(!prog)return;var d=document.documentElement;prog.style.width=((d.scrollTop/(d.scrollHeight-d.clientHeight||1))*100)+'%';});
+  document.querySelectorAll('.feat').forEach(function(c){c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect();c.style.setProperty('--mx',(e.clientX-r.left)+'px');c.style.setProperty('--my',(e.clientY-r.top)+'px');});});
+  var actx=null,sb=document.getElementById('sound'),son=false;function ctx(){if(!actx){try{actx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}}if(actx&&actx.state==='suspended')actx.resume();}
+  function blip(f,d,v){if(!son||!actx)return;var o=actx.createOscillator(),g=actx.createGain();o.type='sine';o.frequency.value=f;o.connect(g);g.connect(actx.destination);var t=actx.currentTime;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(v||.05,t+.01);g.gain.exponentialRampToValueAtTime(.0001,t+(d||.1));o.start(t);o.stop(t+(d||.1)+.02);}
+  if(sb){sb.addEventListener('click',function(){son=!son;ctx();sb.classList.toggle('on',son);sb.textContent=son?'♫':'♪';sb.title='Sound: '+(son?'on':'off');if(son)blip(660,.18,.08);});document.addEventListener('click',function(e){if(e.target.closest('a,button,.chip'))blip(520+Math.random()*120,.1,.04);});}
 })();
 </script>
 </body>
