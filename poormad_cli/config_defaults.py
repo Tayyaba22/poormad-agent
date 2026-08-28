@@ -1474,7 +1474,7 @@ DEFAULT_CONFIG = {
         # model — see poormad_cli/focus_view.py.
         "focus_view": False,
         "focus_saved_tool_progress": "all",
-        "skin": "default",
+        "skin": "poormad-dark",
         # UI language for static user-facing messages (approval prompts, a
         # handful of gateway slash-command replies).  Does NOT affect agent
         # responses, log lines, tool outputs, or slash-command descriptions.
@@ -2423,7 +2423,7 @@ DEFAULT_CONFIG = {
     # WhatsApp platform settings (gateway mode)
     "whatsapp": {
         # Reply prefix prepended to every outgoing WhatsApp message.
-        # Default (None) uses the built-in "⚕ *PoorMad*" header.
+        # Default (None) uses the built-in "🌑 *PoorMad*" header.
         # Set to "" (empty string) to disable the header entirely.
         # Supports \n for newlines, e.g. "🤖 *My Bot*\n──────\n"
     },

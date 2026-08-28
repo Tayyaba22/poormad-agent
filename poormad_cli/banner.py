@@ -74,21 +74,26 @@ POORMAD_AGENT_LOGO = """[bold #C4B5FD]██████╗  ██████�
 [#6D28D9]██║     ╚██████╔╝╚██████╔╝██║  ██║██║ ╚═╝ ██║██║  ██║██████╔╝[/]
 [#6D28D9]╚═╝      ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═════╝ [/]"""
 
-POORMAD_CADUCEUS = """[#C4B5FD]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-[#C4B5FD]⠀⠀⠀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣄⡀⠀⠀⠀⠀⠀[/]
-[#C4B5FD]⠀⠀⠀⣠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣄⠀⠀⠀[/]
-[#8B5CF6]⠀⣠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣄⠀[/]
-[#8B5CF6]⣰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆[/]
-[#7C3AED]⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿[/]
-[#7C3AED]⠙⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠋[/]
-[#6D28D9]⠀⠀⠈⠙⠿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠋⠁⠀⠀[/]
-[#6D28D9]⠀⠀⠀⠀⠀⠈⠙⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠋⠁⠀⠀⠀⠀⠀⠀[/]
-[#4C1D95]⠀⠀⠀⠀⠀⠀⠀⠀⠈⠛⠻⠿⣿⣿⣿⣿⠿⠟⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀[/]
-[#4C1D95]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣾⣿⣿⣿⣷⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-[#4C1D95]⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-[#3B0764]⠀⠀⠀⠀⠀⠀⠀⣠⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣄⠀⠀⠀⠀⠀⠀⠀⠀[/]
-[#3B0764]⠀⠀⠀⠀⠀⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀[/]
-[#3B0764]⠀⠀⠀⠀⠀⠀⠸⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠿⠇⠀⠀⠀⠀⠀⠀⠀[/]"""
+# Brand-neutral fallback hero (a glowing violet moon) — used only if a skin
+# defines no banner_hero. Never a caduceus (that is the old Hermes mark).
+POORMAD_CADUCEUS = """[#8b5cf6]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⣤⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
+[#8b5cf6]⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣿⣿⠟⠛⠻⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀[/]
+[#c4b5fd]⠀⠀⠀⠀⠀⠀⣠⣾⣿⠟⠀⠀⠀⠀⠀⠀⠙⢿⣷⣄⠀⠀⠀⠀⠀[/]
+[#c4b5fd]⠀⠀⠀⠀⣰⣿⠟⠀⠀⠀⢀⣴⣶⡄⠀⠀⠀⠙⢿⣷⡀⠀⠀⠀[/]
+[#8b5cf6]⠀⠀⠀⣰⣿⠃⠀⠀⠀⣰⣿⣿⣿⣆⠀⠀⠀⠀⢻⣿⠀⠀⠀[/]
+[#8b5cf6]⠀⠀⢰⣿⠃⠀⠀⢀⣾⡿⠋⠙⢿⣷⡀⠀⠀⠹⣿⡆⠀⠀[/]
+[#6d28d9]⠀⠀⣿⡇⠀⠀⣠⣿⠟⠀⠀⠀⠻⣿⣄⠀⠀⢸⣿⠀⠀[/]
+[#6d28d9]⠀⠀⣿⡇⠀⠀⠙⠋⠀⠀⚡⠀⠀⠙⠋⠀⠀⢸⣿⠀⠀[/]
+[#6d28d9]⠀⠀⢿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⡿⠀⠀[/]
+[#8b5cf6]⠀⠀⠀⢿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⡿⠀⠀⠀[/]
+[#c4b5fd]⠀⠀⠀⠀⠈⠻⣿⣷⣶⣤⣀⣀⣤⣶⣿⠿⠋⠀⠀⠀⠀[/]
+[#c4b5fd]⠀⠀⠀⠀⠀⠀⠀⠉⠛⠿⠿⠿⠛⠉⠀⠀⠀⠀⠀⠀⠀[/]
+[#8b5cf6]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀🌑⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
+[dim #6d28d9]⠀⠀⠀⠀⠀⠀⠀⠀poor in cost, mad in capability⠀⠀⠀⠀⠀⠀⠀⠀[/]"""
+
+# (The name POORMAD_CADUCEUS is retained as the module-level constant name for
+# backwards compatibility with importers; its content is the PoorMad moon.)
+POORMAD_HERO = POORMAD_CADUCEUS
 
 
 
@@ -1014,10 +1019,10 @@ def build_welcome_banner(console: "Console", model: str, cwd: str,
     try:
         from poormad_cli.skin_engine import get_active_skin
         _bskin = get_active_skin()
-        _hero = _bskin.banner_hero if hasattr(_bskin, 'banner_hero') and _bskin.banner_hero else POORMAD_CADUCEUS
+        _hero = _bskin.banner_hero if hasattr(_bskin, 'banner_hero') and _bskin.banner_hero else POORMAD_HERO
     except Exception:
         _bskin = None
-        _hero = POORMAD_CADUCEUS
+        _hero = POORMAD_HERO
     left_lines = ["", _hero, ""]
     if (provider or "").strip().lower() == "moa":
         # MoA virtual provider: ``model`` is a preset name. Show the preset and

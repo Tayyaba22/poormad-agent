@@ -1,5 +1,5 @@
 # PoorMad house theme — space-black + violet/lavender nebula accent.
-# Set `display.skin: poormad-dark` in config.yaml.
+# Set `display.skin: poormad-dark` in config.yaml (this is the default skin).
 name: poormad-dark
 description: PoorMad house theme — space-black with violet nebula accent
 
@@ -35,11 +35,76 @@ colors:
   status_bar_critical: "#f87171"
   session_label: "#c4b5fd"
   session_border: "#1e1b2e"
+  shell_dollar: "#8b5cf6"
 
-# Optional flavor
+# Spinner — the "thinking / working" animation while the agent runs.
+spinner:
+  waiting_faces:
+    - "(🌑)"
+    - "(✶)"
+    - "(◍)"
+  thinking_faces:
+    - "(🌑)"
+    - "(✶)"
+    - "(◍)"
+    - "(⚡)"
+  thinking_verbs:
+    - "thinking"
+    - "planning"
+    - "forging"
+    - "connecting the dots"
+    - "summoning"
+  wings:
+    - ["⟪🌑", "🌑⟫"]
+    - ["⟪✦", "✦⟫"]
+    - ["⟪⚡", "⚡⟫"]
+
+# Tool emojis — brand-consistent glyphs for tool-call spinners / progress.
+tool_emojis:
+  terminal: "⚡"
+  web_search: "🔮"
+  image_generation: "🎨"
+  browser: "🌐"
+  code_execution: "⚙"
+  file_read: "📄"
+  file_write: "✍"
+  memory: "🧠"
+  skills: "🔧"
+  tts: "🔊"
+  vision: "👁"
+  cron: "⏱"
+
+# Branding — strings used throughout the CLI / TUI.
 branding:
   agent_name: PoorMad
+  welcome: "Welcome to PoorMad — poor in cost, mad in capability. Type a message or /help."
+  goodbye: "Goodbye! 🌑"
+  response_label: " 🌑 PoorMad "
   prompt_symbol: "🌑"
   help_header: "🌑 PoorMad Commands"
+  status_symbol: "🌑"
 
 tool_prefix: "┊"
+
+# Banner hero art — a glowing pixel moon (brand identity), not a caduceus.
+banner_hero: "[#8b5cf6]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⣤⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
+[#8b5cf6]⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣿⣿⠟⠛⠻⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀[/]
+[#c4b5fd]⠀⠀⠀⠀⠀⠀⣠⣾⣿⠟⠀⠀⠀⠀⠀⠀⠙⢿⣷⣄⠀⠀⠀⠀⠀[/]
+[#c4b5fd]⠀⠀⠀⠀⣰⣿⠟⠀⠀⠀⢀⣴⣶⡄⠀⠀⠀⠙⢿⣷⡀⠀⠀⠀[/]
+[#8b5cf6]⠀⠀⠀⣰⣿⠃⠀⠀⠀⣰⣿⣿⣿⣆⠀⠀⠀⠀⢻⣿⠀⠀⠀[/]
+[#8b5cf6]⠀⠀⢰⣿⠃⠀⠀⢀⣾⡿⠋⠙⢿⣷⡀⠀⠀⠹⣿⡆⠀⠀[/]
+[#6d28d9]⠀⠀⣿⡇⠀⠀⣠⣿⠟⠀⠀⠀⠻⣿⣄⠀⠀⢸⣿⠀⠀[/]
+[#6d28d9]⠀⠀⣿⡇⠀⠀⠙⠋⠀⠀⚡⠀⠀⠙⠋⠀⠀⢸⣿⠀⠀[/]
+[#6d28d9]⠀⠀⢿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⡿⠀⠀[/]
+[#8b5cf6]⠀⠀⠀⢿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⡿⠀⠀⠀[/]
+[#c4b5fd]⠀⠀⠀⠀⠈⠻⣿⣷⣶⣤⣀⣀⣤⣶⣿⠿⠋⠀⠀⠀⠀[/]
+[#c4b5fd]⠀⠀⠀⠀⠀⠀⠀⠉⠛⠿⠿⠿⠛⠉⠀⠀⠀⠀⠀⠀⠀[/]
+[#8b5cf6]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀🌑⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
+[dim #6d28d9]⠀⠀⠀⠀⠀⠀⠀⠀poor in cost, mad in capability⠀⠀⠀⠀⠀⠀⠀⠀[/]"
+
+# Banner logo — POORMAD wordmark in violet Rich markup.
+banner_logo: "[bold #c4b5fd]██████╗  ██████╗  ██████╗ ██████╗ ███╗   ███╗ █████╗ ██████╗ [/]
+[#8b5cf6]██████╔╝██║   ██║██║   ██║██████╔╝██╔████╔██║███████║██║  ██║[/]
+[#6d28d9]██╔═══╝ ██║   ██║██║   ██║██╔══██╗██║╚██╔╝██║██╔══██║██║  ██║[/]
+[#8b5cf6]██║     ╚██████╔╝╚██████╔╝██║  ██║██║ ╚═╝ ██║██║  ██║██████╔╝[/]
+[#6d28d9]╚═╝      ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝╚═════╝ [/]"

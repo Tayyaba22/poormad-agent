@@ -4748,8 +4748,8 @@ def _build_compact_banner() -> str:
     dim_color = _skin.get_color("banner_dim", "#B8860B") if _skin else "#B8860B"
 
     if skin_name == "default":
-        line1 = "⚕ NOUS POORMAD - AI Agent Framework"
-        tiny_line = "⚕ NOUS POORMAD"
+        line1 = "🌑 NOUS POORMAD - AI Agent Framework"
+        tiny_line = "🌑 NOUS POORMAD"
     else:
         agent_name = _skin.get_branding("agent_name", "PoorMad") if _skin else "PoorMad"
         line1 = f"{agent_name} - AI Agent Framework"
@@ -7036,7 +7036,7 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
             yolo_active = self._is_session_yolo_active()
             goal_segment = self._status_bar_goal_segment(snapshot)
             if width < 52:
-                text = f"{battery_prefix}⚕ {snapshot['model_short']} · {duration_label}"
+                text = f"{battery_prefix}🌑 {snapshot['model_short']} · {duration_label}"
                 if goal_segment:
                     text += f" · {goal_segment}"
                 if focus_label:
@@ -7045,7 +7045,7 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
                     text += " · ⚠ YOLO"
                 return self._right_align_status_title(text, session_title, width)
             if width < 76:
-                parts = [f"⚕ {snapshot['model_short']}", percent_label]
+                parts = [f"🌑 {snapshot['model_short']}", percent_label]
                 if battery_label:
                     parts.insert(0, battery_label)
                 compressions = snapshot.get("compressions", 0)
@@ -7077,7 +7077,7 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
                 context_label = "ctx --"
 
             compressions = snapshot.get("compressions", 0)
-            parts = [f"⚕ {snapshot['model_short']}", context_label, percent_label]
+            parts = [f"🌑 {snapshot['model_short']}", context_label, percent_label]
             if battery_label:
                 parts.insert(0, battery_label)
             if compressions:
@@ -7106,7 +7106,7 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
                 parts.append("⚠ YOLO")
             return self._right_align_status_title(" │ ".join(parts), session_title, width)
         except Exception:
-            return f"⚕ {self.model if getattr(self, 'model', None) else 'PoorMad'}"
+            return f"🌑 {self.model if getattr(self, 'model', None) else 'PoorMad'}"
 
     def _get_status_bar_fragments(self):
         if not self._status_bar_visible or getattr(self, '_model_picker_state', None) or getattr(self, '_command_palette_state', None):
@@ -7129,7 +7129,7 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
 
             if width < 52:
                 frags = [
-                    ("class:status-bar", " ⚕ "),
+                    ("class:status-bar", " 🌑 "),
                     ("class:status-bar-strong", snapshot["model_short"]),
                     ("class:status-bar-dim", " · "),
                     ("class:status-bar-dim", duration_label),
@@ -7153,7 +7153,7 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
                     bg_proc_count = snapshot.get("active_background_processes", 0)
                     bg_subagent_count = snapshot.get("active_background_subagents", 0)
                     frags = [
-                        ("class:status-bar", " ⚕ "),
+                        ("class:status-bar", " 🌑 "),
                         ("class:status-bar-strong", snapshot["model_short"]),
                         ("class:status-bar-dim", " · "),
                         (self._status_bar_context_style(percent), percent_label),
@@ -7198,7 +7198,7 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
                     bg_proc_count = snapshot.get("active_background_processes", 0)
                     bg_subagent_count = snapshot.get("active_background_subagents", 0)
                     frags = [
-                        ("class:status-bar", " ⚕ "),
+                        ("class:status-bar", " 🌑 "),
                         ("class:status-bar-strong", snapshot["model_short"]),
                         ("class:status-bar-dim", " │ "),
                         ("class:status-bar-dim", context_label),
@@ -7268,7 +7268,7 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
                     frags.append(("class:status-bar-strong", stash_indicator))
 
             # Battery is the first status-bar element when enabled: prepend it
-            # ahead of the leading ⚕ marker in whichever width tier ran above.
+            # ahead of the leading 🌑 marker in whichever width tier ran above.
             if battery_label:
                 frags[0:0] = [
                     ("class:status-bar", " "),
@@ -7911,10 +7911,10 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
             try:
                 from poormad_cli.skin_engine import get_active_skin
                 _skin = get_active_skin()
-                label = _skin.get_branding("response_label", "⚕ PoorMad")
+                label = _skin.get_branding("response_label", "🌑 PoorMad")
                 _text_hex = _skin.get_color("banner_text", "#FFF8DC")
             except Exception:
-                label = "⚕ PoorMad"
+                label = "🌑 PoorMad"
                 _text_hex = "#FFF8DC"
             # Build a true-color ANSI escape for the response text color
             # so streamed content matches the Rich Panel appearance.
@@ -9319,10 +9319,10 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
 
         try:
             from poormad_cli.skin_engine import get_active_help_header
-            header = get_active_help_header("(^_^)? Available Commands")
+            header = get_active_help_header("🌑 Available Commands")
         except Exception:
-            header = "(^_^)? Available Commands"
-        header = (header or "").strip() or "(^_^)? Available Commands"
+            header = "🌑 Available Commands"
+        header = (header or "").strip() or "🌑 Available Commands"
         inner_width = 55
         if len(header) > inner_width:
             header = header[:inner_width]
@@ -9444,7 +9444,7 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
         
         # Header
         print()
-        title = "(^_^)/ Available Tools"
+        title = "🌑 Available Tools"
         width = 78
         pad = width - len(title)
         print("+" + "-" * width + "+")
@@ -9483,7 +9483,7 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
         
         # Header
         print()
-        title = "(^_^)b Available Toolsets"
+        title = "🌑 Available Toolsets"
         width = 58
         pad = width - len(title)
         print("+" + "-" * width + "+")
@@ -9563,7 +9563,7 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
             api_key_display = "Not set!"
         
         print()
-        title = "(^_^) Configuration"
+        title = "🌑 Configuration"
         width = 50
         pad = width - len(title)
         print("+" + "-" * width + "+")
@@ -9683,7 +9683,7 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
 
         _cli_visible_print()
         _cli_visible_print("+" + "-" * 50 + "+")
-        _cli_visible_print("|" + " " * 12 + "(^_^) Conversation History" + " " * 11 + "|")
+        _cli_visible_print("|" + " " * 12 + "🌑 Conversation History" + " " * 11 + "|")
         _cli_visible_print("+" + "-" * 50 + "+")
 
         for msg in self.conversation_history:
@@ -10030,9 +10030,9 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
 
         if not silent:
             if title:
-                print(f"(^_^)v New session started: {title}")
+                print(f"🌑 New session started: {title}")
             else:
-                print("(^_^)v New session started!")
+                print("🌑 New session started!")
 
 
     def _consume_pending_resume_selection(self, text: str) -> bool:
@@ -10159,7 +10159,7 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
             with open(path, "w", encoding="utf-8") as f:
                 f.write(content)
             label = {"json": "JSON", "md": "Markdown", "html": "HTML"}[fmt]
-            print(f"(^_^)v Conversation saved to: {path} ({label})")
+            print(f"🌑 Conversation saved to: {path} ({label})")
             if self.session_id:
                 print(f"       Resume the live session with: poormad --resume {self.session_id}")
         except Exception as e:
@@ -10356,7 +10356,7 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
             if hasattr(self.agent, "_db_flush_scan_prefix"):
                 self.agent._db_flush_scan_prefix = self.conversation_history[:]
         
-        print(f"(^_^)b Retrying: \"{last_message[:60]}{'...' if len(last_message) > 60 else ''}\"")
+        print(f"🌑 Retrying: \"{last_message[:60]}{'...' if len(last_message) > 60 else ''}\"")
         return last_message
     
     def undo_last(self, n: int = 1, prefill: bool = True):
@@ -10484,7 +10484,7 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
         turn_word = "turn" if turns_undone == 1 else "turns"
         msg_count = rewound_rows or removed_count
         print(
-            f"(^_^)b Undid {turns_undone} {turn_word} ({msg_count} message(s)). "
+            f"🌑 Undid {turns_undone} {turn_word} ({msg_count} message(s)). "
             f"Backed up to: \"{removed_text[:60]}{'...' if len(removed_text) > 60 else ''}\""
         )
         remaining = len(self.conversation_history)
@@ -16515,7 +16515,7 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
                         if not _streaming_box_opened:
                             _streaming_box_opened = True
                             w = self._scrollback_box_width(getattr(self.console, "width", 80))
-                            label = " ⚕ PoorMad "
+                            label = " 🌑 PoorMad "
                             if self.show_timestamps:
                                 label = f"{label}{datetime.now().strftime(getattr(self, 'timestamp_format', '%H:%M'))} "
                             fill = w - 2 - PoorMadCLI._status_bar_display_width(label)
@@ -16947,11 +16947,11 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
                 try:
                     from poormad_cli.skin_engine import get_active_skin
                     _skin = get_active_skin()
-                    label = _skin.get_branding("response_label", "⚕ PoorMad")
+                    label = _skin.get_branding("response_label", "🌑 PoorMad")
                     _resp_color = _maybe_remap_for_light_mode(_skin.get_color("response_border", "#CD7F32"))
                     _resp_text = _maybe_remap_for_light_mode(_skin.get_color("banner_text", "#FFF8DC"))
                 except Exception:
-                    label = "⚕ PoorMad"
+                    label = "🌑 PoorMad"
                     _resp_color = _maybe_remap_for_light_mode("#CD7F32")
                     _resp_text = _maybe_remap_for_light_mode("#FFF8DC")
 
@@ -17315,9 +17315,9 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
         else:
             try:
                 from poormad_cli.skin_engine import get_active_goodbye
-                goodbye = get_active_goodbye("Goodbye! ⚕")
+                goodbye = get_active_goodbye("Goodbye! 🌑")
             except Exception:
-                goodbye = "Goodbye! ⚕"
+                goodbye = "Goodbye! 🌑"
             print(goodbye)
 
     def _get_tui_prompt_symbols(self) -> tuple[str, str]:
@@ -17406,7 +17406,7 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
         if self._command_running:
             return _state_fragment("class:prompt-working", self._command_spinner_frame())
         if self._agent_running:
-            return _state_fragment("class:prompt-working", "⚕")
+            return _state_fragment("class:prompt-working", "🌑")
         if self._voice_mode:
             return _state_fragment("class:voice-prompt", "🎤")
         return [("class:prompt", symbol)]

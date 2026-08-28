@@ -1582,17 +1582,17 @@ class CLICommandsMixin:
                     self.system_prompt = ""
                 self.agent = None  # Force re-init
                 if saved:
-                    print("(^_^)b Personality cleared (saved to config)")
+                    print("🌑 Personality cleared (saved to config)")
                 else:
-                    print("(^_^) Personality cleared (session only)")
+                    print("🌑 Personality cleared (session only)")
                 print("  No personality overlay — using base agent behavior.")
             else:
                 self.system_prompt = personality_prompt
                 self.agent = None  # Force re-init
                 if saved:
-                    print(f"(^_^)b Personality set to '{name}' (saved to config)")
+                    print(f"🌑 Personality set to '{name}' (saved to config)")
                 else:
-                    print(f"(^_^) Personality set to '{name}' (session only)")
+                    print(f"🌑 Personality set to '{name}' (session only)")
                 print(f"  \"{personality_prompt[:60]}{'...' if len(personality_prompt) > 60 else ''}\"")
         else:
             # Show available personalities
@@ -1644,7 +1644,7 @@ class CLICommandsMixin:
                 print(f"(x_x) {err}")
                 return
             if enabled:
-                print(f"(^_^)b {name} is out — it'll pop in shortly.")
+                print(f"🌑 {name} is out — it'll pop in shortly.")
             else:
                 print(f"(-_-)zzZ {name} put away." if name else "(-_-)zzZ Pet put away.")
             return
@@ -1659,7 +1659,7 @@ class CLICommandsMixin:
                 print("(o_o) Usage: /pet scale <factor>  (e.g. /pet scale 0.5)")
                 return
             scale, err = set_pet_scale(value)
-            print(f"(x_x) {err}" if err else f"(^_^) Pet scale → {scale:g}.")
+            print(f"(x_x) {err}" if err else f"🌑 Pet scale → {scale:g}.")
             return
 
         if low == "off":
@@ -1674,7 +1674,7 @@ class CLICommandsMixin:
             print(f"(x_x) Couldn't adopt '{arg}': {exc}")
             return
         _set_active(arg)
-        print(f"(^_^)b {pet.display_name} is out — it'll pop in shortly.")
+        print(f"🌑 {pet.display_name} is out — it'll pop in shortly.")
 
     def _handle_hatch_command(self, cmd: str):
         """Generate ("hatch") a brand-new petdex pet from a description.
@@ -1754,7 +1754,7 @@ class CLICommandsMixin:
             return
 
         _set_active(result.slug)
-        print(f"(^_^)b {result.display_name} hatched and adopted — it'll pop in shortly!")
+        print(f"🌑 {result.display_name} hatched and adopted — it'll pop in shortly!")
 
     def _handle_cron_command(self, cmd: str):
         """Handle the /cron command to manage scheduled tasks."""
@@ -1834,7 +1834,7 @@ class CLICommandsMixin:
         if len(tokens) == 1:
             print()
             print("+" + "-" * 68 + "+")
-            print("|" + " " * 22 + "(^_^) Scheduled Tasks" + " " * 23 + "|")
+            print("|" + " " * 22 + "🌑 Scheduled Tasks" + " " * 23 + "|")
             print("+" + "-" * 68 + "+")
             print()
             print("  Commands:")
@@ -1918,7 +1918,7 @@ class CLICommandsMixin:
                 skills=skills or None,
             )
             if result.get("success"):
-                print(f"(^_^)b Created job: {result['job_id']}")
+                print(f"🌑 Created job: {result['job_id']}")
                 print(f"  Schedule: {result['schedule']}")
                 if result.get("skills"):
                     print(f"  Skills: {', '.join(result['skills'])}")
@@ -1965,7 +1965,7 @@ class CLICommandsMixin:
             )
             if result.get("success"):
                 job = result["job"]
-                print(f"(^_^)b Updated job: {job['job_id']}")
+                print(f"🌑 Updated job: {job['job_id']}")
                 print(f"  Schedule: {job['schedule']}")
                 if job.get("skills"):
                     print(f"  Skills: {', '.join(job['skills'])}")
@@ -1987,16 +1987,16 @@ class CLICommandsMixin:
                 print(f"(x_x) Failed to {action} job: {result.get('error')}")
                 return
             if action == "pause":
-                print(f"(^_^)b Paused job: {result['job']['name']} ({job_id})")
+                print(f"🌑 Paused job: {result['job']['name']} ({job_id})")
             elif action == "resume":
-                print(f"(^_^)b Resumed job: {result['job']['name']} ({job_id})")
+                print(f"🌑 Resumed job: {result['job']['name']} ({job_id})")
                 print(f"  Next run: {result['job'].get('next_run_at')}")
             elif action == "run":
-                print(f"(^_^)b Triggered job: {result['job']['name']} ({job_id})")
+                print(f"🌑 Triggered job: {result['job']['name']} ({job_id})")
                 print("  It will run on the next scheduler tick.")
             else:
                 removed = result.get("removed_job", {})
-                print(f"(^_^)b Removed job: {removed.get('name', job_id)} ({job_id})")
+                print(f"🌑 Removed job: {removed.get('name', job_id)} ({job_id})")
             return
 
         print(f"(._.) Unknown cron command: {subcommand}")
@@ -2305,11 +2305,11 @@ class CLICommandsMixin:
                     try:
                         from poormad_cli.skin_engine import get_active_skin
                         _skin = get_active_skin()
-                        label = _skin.get_branding("response_label", "⚕ PoorMad")
+                        label = _skin.get_branding("response_label", "🌑 PoorMad")
                         _resp_color = _maybe_remap_for_light_mode(_skin.get_color("response_border", "#CD7F32"))
                         _resp_text = _maybe_remap_for_light_mode(_skin.get_color("banner_text", "#FFF8DC"))
                     except Exception:
-                        label = "⚕ PoorMad"
+                        label = "🌑 PoorMad"
                         _resp_color = "#CD7F32"
                         _resp_text = "#FFF8DC"
 
@@ -3848,7 +3848,7 @@ class CLICommandsMixin:
             ("cancel", "Cancel", "keep the current session"),
         ]
         raw = self._prompt_text_input_modal(
-            title="⚕  Update PoorMad",
+            title="🌑  Update PoorMad",
             detail="This will exit the current session and run `poormad update`.",
             choices=choices,
         )
@@ -3861,7 +3861,7 @@ class CLICommandsMixin:
             return False
 
         print()
-        print("  ⚕ Launching update...")
+        print("  🌑 Launching update...")
         print()
 
         # Store the relaunch args so run() can exec them from the main thread
