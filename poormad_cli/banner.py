@@ -971,7 +971,7 @@ def build_welcome_banner(console: "Console", model: str, cwd: str,
                          provider: str = None,
                          availability: Dict[str, Any] = None,
                          skills_by_category: Dict[str, List[str]] = None):
-    """Build and print a welcome banner with caduceus on left and info on right.
+    """Build and print a welcome banner with the brand hero on left and info on right.
 
     Args:
         console: Rich Console instance.

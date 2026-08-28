@@ -4715,22 +4715,21 @@ POORMAD_AGENT_LOGO = """[bold #FFD700]██╗  ██╗███████�
 [#CD7F32]██║  ██║███████╗██║  ██║██║ ╚═╝ ██║███████╗███████║      ██║  ██║╚██████╔╝███████╗██║ ╚████║   ██║[/]
 [#CD7F32]╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚══════╝      ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝  ╚═══╝   ╚═╝[/]"""
 
-# ASCII Art - PoorMad Caduceus (compact, fits in left panel)
-POORMAD_CADUCEUS = """[#CD7F32]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⡀⠀⣀⣀⠀⢀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-[#CD7F32]⠀⠀⠀⠀⠀⠀⢀⣠⣴⣾⣿⣿⣇⠸⣿⣿⠇⣸⣿⣿⣷⣦⣄⡀⠀⠀⠀⠀⠀⠀[/]
-[#FFBF00]⠀⢀⣠⣴⣶⠿⠋⣩⡿⣿⡿⠻⣿⡇⢠⡄⢸⣿⠟⢿⣿⢿⣍⠙⠿⣶⣦⣄⡀⠀[/]
-[#FFBF00]⠀⠀⠉⠉⠁⠶⠟⠋⠀⠉⠀⢀⣈⣁⡈⢁⣈⣁⡀⠀⠉⠀⠙⠻⠶⠈⠉⠉⠀⠀[/]
-[#FFD700]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⡿⠛⢁⡈⠛⢿⣿⣦⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-[#FFD700]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠿⣿⣦⣤⣈⠁⢠⣴⣿⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-[#FFBF00]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠻⢿⣿⣦⡉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-[#FFBF00]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢷⣦⣈⠛⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-[#CD7F32]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣴⠦⠈⠙⠿⣦⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-[#CD7F32]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠸⣿⣤⡈⠁⢤⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-[#B8860B]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠷⠄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-[#B8860B]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⠑⢶⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-[#B8860B]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠁⢰⡆⠈⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-[#B8860B]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠳⠈⣡⠞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
-[#B8860B]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]"""
+# ASCII Art - PoorMad moon (compact, fits in left panel)
+POORMAD_CADUCEUS = """[#8b5cf6]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⣤⣤⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
+[#8b5cf6]⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣿⣿⠟⠛⠻⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀[/]
+[#c4b5fd]⠀⠀⠀⠀⠀⠀⣠⣾⣿⠟⠀⠀⠀⠀⠀⠀⠙⢿⣷⣄⠀⠀⠀⠀⠀[/]
+[#c4b5fd]⠀⠀⠀⠀⣰⣿⠟⠀⠀⠀⢀⣴⣶⡄⠀⠀⠀⠙⢿⣷⡀⠀⠀⠀[/]
+[#8b5cf6]⠀⠀⠀⣰⣿⠃⠀⠀⠀⣰⣿⣿⣿⣆⠀⠀⠀⠀⢻⣿⠀⠀⠀[/]
+[#8b5cf6]⠀⠀⢰⣿⠃⠀⠀⢀⣾⡿⠋⠙⢿⣷⡀⠀⠀⠹⣿⡆⠀⠀[/]
+[#6d28d9]⠀⠀⣿⡇⠀⠀⣠⣿⠟⠀⠀⠀⠻⣿⣄⠀⠀⢸⣿⠀⠀[/]
+[#6d28d9]⠀⠀⣿⡇⠀⠀⠙⠋⠀⠀⚡⠀⠀⠙⠋⠀⠀⢸⣿⠀⠀[/]
+[#6d28d9]⠀⠀⢿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⡿⠀⠀[/]
+[#8b5cf6]⠀⠀⠀⢿⣷⣄⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⡿⠀⠀⠀[/]
+[#c4b5fd]⠀⠀⠀⠀⠈⠻⣿⣷⣶⣤⣀⣀⣤⣶⣿⠿⠋⠀⠀⠀⠀[/]
+[#c4b5fd]⠀⠀⠀⠀⠀⠀⠀⠉⠛⠿⠿⠿⠛⠉⠀⠀⠀⠀⠀⠀⠀[/]
+[#8b5cf6]⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀🌑⠀⠀⠀⠀⠀⠀⠀⠀⠀[/]
+[dim #6d28d9]⠀⠀⠀⠀⠀⠀⠀⠀poor in cost, mad in capability⠀⠀⠀⠀⠀⠀⠀⠀[/]"""
 
 
 
@@ -4743,13 +4742,13 @@ def _build_compact_banner() -> str:
         _skin = None
 
     skin_name = getattr(_skin, "name", "default") if _skin else "default"
-    border_color = _skin.get_color("banner_border", "#FFD700") if _skin else "#FFD700"
-    title_color = _skin.get_color("banner_title", "#FFBF00") if _skin else "#FFBF00"
-    dim_color = _skin.get_color("banner_dim", "#B8860B") if _skin else "#B8860B"
+    border_color = _skin.get_color("banner_border", "#1e1b2e") if _skin else "#1e1b2e"
+    title_color = _skin.get_color("banner_title", "#c4b5fd") if _skin else "#c4b5fd"
+    dim_color = _skin.get_color("banner_dim", "#6b6480") if _skin else "#6b6480"
 
     if skin_name == "default":
-        line1 = "🌑 NOUS POORMAD - AI Agent Framework"
-        tiny_line = "🌑 NOUS POORMAD"
+        line1 = "🌑 PoorMad - AI Agent Framework"
+        tiny_line = "🌑 PoorMad"
     else:
         agent_name = _skin.get_branding("agent_name", "PoorMad") if _skin else "PoorMad"
         line1 = f"{agent_name} - AI Agent Framework"
