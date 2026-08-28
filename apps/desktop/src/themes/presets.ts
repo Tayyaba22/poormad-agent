@@ -848,9 +848,9 @@ export const slateTheme: DesktopTheme = {
 /**
  * MONO-HUE THEME FAMILY
  * Each theme is mono-hue: one dominant accent hue over a neutral surface
- * ladder (like Hermes). No second competing hue — the accent tints every
- * semantic token, neutrals carry the rest. Each ships its own matching
- * font (loaded via `typography.fontUrl`) and a unique app title.
+ * ladder. No second competing hue — the accent tints every semantic token,
+ * neutrals carry the rest. Each ships its own matching font (loaded via
+ * `typography.fontUrl`) and a unique app title.
  */
 
 /** J.A.R.V.I.S. — mono-hue cyan, arc-reactor calm. */
@@ -1185,7 +1185,7 @@ export const heroicTheme: DesktopTheme = {
  * PoorMad Dark — the canonical PoorMad desktop identity. Space-black surface
  * with a violet/lavender nebula accent and the pixel-moon brand. Hand-tuned
  * (not the naive CLI-skin auto-convert) so the GUI reads as a first-class
- * product, distinct from the upstream Hermes/nous GitHub-fork look.
+ * PoorMad product with its own distinct look.
  */
 export const poormadDarkTheme: DesktopTheme = {
   name: 'poormad-dark',
