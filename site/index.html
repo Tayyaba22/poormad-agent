@@ -4,149 +4,388 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>PoorMad — The Self-Improving AI Agent</title>
-<meta name="description" content="PoorMad is a self-improving AI agent that learns from experience through skills, remembers across sessions, and runs anywhere — CLI, desktop, TUI, web, and 20+ messaging platforms." />
-<link rel="icon" href="assets/wordmark.png" />
+<meta name="description" content="PoorMad is a self-improving AI agent built by one person from a single room. It learns from experience, remembers across sessions, and runs anywhere. When the light is blocked, the stars align." />
+<link rel="icon" href="favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css" />
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --bg:#050507;
+  --bg-2:#08080d;
+  --surface:#0d0d14;
+  --surface-2:#12121c;
+  --line:rgba(139,92,246,.18);
+  --line-soft:rgba(255,255,255,.08);
+  --violet:#8b5cf6;
+  --violet-bright:#a78bfa;
+  --violet-dim:rgba(139,92,246,.55);
+  --fg:#f2f0f7;
+  --muted:#9b95ad;
+  --muted-2:#6f6a80;
+  --maxw:1180px;
+  --display:'Chakra Petch',system-ui,sans-serif;
+  --body:'Space Grotesk',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--body);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+::selection{background:rgba(139,92,246,.35);color:#fff}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+/* starfield canvas */
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.9}
+/* scanline / CRT overlay (retro-tech) */
+.crt{position:fixed;inset:0;z-index:1;pointer-events:none;mix-blend-mode:overlay;opacity:.5;
+  background:repeating-linear-gradient(0deg,rgba(255,255,255,.04) 0 1px,transparent 1px 3px);
+}
+.vignette{position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 0%,transparent 55%,rgba(0,0,0,.55) 100%);
+}
+.content{position:relative;z-index:2}
+
+/* nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:40;
+  backdrop-filter:blur(12px);background:rgba(5,5,7,.6);
+  border-bottom:1px solid var(--line-soft);transition:transform .4s}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:.04em;
+  color:var(--fg);display:flex;align-items:center;gap:10px}
+.logo .dot{width:9px;height:9px;border-radius:50%;background:var(--violet);
+  box-shadow:0 0 12px var(--violet);animation:pulse 2.4s infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 12px var(--violet)}50%{opacity:.45;box-shadow:0 0 4px var(--violet)}}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{font-family:var(--mono);font-size:13px;color:var(--muted);letter-spacing:.02em;transition:color .2s}
+.nav-links a:hover{color:var(--fg)}
+.btn{font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.03em;
+  background:var(--violet);color:#0a0a0f;padding:11px 20px;border-radius:8px;border:none;
+  cursor:pointer;transition:transform .18s,box-shadow .25s,background .2s;
+  box-shadow:0 0 0 0 rgba(139,92,246,.5);position:relative}
+.btn:hover{transform:translateY(-2px);background:var(--violet-bright);box-shadow:0 10px 34px rgba(139,92,246,.45)}
+.btn-ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn-ghost:hover{background:var(--surface-2);box-shadow:none}
+
+/* hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;position:relative;padding:120px 0 80px}
+.hero .kick{font-family:var(--mono);font-size:13px;color:var(--violet-bright);letter-spacing:.22em;
+  text-transform:uppercase;margin-bottom:26px;opacity:0;transform:translateY(14px);animation:rise .8s .1s forwards}
+.hero h1{font-family:var(--display);font-weight:700;font-size:clamp(54px,11vw,140px);line-height:.92;
+  letter-spacing:-.01em;margin-bottom:10px}
+.hero h1 .l{display:inline-block;opacity:0;transform:translateY(40px) rotateX(-40deg);
+  animation:letterIn .7s forwards;background:linear-gradient(180deg,#fff,#cfc3ff 70%,#8b5cf6);
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+@keyframes letterIn{to{opacity:1;transform:none}}
+.hero .tag{font-family:var(--mono);font-size:clamp(15px,2vw,19px);color:var(--muted);
+  max-width:620px;margin-top:22px;min-height:1.6em}
+.hero .tag .cur{display:inline-block;width:9px;height:1.05em;background:var(--violet);
+  margin-left:2px;vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero .lead{font-size:clamp(17px,2.4vw,21px);color:var(--fg);max-width:560px;margin-top:30px;opacity:0;animation:rise .9s .9s forwards}
+.hero .cta{display:flex;gap:14px;margin-top:34px;opacity:0;animation:rise .9s 1.1s forwards}
+@keyframes rise{to{opacity:1;transform:none}}
+.scrollcue{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);font-family:var(--mono);
+  font-size:11px;letter-spacing:.2em;color:var(--muted-2);text-transform:uppercase;opacity:0;animation:rise 1s 1.6s forwards}
+.scrollcue::after{content:"";display:block;width:1px;height:34px;margin:10px auto 0;
+  background:linear-gradient(var(--violet),transparent);animation:drop 1.8s infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1)}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* chapter sections */
+.chapter{padding:120px 0;border-top:1px solid var(--line-soft);position:relative}
+.chapter .idx{font-family:var(--mono);font-size:13px;color:var(--violet);letter-spacing:.2em;
+  text-transform:uppercase;margin-bottom:18px;opacity:0;transform:translateY(20px);transition:.7s}
+.chapter h2{font-family:var(--display);font-weight:700;font-size:clamp(34px,6vw,68px);line-height:1.02;
+  letter-spacing:-.01em;margin-bottom:26px;opacity:0;transform:translateY(26px);transition:.7s .05s}
+.chapter p{font-size:clamp(16px,2vw,19px);color:var(--muted);max-width:680px;opacity:0;
+  transform:translateY(26px);transition:.7s .12s}
+.chapter .big{font-family:var(--display);font-weight:600;color:var(--fg);font-size:clamp(20px,3vw,30px);
+  line-height:1.25;margin:0 0 22px;max-width:760px}
+.chapter.in .idx,.chapter.in h2,.chapter.in p{opacity:1;transform:none}
+.reveal{opacity:0;transform:translateY(28px);transition:.7s}
+.chapter.in .reveal{opacity:1;transform:none}
+
+/* terminal block */
+.term{margin-top:40px;background:#060609;border:1px solid var(--line);border-radius:14px;
+  overflow:hidden;max-width:760px;box-shadow:0 0 60px rgba(139,92,246,.12)}
+.term .bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line-soft);
+  background:var(--surface)}
+.term .bar i{width:11px;height:11px;border-radius:50%;display:inline-block}
+.term .bar .r{background:#ff5f57}.term .bar .y{background:#febc2e}.term .bar .g{background:#28c840}
+.term .bar span{font-family:var(--mono);font-size:12px;color:var(--muted-2);margin-left:10px}
+.term .body{font-family:var(--mono);font-size:13.5px;line-height:1.85;padding:20px 22px;color:#c9c2e6;min-height:230px}
+.term .body .pr{color:var(--violet-bright)}
+.term .body .ok{color:#28c840}
+.term .body .mut{color:var(--muted-2)}
+.term .body .cur{display:inline-block;width:8px;height:1em;background:var(--violet);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+
+/* stats strip */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line-soft);
+  border:1px solid var(--line-soft);border-radius:14px;overflow:hidden;margin-top:10px}
+.stats .s{background:var(--bg);padding:34px 26px;text-align:center}
+.stats .n{font-family:var(--display);font-weight:700;font-size:clamp(30px,5vw,46px);color:var(--violet-bright);
+  line-height:1}
+.stats .l{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.08em;margin-top:10px;text-transform:uppercase}
+
+/* research grid (asymmetric, not 3-equal cards) */
+.rgrid{display:grid;grid-template-columns:1.4fr 1fr;gap:18px;margin-top:36px}
+.rgrid .cell{background:var(--surface);border:1px solid var(--line-soft);border-radius:14px;padding:26px;
+  transition:border-color .25s,transform .25s}
+.rgrid .cell:hover{border-color:var(--line);transform:translateY(-3px)}
+.rgrid .cell h3{font-family:var(--display);font-weight:600;font-size:19px;margin-bottom:10px;color:var(--fg)}
+.rgrid .cell p{font-size:14.5px;color:var(--muted);max-width:none}
+.rgrid .cell .k{font-family:var(--mono);font-size:11px;color:var(--violet);letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.rgrid .wide{grid-column:1 / -1}
+@media(max-width:760px){.rgrid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}
+
+/* portal CTA band */
+.band{border:1px solid var(--line);border-radius:24px;padding:64px 28px;text-align:center;
+  background:radial-gradient(700px 320px at 50% -20%,rgba(139,92,246,.18),transparent 60%),var(--surface)}
+.band h2{font-family:var(--display);font-weight:700;font-size:clamp(30px,5vw,52px);margin-bottom:14px;line-height:1.04}
+.band p{color:var(--muted);max-width:520px;margin:0 auto 30px;font-size:16.5px}
+
+/* footer */
+.footer{border-top:1px solid var(--line-soft);padding:50px 0 40px;margin-top:30px}
+.footer-in{display:flex;justify-content:space-between;flex-wrap:wrap;gap:26px}
+.footer .col h4{font-family:var(--mono);font-size:12px;color:var(--muted-2);letter-spacing:.14em;
+  text-transform:uppercase;margin-bottom:14px}
+.footer .col a{display:block;color:var(--muted);font-size:14px;margin-bottom:9px;transition:color .15s}
+.footer .col a:hover{color:var(--violet-bright)}
+.footer .tag{color:var(--muted-2);font-size:13px;max-width:280px;font-family:var(--mono)}
+.footer-base{border-top:1px solid var(--line-soft);margin-top:34px;padding-top:20px;color:var(--muted-2);
+  font-size:12.5px;font-family:var(--mono);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.magic{color:var(--violet-bright)}
+
+@media(max-width:760px){.nav-links{display:none}.hero h1{font-size:clamp(46px,15vw,90px)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.hero .kick,.hero .lead,.hero .cta,.scrollcue{opacity:1!important;transform:none!important}.hero h1 .l{opacity:1;transform:none}}
+</style>
 </head>
 <body>
+<canvas id="stars"></canvas>
+<div class="crt"></div>
+<div class="vignette"></div>
+
+<div class="content">
 <header class="nav">
   <div class="wrap nav-inner">
-    <a class="brand" href="index.html"><img src="assets/wordmark.png" alt="PoorMad" /></a>
+    <a class="logo" href="#top"><span class="dot"></span>POORMAD</a>
     <nav class="nav-links">
-      <a href="docs.html">Docs</a>
-      <a href="faq.html">FAQ</a>
-      <a href="portal/" target="_blank">Portal</a>
-      <a href="https://github.com/Tayyaba22/poormad-agent" target="_blank">GitHub</a>
+      <a href="#vision">Vision</a>
+      <a href="#mission">Mission</a>
+      <a href="#cause">Cause</a>
+      <a href="#research">Research</a>
+      <a href="#portal">Portal</a>
     </nav>
-    <a class="btn" href="portal/" target="_blank">Open Portal</a>
+    <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter Portal →</a>
   </div>
 </header>
 
-<section class="hero wrap">
-  <span class="kicker">🌑 Self-improving AI agent</span>
-  <h1>The agent that <span class="grad">learns from every session</span></h1>
-  <p class="lead">PoorMad writes its own skills from experience, curates its own memory, and searches its own past conversations — then acts across your terminal, desktop, and 20+ messaging platforms. Built to be yours alone.</p>
-  <div class="hero-cta">
-    <a class="btn" href="portal/" target="_blank">Launch the Portal</a>
-    <a class="btn btn-ghost" href="docs.html">Read the docs</a>
+<section class="hero wrap" id="top">
+  <div class="kick">// self-improving ai agent · built from one room</div>
+  <h1 id="hero-title" aria-label="PoorMad">POORMAD</h1>
+  <div class="tag"><span id="typed"></span><span class="cur"></span></div>
+  <p class="lead">An agent that writes its own skills, remembers who you are, and gets sharper with every session. Not a service. Not a black box. Yours.</p>
+  <div class="cta">
+    <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter the Portal</a>
+    <a class="btn btn-ghost" href="#vision">Read the story</a>
   </div>
-  <div class="hero-word"><img src="assets/wordmark.png" alt="PoorMad" /></div>
+  <div class="scrollcue">scroll</div>
 </section>
 
-<section class="section wrap">
-  <div class="section-head">
-    <h2>One agent, every surface</h2>
-    <p>Run PoorMad where you already work. Same brain, same memory, same skills — across every interface.</p>
-  </div>
-  <div class="grid">
-    <div class="card"><div class="ico">💻</div><h3>Desktop &amp; CLI</h3><p>A native desktop app and a fast terminal CLI with a TUI. Your agent lives on your machine, private by default.</p></div>
-    <div class="card"><div class="ico">🌐</div><h3>Web Portal</h3><p>A clean browser portal (Nous-Portal style) to chat, browse sessions, and manage skills from anywhere.</p></div>
-    <div class="card"><div class="ico">💬</div><h3>20+ Platforms</h3><p>Telegram, Discord, Slack, WhatsApp, and more — message it like a teammate and it works in the background.</p></div>
-    <div class="card"><div class="ico">🧠</div><h3>Skills from experience</h3><p>It turns repetitive work into reusable skills automatically, so the next run is faster and sharper.</p></div>
-    <div class="card"><div class="ico">📚</div><h3>Memory across sessions</h3><p>Semantic recall of past conversations and a deepening model of who you are — no re-explaining.</p></div>
-    <div class="card"><div class="ico">🔧</div><h3>Tools &amp; automations</h3><p>Scheduled jobs, subagents, and a tool registry. Point it at any model and let it orchestrate.</p></div>
+<section class="chapter wrap" id="vision">
+  <div class="idx">01 — Vision</div>
+  <h2>An intelligence<br/>that belongs to you.</h2>
+  <p class="big">Most AI is rented. You type into someone else's machine, someone else's memory, someone else's rules. PoorMad is the opposite: an agent that lives on your side of the wall — learning, remembering, and improving on your terms.</p>
+  <p>We are building toward a future where everyone can run an agent that compounds. Not a model you subscribe to, but a mind you own — one that knows your work, protects your context, and gets undeniably better the longer you keep it.</p>
+  <div class="term reveal">
+    <div class="bar"><i class="r"></i><i class="y"></i><i class="g"></i><span>poormad — vision</span></div>
+    <div class="body" id="term-vision"></div>
   </div>
 </section>
 
-<section class="section wrap">
-  <div class="section-head">
-    <h2>Up and running in minutes</h2>
-    <p>Install with one command. No cloud lock-in, no account required to start.</p>
-  </div>
-  <div class="steps">
-    <div class="step"><div class="n">1</div><h3>Install</h3><p>Pull the agent and run the setup flow. Works on a $5 VPS or your laptop.</p></div>
-    <div class="step"><div class="n">2</div><h3>Connect</h3><p>Point it at the model you want. Local, hosted, or a provider of your choice.</p></div>
-    <div class="step"><div class="n">3</div><h3>Go</h3><p>Chat from the terminal, desktop, portal, or your favorite messenger. It learns as you go.</p></div>
-  </div>
-  <div style="text-align:center;margin-top:34px">
-    <div class="code" style="display:inline-block;text-align:left">
-<span class="c"># install</span><br/>pip install poormad-agent<br/>
-<span class="c"># launch the desktop app + portal</span><br/>poormad desktop
-    </div>
+<section class="chapter wrap" id="mission">
+  <div class="idx">02 — Mission</div>
+  <h2>Ship a real agent.<br/>From a laptop to a fleet.</h2>
+  <p class="big">PoorMad started as one person, one room, one laptop — and a refusal to accept that capable AI had to be closed, centralized, and extractive.</p>
+  <p>Our mission is to make a genuinely self-improving agent that anyone can run, extend, and trust. Same brain across your terminal, desktop, web, and 20+ messaging platforms. Install it, point it at a model, and it begins to learn. No account required to begin. No lock-in at the end.</p>
+  <div class="stats reveal">
+    <div class="s"><div class="n" data-to="1" data-suf="">0</div><div class="l">Person building it</div></div>
+    <div class="s"><div class="n" data-to="20" data-suf="+">0</div><div class="l">Messaging platforms</div></div>
+    <div class="s"><div class="n" data-to="6" data-suf="">0</div><div class="l">Interfaces</div></div>
+    <div class="s"><div class="n" data-to="100" data-suf="%">0</div><div class="l">Open source · MIT</div></div>
   </div>
 </section>
 
-<section class="section wrap">
-  <div class="stats">
-    <div class="stat"><div class="big">20+</div><div class="lbl">Messaging platforms</div></div>
-    <div class="stat"><div class="big">6</div><div class="lbl">Interfaces (CLI, TUI, desktop, web…)</div></div>
-    <div class="stat"><div class="big">∞</div><div class="lbl">Skills it writes for you</div></div>
-    <div class="stat"><div class="big">0</div><div class="lbl">Re-explaining needed</div></div>
+<section class="chapter wrap" id="cause">
+  <div class="idx">03 — Cause</div>
+  <h2>Sovereignty over<br/>your own intelligence.</h2>
+  <p class="big">When the light is blocked, the stars align. The cause behind PoorMad is simple: your agent's memory, skills, and judgment should be yours — not a product someone else can switch off or read.</p>
+  <p>Privacy by default. Local-first. Open source. Built to be unique and yours only. We don't train on you, we don't hold your context hostage, and we don't sit between you and your own agent. The point of PoorMad is that it remains yours.</p>
+  <div class="rgrid reveal">
+    <div class="cell"><div class="k">local-first</div><h3>Your machine, your memory</h3><p>The agent runs where you are. Memory stays in your PoorMad home — nothing leaves your control unless you choose to share it.</p></div>
+    <div class="cell"><div class="k">open source</div><h3>MIT licensed</h3><p>Every line is yours to read, fork, and extend. No proprietary lock, no disappearing feature.</p></div>
+    <div class="cell wide"><div class="k">built to be yours only</div><h3>A distinct identity, not a clone</h3><p>Own branding, own interface, own learning loop. PoorMad is designed to feel like it was made for one person — because it was.</p></div>
   </div>
 </section>
 
-<section class="section wrap" id="download">
-  <div class="section-head">
-    <h2>Download PoorMad</h2>
-    <p>We detect your system automatically. One click grabs the right installer.</p>
+<section class="chapter wrap" id="research">
+  <div class="idx">04 — Research</div>
+  <h2>The learning loop.</h2>
+  <p class="big">PoorMad's core research problem is boring in theory and hard in practice: how does an agent get permanently better from use, without a central model swallowing everyone's data?</p>
+  <p>Our answer is a tight loop of skills, memory, and orchestration — running locally, improving locally. Here's what we're actually building.</p>
+  <div class="rgrid reveal">
+    <div class="cell"><div class="k">skills</div><h3>Skills from experience</h3><p>When the agent solves something non-trivial, it writes a reusable skill capturing the approach — then sharpens it on the next run. Capability compounds instead of resetting.</p></div>
+    <div class="cell"><div class="k">memory</div><h3>Recall across sessions</h3><p>A deepening model of who you are and what you're working on, searchable by meaning. No re-explaining context every time you open it.</p></div>
+    <div class="cell"><div class="k">orchestration</div><h3>Tools &amp; subagents</h3><p>Scheduled jobs, delegation, and a tool registry. Point it at any model and let it coordinate the work.</p></div>
+    <div class="cell"><div class="k">surfaces</div><h3>One brain, many fronts</h3><p>CLI, desktop, web portal, and 20+ messengers share one gateway and one memory — sessions resume wherever you left them.</p></div>
   </div>
-  <div style="text-align:center">
-    <a class="btn" id="download-btn" href="https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-win-x64.exe">⬇ Download for <span id="os-name">your OS</span></a>
-    <p style="color:var(--muted);font-size:14px;margin-top:16px">or pick your platform:</p>
-    <div class="hero-cta" style="margin-top:10px">
-      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-win-x64.exe">Windows (.exe)</a>
-      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-win-x64.msi">Windows (.msi)</a>
-      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0-mac-arm64.dmg">macOS (.dmg)</a>
-      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0-mac-arm64.zip">macOS (.zip)</a>
-    </div>
+  <div class="term reveal" style="margin-top:36px">
+    <div class="bar"><i class="r"></i><i class="y"></i><i class="g"></i><span>poormad — research loop</span></div>
+    <div class="body" id="term-research"></div>
   </div>
 </section>
 
-<section class="section wrap">
+<section class="chapter wrap" id="portal">
   <div class="band">
-    <h2>Start with an agent that's actually yours</h2>
-    <p>PoorMad is built to be unique and yours only — a distinct identity, a clean interface, and memory that stays with you.</p>
-    <div class="hero-cta">
-      <a class="btn" href="portal/" target="_blank">Open the Portal</a>
-      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank">View on GitHub</a>
-    </div>
+    <h2>The Portal is where<br/>it meets you.</h2>
+    <p>A clean browser surface to chat, browse sessions, and manage skills — the same agent, a new front. Accounts, billing, and hosting live there. Coming soon on the Oracle VPS.</p>
+    <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter the Portal →</a>
   </div>
 </section>
-
-<script>
-  (function () {
-    var WIN = "https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-win-x64.exe";
-    var MSI = "https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-win-x64.msi";
-    var DMG = "https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0-mac-arm64.dmg";
-    var ZIP = "https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0-mac-arm64.zip";
-    var ua = navigator.userAgent;
-    var btn = document.getElementById("download-btn");
-    var label = document.getElementById("os-name");
-    if (!btn || !label) return;
-    if (/Mac|iPhone|iPad/i.test(ua)) {
-      btn.href = DMG; label.textContent = "macOS";
-    } else if (/Win/i.test(ua)) {
-      btn.href = WIN; label.textContent = "Windows";
-    } else if (/Linux/i.test(ua)) {
-      // No prebuilt Linux installer published yet — point to the portal/sources.
-      btn.href = "https://github.com/Tayyaba22/poormad-agent/releases/tag/v0.18.0";
-      label.textContent = "Linux (see releases)";
-    } else {
-      btn.href = "https://github.com/Tayyaba22/poormad-agent/releases/tag/v0.18.0";
-      label.textContent = "your OS";
-    }
-  })();
-</script>
 
 <footer class="footer">
   <div class="wrap">
     <div class="footer-in">
       <div class="col" style="max-width:300px">
-        <a class="brand" href="index.html"><img src="assets/wordmark.png" alt="PoorMad" /></a>
-        <p class="tag">The self-improving AI agent. When the light is blocked, the stars align.</p>
+        <a class="logo" href="#top" style="margin-bottom:14px"><span class="dot"></span>POORMAD</a>
+        <p class="tag">The self-improving AI agent.<br/>When the light is blocked, the stars align.</p>
       </div>
-      <div class="col"><h4>Product</h4><a href="docs.html">Docs</a><a href="faq.html">FAQ</a><a href="portal/" target="_blank">Portal</a><a href="docs.html#install">Install</a></div>
-      <div class="col"><h4>Resources</h4><a href="docs.html#skills">Skills</a><a href="docs.html#memory">Memory</a><a href="docs.html#platforms">Platforms</a><a href="faq.html">Troubleshooting</a></div>
-      <div class="col"><h4>Project</h4><a href="https://github.com/Tayyaba22/poormad-agent" target="_blank">GitHub</a><a href="https://github.com/Tayyaba22/poormad-agent/releases" target="_blank">Releases</a><a href="https://github.com/Tayyaba22/poormad-agent/blob/main/LICENSE" target="_blank">License</a></div>
+      <div class="col"><h4>Story</h4><a href="#vision">Vision</a><a href="#mission">Mission</a><a href="#cause">Cause</a><a href="#research">Research</a></div>
+      <div class="col"><h4>Product</h4><a href="https://portal.xingabot.com" target="_blank" rel="noopener">Portal</a><a href="https://github.com/Tayyaba22/poormad-agent/releases" target="_blank" rel="noopener">Downloads</a><a href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">Source</a></div>
+      <div class="col"><h4>Project</h4><a href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">GitHub</a><a href="https://github.com/Tayyaba22/poormad-agent/blob/main/LICENSE" target="_blank" rel="noopener">License (MIT)</a><a href="https://portal.xingabot.com" target="_blank" rel="noopener">Portal login</a></div>
     </div>
     <div class="footer-base">
-      <span>© 2026 PoorMad. All rights reserved.</span>
-      <span>MIT licensed · Built to be yours only</span>
+      <span>© 2026 PoorMad · built by one person, from one room.</span>
+      <span class="magic">MIT licensed · yours only</span>
     </div>
   </div>
 </footer>
+</div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- hero title letters ---- */
+  var title = document.getElementById('hero-title');
+  var txt = title.getAttribute('aria-label');
+  title.textContent='';
+  for(var i=0;i<txt.length;i++){
+    var s=document.createElement('span');
+    s.className='l';s.textContent=txt[i];
+    s.style.animationDelay=(0.15+i*0.07)+'s';
+    title.appendChild(s);
+  }
+
+  /* ---- typed hero subtitle ---- */
+  var lines=["An agent that learns from every session.","Built by one person, from a room.","Yours. Local-first. Open source.","When the light is blocked, the stars align."];
+  var typed=document.getElementById('typed'),li=0,ci=0,del=false;
+  function type(){
+    if(reduce){typed.textContent=lines[0];return;}
+    var cur=lines[li];
+    if(!del){typed.textContent=cur.slice(0,++ci);if(ci===cur.length){del=true;setTimeout(type,1600);return;}}
+    else{typed.textContent=cur.slice(0,--ci);if(ci===0){del=false;li=(li+1)%lines.length;}}
+    setTimeout(type,del?38:62);
+  }
+  type();
+
+  /* ---- terminal animations ---- */
+  function term(el,steps){
+    if(!el)return;
+    if(reduce){el.innerHTML=steps.map(function(s){return s.t;}).join('<br/>');return;}
+    var i=0;
+    function step(){
+      if(i>=steps.length)return;
+      var s=steps[i++];
+      el.innerHTML+=s.t+(i<steps.length?'<br/>':'');
+      if(s.delay)setTimeout(step,s.delay);else step();
+    }
+    step();
+  }
+  term(document.getElementById('term-vision'),[
+    {t:'<span class="pr">$</span> poormad "remember who I am"',delay:700},
+    {t:'<span class="mut">› writing memory embedding ............ </span><span class="ok">ok</span>',delay:650},
+    {t:'<span class="mut">› linking 14 past sessions ............ </span><span class="ok">ok</span>',delay:650},
+    {t:'<span class="pr">$</span> poormad "plan my week"',delay:800},
+    {t:'<span class="mut">› resuming context without re-explaining </span><span class="ok">ok</span>',delay:600},
+    {t:'<span class="ok">agent is yours. memory persists.</span><span class="cur"></span>'}
+  ]);
+  term(document.getElementById('term-research'),[
+    {t:'<span class="pr">$</span> poormad learn',delay:700},
+    {t:'<span class="mut">› solved a hard task → extracted skill </span><span class="ok">+skill</span>',delay:650},
+    {t:'<span class="mut">› sharpened 3 related skills .......... </span><span class="ok">ok</span>',delay:650},
+    {t:'<span class="mut">› stored semantic recall index ........ </span><span class="ok">ok</span>',delay:650},
+    {t:'<span class="pr">$</span> next run: faster, sharper.<span class="cur"></span>'}
+  ]);
+
+  /* ---- scroll reveal + counters ---- */
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){
+      e.target.classList.add('in');
+      if(e.target.classList.contains('chapter')){
+        e.target.querySelectorAll('.n[data-to]').forEach(function(n){count(n);});
+      }
+      io.unobserve(e.target);
+    }});
+  },{threshold:.18});
+  document.querySelectorAll('.chapter').forEach(function(c){io.observe(c);});
+
+  function count(n){
+    if(reduce){n.textContent=n.dataset.to+n.dataset.suf;return;}
+    var to=+n.dataset.to,suf=n.dataset.suf||'',start=0,dur=1200,t0=null;
+    function f(t){if(!t0)t0=t;var p=Math.min(1,(t-t0)/dur);
+      n.textContent=Math.floor(p*(to-start)+start)+suf;if(p<1)requestAnimationFrame(f);}
+    requestAnimationFrame(f);
+  }
+
+  /* ---- starfield canvas ---- */
+  var cv=document.getElementById('stars'),cx=cv.getContext('2d'),stars=[],w,h,mouse={x:0,y:0};
+  function size(){w=cv.width=innerWidth;h=cv.height=innerHeight;}
+  size();addEventListener('resize',size);
+  var N=reduce?0:Math.min(160,Math.floor(innerWidth/9));
+  for(var i=0;i<N;i++)stars.push({x:Math.random()*w,y:Math.random()*h,z:Math.random()*1.6+.4,
+    r:Math.random()*1.4+.3,t:Math.random()*Math.PI*2,s:Math.random()*.012+.003});
+  addEventListener('mousemove',function(e){mouse.x=e.clientX;mouse.y=e.clientY;});
+  function draw(){
+    cx.clearRect(0,0,w,h);
+    // nebula glow
+    var g=cx.createRadialGradient(w*0.78,h*0.12,0,w*0.78,h*0.12,h*0.7);
+    g.addColorStop(0,'rgba(139,92,246,0.10)');g.addColorStop(1,'rgba(139,92,246,0)');
+    cx.fillStyle=g;cx.fillRect(0,0,w,h);
+    for(var i=0;i<stars.length;i++){var s=stars[i];
+      s.t+=s.s;s.y+=s.z*0.12;if(s.y>h){s.y=0;s.x=Math.random()*w;}
+      var dx=s.x-mouse.x,dy=s.y-mouse.y,d=Math.sqrt(dx*dx+dy*dy);
+      var px=s.x+Math.sin(s.t)*Math.min(14,d/40),py=s.y;
+      var a=0.4+Math.sin(s.t*2)*0.3;
+      cx.beginPath();cx.arc(px,py,s.r,0,7);
+      cx.fillStyle='rgba(200,190,255,'+a+')';cx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  if(!reduce)draw();
+
+  /* ---- hide nav on scroll down ---- */
+  var last=0,nav=document.querySelector('.nav');
+  addEventListener('scroll',function(){var y=scrollY;
+    nav.style.transform=(y>last&&y>200)?'translateY(-100%)':'translateY(0)';last=y;});
+})();
+</script>
 </body>
 </html>
