@@ -1295,6 +1295,7 @@ def build_welcome_banner(console: "Console", model: str, cwd: str,
         layout_table,
         title=title_markup,
         border_style=border_color,
+        box=_bskin.get_box() if _bskin and hasattr(_bskin, "get_box") else None,
         padding=(0, 2),
     )
 

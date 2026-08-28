@@ -8097,7 +8097,21 @@ class PoorMadCLI(CLIAgentSetupMixin, CLICommandsMixin, CLIBillingMixin):
         return "Processing command..."
 
     def _command_spinner_frame(self) -> str:
-        """Return the current spinner frame for slow slash commands."""
+        """Return the current spinner frame for slow slash commands.
+
+        Uses the active skin's ``waiting_faces`` (or ``thinking_faces``) when
+        defined, so each theme animates with its own glyph set; falls back to
+        the classic braille spinner otherwise.
+        """
+        try:
+            from poormad_cli.skin_engine import get_active_skin
+            _faces = get_active_skin().spinner.get("waiting_faces") or \
+                get_active_skin().spinner.get("thinking_faces")
+            if _faces:
+                frame_idx = int(time.monotonic() * 8) % len(_faces)
+                return _faces[frame_idx]
+        except Exception:
+            pass
         frame_idx = int(time.monotonic() * 10) % len(_COMMAND_SPINNER_FRAMES)
         return _COMMAND_SPINNER_FRAMES[frame_idx]
 
