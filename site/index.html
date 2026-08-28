@@ -91,6 +91,11 @@ a{color:inherit;text-decoration:none}
 @keyframes blink{50%{opacity:0}}
 .hero .lead{font-size:clamp(17px,2.4vw,21px);color:var(--fg);max-width:560px;margin-top:30px;opacity:0;animation:rise .9s .9s forwards}
 .hero .cta{display:flex;gap:14px;margin-top:34px;opacity:0;animation:rise .9s 1.1s forwards}
+.hero .dl-row{margin-top:16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+  font-family:var(--mono);font-size:13px;opacity:0;animation:rise .9s 1.3s forwards}
+.hero .dl-link{color:var(--muted);transition:color .2s;border-bottom:1px solid transparent}
+.hero .dl-link:hover{color:var(--violet-bright);border-bottom-color:var(--violet-dim)}
+.hero .dl-sep{color:var(--muted-2)}
 @keyframes rise{to{opacity:1;transform:none}}
 .scrollcue{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);font-family:var(--mono);
   font-size:11px;letter-spacing:.2em;color:var(--muted-2);text-transform:uppercase;opacity:0;animation:rise 1s 1.6s forwards}
@@ -163,6 +168,47 @@ a{color:inherit;text-decoration:none}
   font-size:12.5px;font-family:var(--mono);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
 .magic{color:var(--violet-bright)}
 
+/* ── Advanced motion layer ── */
+/* scroll progress */
+.progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:60;
+  background:linear-gradient(90deg,var(--violet),var(--violet-bright));
+  box-shadow:0 0 12px var(--violet);transition:width .1s linear}
+/* custom cursor */
+.cursor,.cursor-dot{position:fixed;top:0;left:0;z-index:70;pointer-events:none;
+  border-radius:50%;mix-blend-mode:screen;will-change:transform}
+.cursor{width:34px;height:34px;margin:-17px 0 0 -17px;border:1px solid rgba(167,139,250,.6);
+  transition:width .2s,height .2s,margin .2s,background .2s,opacity .3s}
+.cursor-dot{width:6px;height:6px;margin:-3px 0 0 -3px;background:var(--violet-bright);
+  box-shadow:0 0 10px var(--violet-bright)}
+.cursor.hover{width:54px;height:54px;margin:-27px 0 0 -27px;background:rgba(139,92,246,.10);
+  border-color:rgba(167,139,250,.9)}
+@media(hover:none),(pointer:coarse){.cursor,.cursor-dot{display:none}}
+/* hero title aurora */
+.hero h1 .l{position:relative}
+.hero h1.aurora .l{
+  background:linear-gradient(110deg,#fff 0%,#c4b5fd 28%,#8b5cf6 50%,#a78bfa 72%,#fff 100%);
+  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:aurora 6s linear infinite;animation-delay:calc(var(--i,0)*.08s)}
+@keyframes aurora{to{background-position:220% 0}}
+/* spotlight on cards */
+.cell,.s,.band{position:relative;overflow:hidden}
+.cell::after,.s::after{content:"";position:absolute;inset:0;border-radius:inherit;opacity:0;
+  background:radial-gradient(180px 180px at var(--mx,50%) var(--my,50%),rgba(139,92,246,.18),transparent 60%);
+  transition:opacity .3s;pointer-events:none}
+.cell:hover::after,.s:hover::after{opacity:1}
+/* glow text on chapter h2 hover */
+.chapter h2{transition:text-shadow .4s}
+.chapter h2:hover{text-shadow:0 0 30px rgba(139,92,246,.35)}
+/* magnetic cue */
+.btn{will-change:transform}
+/* sound toggle */
+.sound{position:fixed;bottom:22px;right:22px;z-index:55;width:42px;height:42px;border-radius:50%;
+  border:1px solid var(--line);background:rgba(13,13,20,.7);backdrop-filter:blur(8px);cursor:pointer;
+  display:grid;place-items:center;color:var(--muted);font-family:var(--mono);font-size:15px;transition:.2s}
+.sound:hover{color:var(--fg);border-color:var(--violet)}
+.sound.on{color:var(--violet-bright);border-color:var(--violet);box-shadow:0 0 16px rgba(139,92,246,.4)}
+@media(prefers-reduced-motion:reduce){.cursor,.cursor-dot{display:none}.hero h1.aurora .l{animation:none}}
+
 @media(max-width:760px){.nav-links{display:none}.hero h1{font-size:clamp(46px,15vw,90px)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.hero .kick,.hero .lead,.hero .cta,.scrollcue{opacity:1!important;transform:none!important}.hero h1 .l{opacity:1;transform:none}}
 </style>
@@ -171,6 +217,10 @@ a{color:inherit;text-decoration:none}
 <canvas id="stars"></canvas>
 <div class="crt"></div>
 <div class="vignette"></div>
+<div class="progress" id="progress"></div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+<button class="sound" id="sound" aria-label="Toggle sound" title="Sound: off">♪</button>
 
 <div class="content">
 <header class="nav">
@@ -193,8 +243,15 @@ a{color:inherit;text-decoration:none}
   <div class="tag"><span id="typed"></span><span class="cur"></span></div>
   <p class="lead">An agent that writes its own skills, remembers who you are, and gets sharper with every session. Not a service. Not a black box. Yours.</p>
   <div class="cta">
-    <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter the Portal</a>
-    <a class="btn btn-ghost" href="#vision">Read the story</a>
+    <a class="btn" id="dl-btn" href="https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-win-x64.exe">⬇ Download <span id="dl-os">for your OS</span></a>
+    <a class="btn btn-ghost" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter the Portal</a>
+  </div>
+  <div class="dl-row">
+    <a class="dl-link" href="https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-win-x64.exe">Windows</a>
+    <a class="dl-link" href="https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-mac-arm64.dmg">macOS</a>
+    <a class="dl-link" href="https://github.com/Tayyaba22/poormad-agent/releases/tag/v0.18.0">Linux</a>
+    <span class="dl-sep">·</span>
+    <a class="dl-link" href="https://github.com/Tayyaba22/poormad-agent/releases" target="_blank" rel="noopener">all releases ↗</a>
   </div>
   <div class="scrollcue">scroll</div>
 </section>
@@ -385,6 +442,77 @@ a{color:inherit;text-decoration:none}
   var last=0,nav=document.querySelector('.nav');
   addEventListener('scroll',function(){var y=scrollY;
     nav.style.transform=(y>last&&y>200)?'translateY(-100%)':'translateY(0)';last=y;});
+
+  /* ---- hero title aurora + per-letter index ---- */
+  var htitle=document.getElementById('hero-title');
+  if(htitle&&!reduce){
+    var ls=htitle.querySelectorAll('.l');
+    ls.forEach(function(el,i){el.style.setProperty('--i',i);});
+    htitle.classList.add('aurora');
+  }
+
+  /* ---- download OS auto-detect ---- */
+  (function(){
+    var WIN='https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-win-x64.exe',
+        DMG='https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-mac-arm64.dmg',
+        TAG='https://github.com/Tayyaba22/poormad-agent/releases/tag/v0.18.0';
+    var btn=document.getElementById('dl-btn'),os=document.getElementById('dl-os'),ua=navigator.userAgent;
+    if(!btn||!os)return;
+    if(/Mac|iPhone|iPad/i.test(ua)){btn.href=DMG;os.textContent='for macOS';}
+    else if(/Win/i.test(ua)){btn.href=WIN;os.textContent='for Windows';}
+    else{btn.href=TAG;os.textContent='for Linux';}
+  })();
+
+  /* ---- custom cursor + magnetic buttons ---- */
+  var cur=document.getElementById('cursor'),cdot=document.getElementById('cursorDot');
+  var cx2=innerWidth/2,cy2=innerHeight/2,tx2=cx2,ty2=cy2;
+  if(cur&&cdot&&!reduce&&matchMedia('(hover:hover)').matches){
+    addEventListener('mousemove',function(e){tx2=e.clientX;ty2=e.clientY;
+      cdot.style.transform='translate('+e.clientX+'px,'+e.clientY+'px)';
+      var hov=e.target.closest('a,button,.cell,.s,.btn');
+      cur.classList.toggle('hover',!!hov);
+    });
+    (function loop(){cx2+=(tx2-cx2)*.18;cy2+=(ty2-cy2)*.18;
+      cur.style.transform='translate('+cx2+'px,'+cy2+'px)';requestAnimationFrame(loop);})();
+  }
+  document.querySelectorAll('.btn').forEach(function(b){
+    b.addEventListener('mousemove',function(e){if(reduce)return;
+      var r=b.getBoundingClientRect(),mx=e.clientX-(r.left+r.width/2),my=e.clientY-(r.top+r.height/2);
+      b.style.transform='translate('+(mx*.25)+'px,'+(my*.35)+'px)';});
+    b.addEventListener('mouseleave',function(){b.style.transform='';});
+  });
+
+  /* ---- spotlight tracking on cards ---- */
+  document.querySelectorAll('.cell,.s').forEach(function(c){
+    c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect();
+      c.style.setProperty('--mx',(e.clientX-r.left)+'px');
+      c.style.setProperty('--my',(e.clientY-r.top)+'px');});
+  });
+
+  /* ---- scroll progress ---- */
+  var prog=document.getElementById('progress');
+  addEventListener('scroll',function(){if(!prog)return;
+    var h=document.documentElement;var p=h.scrollTop/(h.scrollHeight-h.clientHeight||1);
+    prog.style.width=(p*100)+'%';});
+
+  /* ---- subtle sound design (toggle, gesture-gated) ---- */
+  var actx=null,soundBtn=document.getElementById('sound'),soundOn=false;
+  function ensureCtx(){if(!actx){try{actx=new (window.AudioContext||window.webkitAudioContext)();}catch(e){}}
+    if(actx&&actx.state==='suspended')actx.resume();}
+  function blip(freq,dur,vol){if(!soundOn||!actx)return;
+    var o=actx.createOscillator(),g=actx.createGain();
+    o.type='sine';o.frequency.value=freq;o.connect(g);g.connect(actx.destination);
+    var t=actx.currentTime;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(vol||.06,t+.01);
+    g.gain.exponentialRampToValueAtTime(.0001,t+(dur||.12));o.start(t);o.stop(t+(dur||.12)+.02);}
+  if(soundBtn){
+    soundBtn.addEventListener('click',function(){soundOn=!soundOn;ensureCtx();
+      soundBtn.classList.toggle('on',soundOn);soundBtn.textContent=soundOn?'♫':'♪';
+      soundBtn.title='Sound: '+(soundOn?'on':'off');if(soundOn)blip(660,.18,.08);});
+    document.addEventListener('click',function(e){
+      if(e.target.closest('a,button,.cell,.s,.btn'))blip(520+e.target.offsetWidth%120,.1,.05);});
+    document.addEventListener('mouseover',function(e){
+      if(e.target.closest('.btn,a'))blip(880,.05,.025);},{passive:true});
+  }
 })();
 </script>
 </body>
