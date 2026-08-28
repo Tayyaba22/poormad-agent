@@ -1,7 +1,6 @@
 import { useStore } from '@nanostores/react'
 import { useEffect, useState } from 'react'
 
-import { BrandMark } from '@/components/brand-mark'
 import { Button } from '@/components/ui/button'
 import { Codicon } from '@/components/ui/codicon'
 import { type Translations, useI18n } from '@/i18n'
@@ -23,6 +22,9 @@ import { UninstallSection } from './uninstall-section'
 
 const RELEASE_NOTES_URL = 'https://github.com/Tayyaba22/poormad-agent/releases'
 const INSTALLER_URL = 'https://poormad.dev/'
+
+// Resolve a bundled asset from the app's base URL (matches BrandMark's loader).
+const assetPath = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`
 
 function relativeTime(ms: number | undefined, a: Translations['settings']['about']) {
   if (!ms) {
@@ -99,8 +101,17 @@ export function AboutSettings() {
 
   return (
     <SettingsContent>
+      {/* Clean HD banner hero — space-black + violet nebula, pixel moon + wordmark */}
+      <div className="relative overflow-hidden rounded-2xl border border-border/60">
+        <img
+          alt="PoorMad"
+          className="block w-full object-cover"
+          src={assetPath('banner.png')}
+          style={{ aspectRatio: '1280 / 640' }}
+        />
+      </div>
+
       <div className="flex flex-col items-center gap-3 pt-6 pb-2 text-center">
-        <BrandMark className="size-16" />
         <div>
           <h2 className="text-lg font-semibold tracking-tight">{a.heading}</h2>
           <p className="mt-1 text-xs text-muted-foreground">
