@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PoorMad — Documentation</title>
-<meta name="description" content="Full PoorMad documentation: install, quickstart, architecture, skills, memory, gateway, CLI, desktop, portal, platforms, providers, self-hosting, security." />
+<title>PoorMad — CLI</title>
+<meta name="description" content="The terminal surface — a REPL that writes its own skills." />
 <link rel="icon" href="favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -60,37 +60,40 @@
   </div>
 </aside>
 <main class="content">
-  <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Introduction</div>
-  <h1>PoorMad documentation</h1>
-  <p class="lede">Everything you need to install, run, extend, and self-host the self-improving AI agent.</p>
+  <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Surfaces</div>
+  <h1>CLI</h1>
+  <p class="lede">The terminal surface — a REPL that writes its own skills.</p>
 
-<p>PoorMad is a <strong>self-improving AI agent</strong>. The same agent core runs across a command line, a native desktop app, a web portal, and 20+ messaging platforms. It learns from experience by writing reusable <a class="inline" href="docs-skills.html">skills</a>, recalls past context through <a class="inline" href="docs-memory.html">memory</a>, and coordinates tools and subagents to get work done.</p>
-<h2 id="what-it-is">What PoorMad is</h2>
-<p>At its heart, PoorMad is one agent brain with many front doors. You can talk to it from a terminal, a desktop window, a browser, or Telegram — and it is the same agent with the same memory and skills behind all of them. That is possible because every surface connects to a single <a class="inline" href="docs-gateway.html">gateway</a> using one JSON-RPC protocol.</p>
-<h3 id="principles">Design principles</h3>
-<ul>
-  <li><strong>Local-first.</strong> Memory and skills live in your PoorMad home directory. Nothing leaves your control unless you choose to connect a remote surface.</li>
-  <li><strong>Open source.</strong> MIT licensed, built in the open. Capability compounds locally as the agent writes its own skills.</li>
-  <li><strong>Mono-hue identity.</strong> One violet accent, no noise. Calm, fast, and yours.</li>
-  <li><strong>Learn by doing.</strong> The agent turns repeated work into skills it can reuse, so it gets cheaper and more capable over time.</li>
-</ul>
-<h2 id="who">Who it is for</h2>
-<p>Individuals and small teams who want a personal agent they actually own — developers wiring it into their stack, operators running it on a server, and anyone who would rather self-host than hand their context to a third party.</p>
-<h2 id="next">Next steps</h2>
-<p>Install it in minutes with <a class="inline" href="docs-install.html">Installation</a>, run your first task in <a class="inline" href="docs-quickstart.html">Quickstart</a>, or understand the moving parts in <a class="inline" href="docs-architecture.html">Architecture</a>.</p>
-<div class="callout"><span class="ct">Note</span>PoorMad builds on an MIT-licensed upstream lineage; attribution to that lineage is preserved in the repository's LICENSE file. The product, name, and brand are independent.</div>
+<p>The CLI is the original surface — a terminal session that writes its own skills.</p>
+<h2 id="start">Start a session</h2>
+<pre>poormad                 <span class="c"># interactive REPL</span>
+poormad "summarize x"    <span class="c"># one-shot prompt</span>
+poormad -f task.md      <span class="c"># prompt from a file</span></pre>
+<h2 id="flags">Common flags</h2>
+<table>
+<tr><th>Flag</th><th>Meaning</th></tr>
+<tr><td><code>--home PATH</code></td><td>Override the PoorMad home directory.</td></tr>
+<tr><td><code>--profile NAME</code></td><td>Use a named config profile.</td></tr>
+<tr><td><code>--model SLUG</code></td><td>Override the model for this run.</td></tr>
+<tr><td><code>--no-memory</code></td><td>Disable cross-session recall for this run.</td></tr>
+</table>
+<h2 id="skins">Themes &amp; skins</h2>
+<p>The CLI has its own skin engine (<code>skins/*.yaml</code>) independent of the desktop theme. Set the active skin with <code>/skin &lt;name&gt;</code> inside a session.</p>
+<h2 id="pipe">Piping</h2>
+<pre>cat error.log | poormad "explain this and propose a fix"</pre>
+<p>See the full list in <a class="inline" href="docs-cli-reference.html">CLI Reference</a>.</p>
 
   <div class="nextprev">
-    <span></span>
-    <a href="docs-install.html" style="text-align:right"><span class="np-t">Next</span>Installation</a>
+    <a href="docs-gateway.html"><span class="np-t">Previous</span>Gateway</a>
+    <a href="docs-desktop.html" style="text-align:right"><span class="np-t">Next</span>Desktop App</a>
   </div>
 </main>
 <aside class="toc">
   <div class="th">On this page</div>
-  <a class="" href="#what-it-is">What PoorMad is</a>
-  <a class="" href="#principles">Design principles</a>
-  <a class="" href="#who">Who it is for</a>
-  <a class="" href="#next">Next steps</a>
+  <a class="" href="#start">Start a session</a>
+  <a class="" href="#flags">Common flags</a>
+  <a class="" href="#skins">Themes & skins</a>
+  <a class="" href="#pipe">Piping</a>
 </aside>
 </div>
 

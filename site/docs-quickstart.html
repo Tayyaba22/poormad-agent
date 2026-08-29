@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PoorMad — Documentation</title>
-<meta name="description" content="Full PoorMad documentation: install, quickstart, architecture, skills, memory, gateway, CLI, desktop, portal, platforms, providers, self-hosting, security." />
+<title>PoorMad — Quickstart</title>
+<meta name="description" content="Run your first self-improving agent session in under five minutes." />
 <link rel="icon" href="favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -60,37 +60,53 @@
   </div>
 </aside>
 <main class="content">
-  <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Introduction</div>
-  <h1>PoorMad documentation</h1>
-  <p class="lede">Everything you need to install, run, extend, and self-host the self-improving AI agent.</p>
+  <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Getting Started</div>
+  <h1>Quickstart</h1>
+  <p class="lede">Run your first self-improving agent session in under five minutes.</p>
 
-<p>PoorMad is a <strong>self-improving AI agent</strong>. The same agent core runs across a command line, a native desktop app, a web portal, and 20+ messaging platforms. It learns from experience by writing reusable <a class="inline" href="docs-skills.html">skills</a>, recalls past context through <a class="inline" href="docs-memory.html">memory</a>, and coordinates tools and subagents to get work done.</p>
-<h2 id="what-it-is">What PoorMad is</h2>
-<p>At its heart, PoorMad is one agent brain with many front doors. You can talk to it from a terminal, a desktop window, a browser, or Telegram — and it is the same agent with the same memory and skills behind all of them. That is possible because every surface connects to a single <a class="inline" href="docs-gateway.html">gateway</a> using one JSON-RPC protocol.</p>
-<h3 id="principles">Design principles</h3>
+<p>Run your first agent session end to end in under five minutes.</p>
+<h2 id="auth">1. Point at a model</h2>
+<p>PoorMad is provider-agnostic. Set your provider and API key in the config (or environment):</p>
+<pre><span class="c"># config.yaml (recommended)</span>
+provider: openai
+model: gpt-4o-mini
+
+<span class="c"># or environment</span>
+<span class="k">export</span> POORMAD_API_KEY=sk-...</pre>
+<p>See <a class="inline" href="docs-providers.html">Models &amp; Providers</a> for the full list of supported providers and how to use a local model.</p>
+<h2 id="run">2. Run the agent</h2>
+<pre>poormad</pre>
+<p>You land in an interactive session. Try a real task:</p>
+<pre><span class="c">&gt;</span> Summarize the last 20 lines of my shell history and suggest three aliases.</pre>
+<h2 id="skills">3. Watch it learn</h2>
+<p>When you repeat a class of task, ask the agent to capture it as a skill:</p>
+<pre><span class="c">&gt;</span> Save what you just did as a skill called "shell-audit"</pre>
+<p>The skill is written to your PoorMad home and reused on future sessions. Read more in <a class="inline" href="docs-skills.html">Skills</a>.</p>
+<h2 id="surfaces">4. Connect other surfaces</h2>
 <ul>
-  <li><strong>Local-first.</strong> Memory and skills live in your PoorMad home directory. Nothing leaves your control unless you choose to connect a remote surface.</li>
-  <li><strong>Open source.</strong> MIT licensed, built in the open. Capability compounds locally as the agent writes its own skills.</li>
-  <li><strong>Mono-hue identity.</strong> One violet accent, no noise. Calm, fast, and yours.</li>
-  <li><strong>Learn by doing.</strong> The agent turns repeated work into skills it can reuse, so it gets cheaper and more capable over time.</li>
+  <li><strong>Desktop:</strong> open the app — it finds your local gateway automatically.</li>
+  <li><strong>Portal:</strong> start the dashboard server and open the browser UI.</li>
+  <li><strong>Messaging:</strong> link Telegram, Discord, or Slack in <a class="inline" href="docs-platforms.html">Messaging Platforms</a>.</li>
 </ul>
-<h2 id="who">Who it is for</h2>
-<p>Individuals and small teams who want a personal agent they actually own — developers wiring it into their stack, operators running it on a server, and anyone who would rather self-host than hand their context to a third party.</p>
-<h2 id="next">Next steps</h2>
-<p>Install it in minutes with <a class="inline" href="docs-install.html">Installation</a>, run your first task in <a class="inline" href="docs-quickstart.html">Quickstart</a>, or understand the moving parts in <a class="inline" href="docs-architecture.html">Architecture</a>.</p>
-<div class="callout"><span class="ct">Note</span>PoorMad builds on an MIT-licensed upstream lineage; attribution to that lineage is preserved in the repository's LICENSE file. The product, name, and brand are independent.</div>
+<h2 id="next">Where to go next</h2>
+<ul>
+  <li><a class="inline" href="docs-configuration.html">Configuration</a> — every setting, explained.</li>
+  <li><a class="inline" href="docs-memory.html">Memory</a> — how cross-session recall works.</li>
+  <li><a class="inline" href="docs-cli-reference.html">CLI Reference</a> — every command.</li>
+</ul>
 
   <div class="nextprev">
-    <span></span>
-    <a href="docs-install.html" style="text-align:right"><span class="np-t">Next</span>Installation</a>
+    <a href="docs-install.html"><span class="np-t">Previous</span>Installation</a>
+    <a href="docs-configuration.html" style="text-align:right"><span class="np-t">Next</span>Configuration</a>
   </div>
 </main>
 <aside class="toc">
   <div class="th">On this page</div>
-  <a class="" href="#what-it-is">What PoorMad is</a>
-  <a class="" href="#principles">Design principles</a>
-  <a class="" href="#who">Who it is for</a>
-  <a class="" href="#next">Next steps</a>
+  <a class="" href="#auth">Point at a model</a>
+  <a class="" href="#run">Run the agent</a>
+  <a class="" href="#skills">Watch it learn</a>
+  <a class="" href="#surfaces">Connect other surfaces</a>
+  <a class="" href="#next">Where to go next</a>
 </aside>
 </div>
 

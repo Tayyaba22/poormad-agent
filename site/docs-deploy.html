@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PoorMad — Documentation</title>
-<meta name="description" content="Full PoorMad documentation: install, quickstart, architecture, skills, memory, gateway, CLI, desktop, portal, platforms, providers, self-hosting, security." />
+<title>PoorMad — Self-Hosting</title>
+<meta name="description" content="Run the agent on a VPS and serve the portal from any static host." />
 <link rel="icon" href="favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -60,37 +60,43 @@
   </div>
 </aside>
 <main class="content">
-  <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Introduction</div>
-  <h1>PoorMad documentation</h1>
-  <p class="lede">Everything you need to install, run, extend, and self-host the self-improving AI agent.</p>
+  <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Guides</div>
+  <h1>Self-Hosting</h1>
+  <p class="lede">Run the agent on a VPS and serve the portal from any static host.</p>
 
-<p>PoorMad is a <strong>self-improving AI agent</strong>. The same agent core runs across a command line, a native desktop app, a web portal, and 20+ messaging platforms. It learns from experience by writing reusable <a class="inline" href="docs-skills.html">skills</a>, recalls past context through <a class="inline" href="docs-memory.html">memory</a>, and coordinates tools and subagents to get work done.</p>
-<h2 id="what-it-is">What PoorMad is</h2>
-<p>At its heart, PoorMad is one agent brain with many front doors. You can talk to it from a terminal, a desktop window, a browser, or Telegram — and it is the same agent with the same memory and skills behind all of them. That is possible because every surface connects to a single <a class="inline" href="docs-gateway.html">gateway</a> using one JSON-RPC protocol.</p>
-<h3 id="principles">Design principles</h3>
+<p>Self-host the full stack: the agent (Python gateway) on a VPS, and the portal as a static site.</p>
+<h2 id="topology">Topology</h2>
 <ul>
-  <li><strong>Local-first.</strong> Memory and skills live in your PoorMad home directory. Nothing leaves your control unless you choose to connect a remote surface.</li>
-  <li><strong>Open source.</strong> MIT licensed, built in the open. Capability compounds locally as the agent writes its own skills.</li>
-  <li><strong>Mono-hue identity.</strong> One violet accent, no noise. Calm, fast, and yours.</li>
-  <li><strong>Learn by doing.</strong> The agent turns repeated work into skills it can reuse, so it gets cheaper and more capable over time.</li>
+  <li><strong>Agent VPS</strong> — runs <code>poormad gateway</code> or <code>poormad dashboard</code>. Needs Python; shared web hosts won't work.</li>
+  <li><strong>Portal host</strong> — any static host (Hostinger, Netlify, S3). No Python needed.</li>
+  <li><strong>TLS</strong> — put the gateway behind a reverse proxy (Caddy/Nginx) with HTTPS.</li>
 </ul>
-<h2 id="who">Who it is for</h2>
-<p>Individuals and small teams who want a personal agent they actually own — developers wiring it into their stack, operators running it on a server, and anyone who would rather self-host than hand their context to a third party.</p>
-<h2 id="next">Next steps</h2>
-<p>Install it in minutes with <a class="inline" href="docs-install.html">Installation</a>, run your first task in <a class="inline" href="docs-quickstart.html">Quickstart</a>, or understand the moving parts in <a class="inline" href="docs-architecture.html">Architecture</a>.</p>
-<div class="callout"><span class="ct">Note</span>PoorMad builds on an MIT-licensed upstream lineage; attribution to that lineage is preserved in the repository's LICENSE file. The product, name, and brand are independent.</div>
+<h2 id="agent">Run the agent</h2>
+<pre>poormad gateway --bind 0.0.0.0:8765 --token "$POORMAD_TOKEN"</pre>
+<h2 id="proxy">Reverse proxy (Caddy)</h2>
+<pre>agent.example.com {
+  reverse_proxy 127.0.0.1:8765
+}</pre>
+<h2 id="portal">Deploy the portal</h2>
+<pre><span class="c"># build the static portal</span>
+cd apps/web &amp;&amp; npx vite build
+<span class="c"># serve dist/ from your static host</span></pre>
+<p>Wire the gateway URL with <code>window.__POORMAD_GATEWAY_WS__</code> or the <code>?gw=</code> param.</p>
+<h2 id="hostinger">Hostinger notes</h2>
+<p>Hostinger Business shared has no Python — use it only for the static portal, and run the agent on a separate VPS (e.g. Oracle). See the <a class="inline" href="docs-portal.html">Portal</a> page.</p>
 
   <div class="nextprev">
-    <span></span>
-    <a href="docs-install.html" style="text-align:right"><span class="np-t">Next</span>Installation</a>
+    <a href="docs-providers.html"><span class="np-t">Previous</span>Providers</a>
+    <a href="docs-security.html" style="text-align:right"><span class="np-t">Next</span>Security & Privacy</a>
   </div>
 </main>
 <aside class="toc">
   <div class="th">On this page</div>
-  <a class="" href="#what-it-is">What PoorMad is</a>
-  <a class="" href="#principles">Design principles</a>
-  <a class="" href="#who">Who it is for</a>
-  <a class="" href="#next">Next steps</a>
+  <a class="" href="#topology">Topology</a>
+  <a class="" href="#agent">Run the agent</a>
+  <a class="" href="#proxy">Reverse proxy</a>
+  <a class="" href="#portal">Deploy the portal</a>
+  <a class="" href="#hostinger">Hostinger notes</a>
 </aside>
 </div>
 

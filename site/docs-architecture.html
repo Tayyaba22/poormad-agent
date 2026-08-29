@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PoorMad — Documentation</title>
-<meta name="description" content="Full PoorMad documentation: install, quickstart, architecture, skills, memory, gateway, CLI, desktop, portal, platforms, providers, self-hosting, security." />
+<title>PoorMad — Architecture</title>
+<meta name="description" content="A narrow-waist design: one core, one gateway, capability at the edges." />
 <link rel="icon" href="favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -60,37 +60,42 @@
   </div>
 </aside>
 <main class="content">
-  <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Introduction</div>
-  <h1>PoorMad documentation</h1>
-  <p class="lede">Everything you need to install, run, extend, and self-host the self-improving AI agent.</p>
+  <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Core Concepts</div>
+  <h1>Architecture</h1>
+  <p class="lede">A narrow-waist design: one core, one gateway, capability at the edges.</p>
 
-<p>PoorMad is a <strong>self-improving AI agent</strong>. The same agent core runs across a command line, a native desktop app, a web portal, and 20+ messaging platforms. It learns from experience by writing reusable <a class="inline" href="docs-skills.html">skills</a>, recalls past context through <a class="inline" href="docs-memory.html">memory</a>, and coordinates tools and subagents to get work done.</p>
-<h2 id="what-it-is">What PoorMad is</h2>
-<p>At its heart, PoorMad is one agent brain with many front doors. You can talk to it from a terminal, a desktop window, a browser, or Telegram — and it is the same agent with the same memory and skills behind all of them. That is possible because every surface connects to a single <a class="inline" href="docs-gateway.html">gateway</a> using one JSON-RPC protocol.</p>
-<h3 id="principles">Design principles</h3>
-<ul>
-  <li><strong>Local-first.</strong> Memory and skills live in your PoorMad home directory. Nothing leaves your control unless you choose to connect a remote surface.</li>
-  <li><strong>Open source.</strong> MIT licensed, built in the open. Capability compounds locally as the agent writes its own skills.</li>
-  <li><strong>Mono-hue identity.</strong> One violet accent, no noise. Calm, fast, and yours.</li>
-  <li><strong>Learn by doing.</strong> The agent turns repeated work into skills it can reuse, so it gets cheaper and more capable over time.</li>
-</ul>
-<h2 id="who">Who it is for</h2>
-<p>Individuals and small teams who want a personal agent they actually own — developers wiring it into their stack, operators running it on a server, and anyone who would rather self-host than hand their context to a third party.</p>
-<h2 id="next">Next steps</h2>
-<p>Install it in minutes with <a class="inline" href="docs-install.html">Installation</a>, run your first task in <a class="inline" href="docs-quickstart.html">Quickstart</a>, or understand the moving parts in <a class="inline" href="docs-architecture.html">Architecture</a>.</p>
-<div class="callout"><span class="ct">Note</span>PoorMad builds on an MIT-licensed upstream lineage; attribution to that lineage is preserved in the repository's LICENSE file. The product, name, and brand are independent.</div>
+<p>PoorMad follows a narrow-waist design: one agent core, one gateway protocol, and capability pushed to the edges (skills, plugins, surfaces).</p>
+<h2 id="layers">Layers</h2>
+<table>
+<tr><th>Layer</th><th>Job</th></tr>
+<tr><td><strong>Surfaces</strong></td><td>CLI, desktop, portal, messengers. Thin front-ends that render and capture input.</td></tr>
+<tr><td><strong>Gateway</strong></td><td>A WebSocket/JSON-RPC server. The only thing surfaces talk to. One brain, many fronts.</td></tr>
+<tr><td><strong>Agent core</strong></td><td>Reasoning loop, tool dispatch, memory, and skill execution.</td></tr>
+<tr><td><strong>Edges</strong></td><td>Skills, plugins, toolset distributions, and provider adapters.</td></tr>
+</table>
+<h2 id="narrow">The narrow waist</h2>
+<p>Every model tool is sent on every API call, so the core stays small on purpose. New capability should arrive as a CLI command + skill, a service-gated tool, a plugin, or an MCP server — not as a new core tool. This keeps the agent cheap to run and easy to extend.</p>
+<h2 id="caching">Prompt caching</h2>
+<p>Per-conversation prompt caching is sacred. A long-lived conversation reuses a cached prefix every turn; anything that mutates past context mid-conversation invalidates that cache and multiplies your cost. The core preserves a byte-stable system prompt for the life of a conversation.</p>
+<h2 id="flow">Request flow</h2>
+<pre><span class="c"># surface -> gateway -> core -> tools -> model -> core -> surface</span>
+portal --&gt; wss://agent/api/ws
+       --&gt; GatewayClient.connect(token)
+       --&gt; agent.run(turn)
+       --&gt; dispatch(toolset)
+       --&gt; model.complete()</pre>
 
   <div class="nextprev">
-    <span></span>
-    <a href="docs-install.html" style="text-align:right"><span class="np-t">Next</span>Installation</a>
+    <a href="docs-configuration.html"><span class="np-t">Previous</span>Configuration</a>
+    <a href="docs-skills.html" style="text-align:right"><span class="np-t">Next</span>Skills</a>
   </div>
 </main>
 <aside class="toc">
   <div class="th">On this page</div>
-  <a class="" href="#what-it-is">What PoorMad is</a>
-  <a class="" href="#principles">Design principles</a>
-  <a class="" href="#who">Who it is for</a>
-  <a class="" href="#next">Next steps</a>
+  <a class="" href="#layers">Layers</a>
+  <a class="" href="#narrow">The narrow waist</a>
+  <a class="" href="#caching">Prompt caching</a>
+  <a class="" href="#flow">Request flow</a>
 </aside>
 </div>
 

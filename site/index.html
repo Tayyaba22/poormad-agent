@@ -12,92 +12,63 @@
 <link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
-<header class="nav">
-  <div class="wrap nav-in">
+<header class="topnav">
+  <div class="topnav-in">
     <a class="logo" href="index.html"><span class="moon"></span>POORMAD</a>
-    <nav class="nav-links">
-      <a href="index.html" class="active">Home</a>
-      <a href="products.html">Products</a>
-      <a href="about.html">About</a>
-      <a href="docs.html">Docs</a>
-      <a href="faq.html">FAQ</a>
-      <a href="brand.html">Brand</a>
-      <a href="contact.html">Contact</a>
-    </nav>
-    <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter Portal →</a>
+    <nav class="topnav-links"><a href="index.html" class="active">Home</a><a href="products.html">Products</a><a href="about.html">About</a><a href="docs.html">Docs</a><a href="faq.html">FAQ</a><a href="brand.html">Brand</a><a href="contact.html">Contact</a></nav>
+    <div class="topnav-right">
+      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">GitHub</a>
+      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter Portal →</a>
+    </div>
   </div>
 </header>
 
-<section class="hero wrap">
-  <div class="badge"><span class="d"></span> built by one person · from one room</div>
-  <h1>An AI agent that <span class="vi">learns, remembers,</span><br/>and stays yours.</h1>
-  <p class="sub">PoorMad is a self-improving AI agent — one brain across the CLI, a native desktop app, a web portal, and 20+ messaging platforms. Local-first and open source.</p>
-  <div class="btn-row">
-    <a class="btn" id="download-btn" href="https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-win-x64.exe">⬇ Download <span id="os-name"></span></a>
-    <a class="btn btn-ghost" href="https://portal.xingabot.com" target="_blank" rel="noopener">Open Portal</a>
-  </div>
-  <div class="strip">
-    <span class="pill"><b>CLI</b> · Terminal</span><span class="pill"><b>Desktop</b> · Windows / macOS</span>
-    <span class="pill"><b>Web Portal</b></span><span class="pill"><b>20+</b> Messaging platforms</span>
-    <span class="pill"><b>MIT</b> · Open source</span>
+<section class="hero">
+  <div class="page">
+    <div class="kick">built by one person · from one room</div>
+    <h1>An AI agent that <span class="vi">learns, remembers,</span><br/>and stays yours.</h1>
+    <p class="sub">PoorMad is a self-improving AI agent — one brain across the CLI, a native desktop app, a web portal, and 20+ messaging platforms. Local-first and open source.</p>
+    <div class="btn-row">
+      <a class="btn btn-lg" id="download-btn" href="https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-win-x64.exe">⬇ Download <span id="os-name"></span></a>
+      <a class="btn btn-lg btn-ghost" href="https://portal.xingabot.com" target="_blank" rel="noopener">Open Portal</a>
+    </div>
+    <div class="strip">
+      <span class="pill"><b>CLI</b> · Terminal</span><span class="pill"><b>Desktop</b> · Windows / macOS</span>
+      <span class="pill"><b>Web Portal</b></span><span class="pill"><b>20+</b> Messaging platforms</span>
+      <span class="pill"><b>MIT</b> · Open source</span>
+    </div>
   </div>
 </section>
-
-<!-- PRODUCT SUITE -->
-<section class="sec wrap" id="suite">
+<section class="sec"><div class="page">
   <div class="idx">Product Suite</div>
   <h2>The PoorMad product suite</h2>
   <p class="lead">One agent, many fronts. Each surface shares the same gateway and the same memory.</p>
-  <div class="suite">
-    <div class="card">
-      <div class="num">01</div><h3>PoorMad Agent</h3>
-      <p>The self-improving core. Writes reusable skills from experience, recalls across sessions, and coordinates tools and subagents.</p>
-      <span class="tag">Core · Open source</span><div class="go">github.com/…/poormad-agent ↗</div>
-      <a class="cardlink" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener"></a>
-    </div>
-    <div class="card">
-      <div class="num">02</div><h3>Desktop App</h3>
-      <p>A native desktop client for Windows and macOS. Themed, local-first, and connected to your agent's memory.</p>
-      <span class="tag">Windows · macOS</span><div class="go">Download v0.18.0 ↗</div>
-      <a class="cardlink" href="https://github.com/Tayyaba22/poormad-agent/releases" target="_blank" rel="noopener"></a>
-    </div>
-    <div class="card">
-      <div class="num">03</div><h3>Web Portal</h3>
-      <p>Chat, browse sessions, and manage skills from a browser. Accounts, billing, and hosting live here.</p>
-      <span class="tag">portal.xingabot.com</span><div class="go">Enter portal ↗</div>
-      <a class="cardlink" href="https://portal.xingabot.com" target="_blank" rel="noopener"></a>
-    </div>
-    <div class="card">
-      <div class="num">04</div><h3>Messenger Connect</h3>
-      <p>Run the agent where you already are — 20+ platforms including Telegram, Discord, Slack, WhatsApp, and more.</p>
-      <span class="tag">20+ platforms</span><div class="go">See all surfaces ↗</div>
-      <a class="cardlink" href="docs.html#platforms" rel="noopener"></a>
-    </div>
+  <div class="numrow">
+    <div class="it"><div class="n">01 · CORE</div><h4>PoorMad Agent</h4><p>The self-improving core. Writes reusable skills from experience, recalls across sessions, and coordinates tools and subagents.</p></div>
+    <div class="it"><div class="n">02 · DESKTOP</div><h4>Desktop App</h4><p>A native desktop client for Windows and macOS. Themed, local-first, connected to your agent's memory.</p></div>
+    <div class="it"><div class="n">03 · PORTAL</div><h4>Web Portal</h4><p>Chat, browse sessions, and manage skills from a browser. Accounts, billing, and hosting live here.</p></div>
+    <div class="it"><div class="n">04 · MESSENGERS</div><h4>Messenger Connect</h4><p>Run the agent where you already are — 20+ platforms including Telegram, Discord, Slack, WhatsApp, and more.</p></div>
   </div>
-</section>
-
-<!-- FEATURES -->
-<section class="sec wrap" id="features">
+</div></section>
+<section class="sec"><div class="page">
   <div class="idx">Platform</div>
   <h2>Built for control. Built to be yours.</h2>
   <p class="lead">The same principles behind every surface in the suite.</p>
-  <div class="feat3">
+  <div class="featrow">
     <div class="f"><div class="k">API Access</div><h4>One gateway</h4><p>A single WebSocket/JSON-RPC gateway connects every surface to the agent. Bring your own model.</p></div>
     <div class="f"><div class="k">Security</div><h4>Local-first</h4><p>Memory and skills live in your PoorMad home. Privacy by default — nothing leaves your control unless you choose.</p></div>
     <div class="f"><div class="k">Modular Design</div><h4>Skills &amp; tools</h4><p>Clear module boundaries. The agent extends itself by writing skills, so capability compounds locally.</p></div>
   </div>
-</section>
-
-<!-- DEVELOPERS -->
-<section class="sec wrap" id="developers">
+</div></section>
+<section class="sec"><div class="page">
   <div class="idx">Developer First</div>
-  <h2>Built for developers.<br/>Ready for teams.</h2>
+  <h2>Built for developers. Ready for teams.</h2>
   <p class="lead">Install the agent, point it at a model, and it begins to learn. No account required to begin.</p>
-  <div class="dev">
+  <div class="dev2">
     <div>
       <p class="big">One command to run the agent. The same gateway powers the desktop app, the web portal, and every messenger.</p>
-      <div class="install"><span class="p">$</span> pip install poormad-agent</div>
-      <div style="margin-top:20px" class="btn-row" style="justify-content:flex-start">
+      <div class="install" style="background:#07070c;border:1px solid var(--border);border-radius:9px;padding:13px 17px;font-family:var(--mono);font-size:13.5px;display:inline-flex;gap:10px"><span style="color:var(--violet)">$</span> pip install poormad-agent</div>
+      <div style="margin-top:20px" class="btn-row">
         <a class="btn" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">View on GitHub</a>
         <a class="btn btn-ghost" href="docs.html">Read the docs</a>
       </div>
@@ -113,37 +84,34 @@ client = <span class="k">GatewayClient</span>(<br/>
 <span class="c"># same brain, every front</span>
     </div>
   </div>
-</section>
-
-<footer class="footer">
-  <div class="wrap">
-    <div class="footer-in">
-      <div class="col" style="max-width:300px">
-        <a class="logo" href="index.html" style="margin-bottom:14px"><span class="moon"></span>POORMAD</a>
-        <p class="tag">The self-improving AI agent.<br/>When the light is blocked, the stars align.</p>
-      </div>
-      <div class="col"><h4>Product</h4><a href="products.html">Agent</a><a href="products.html">Desktop</a><a href="products.html">Portal</a><a href="products.html">Messengers</a></div>
-      <div class="col"><h4>Resources</h4><a href="docs.html">Docs</a><a href="faq.html">FAQ</a><a href="about.html">About</a><a href="https://github.com/Tayyaba22/poormad-agent/releases" target="_blank" rel="noopener">Downloads</a></div>
-      <div class="col"><h4>Project</h4><a href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">GitHub</a><a href="https://github.com/Tayyaba22/poormad-agent/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a><a href="https://portal.xingabot.com" target="_blank" rel="noopener">Portal login</a></div>
-    </div>
-    <div class="footer-base">
-      <span>© 2026 PoorMad · built by one person, from one room.</span>
-      <span class="magic">MIT licensed · yours only</span>
-    </div>
-  </div>
-</footer>
-
+</div></section>
 <script>
 (function () {
   var WIN = "https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-win-x64.exe";
   var DMG = "https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0-mac-arm64.dmg";
-  var ua = navigator.userAgent, btn = document.getElementById("download-btn"),
-      label = document.getElementById("os-name");
+  var ua = navigator.userAgent, btn = document.getElementById("download-btn"), label = document.getElementById("os-name");
   if (!btn || !label) return;
   if (/Mac|iPhone|iPad/i.test(ua))      { btn.href = DMG;  label.textContent = "for macOS"; }
   else if (/Win/i.test(ua))             { btn.href = WIN;  label.textContent = "for Windows"; }
   else if (/Linux/i.test(ua))           { btn.href = "https://github.com/Tayyaba22/poormad-agent/releases/tag/v0.18.0"; label.textContent = "· Linux"; }
 })();
 </script>
+
+
+<footer class="footer">
+  <div class="footer-in">
+    <div class="col" style="max-width:300px">
+      <a class="logo" href="index.html" style="margin-bottom:14px"><span class="moon"></span>POORMAD</a>
+      <p class="tag">The self-improving AI agent.<br/>When the light is blocked, the stars align.</p>
+    </div>
+    <div class="col"><h4>Product</h4><a href="products.html">Agent</a><a href="products.html">Desktop</a><a href="products.html">Portal</a><a href="products.html">Messengers</a></div>
+    <div class="col"><h4>Resources</h4><a href="docs.html">Docs</a><a href="faq.html">FAQ</a><a href="about.html">About</a><a href="https://github.com/Tayyaba22/poormad-agent/releases" target="_blank" rel="noopener">Downloads</a></div>
+    <div class="col"><h4>Project</h4><a href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">GitHub</a><a href="https://github.com/Tayyaba22/poormad-agent/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a><a href="https://portal.xingabot.com" target="_blank" rel="noopener">Portal login</a></div>
+  </div>
+  <div class="footer-base">
+    <span>© 2026 PoorMad · built by one person, from one room.</span>
+    <span class="magic">MIT licensed · yours only</span>
+  </div>
+</footer>
 </body>
 </html>

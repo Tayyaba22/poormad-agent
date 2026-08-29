@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PoorMad — Documentation</title>
-<meta name="description" content="Full PoorMad documentation: install, quickstart, architecture, skills, memory, gateway, CLI, desktop, portal, platforms, providers, self-hosting, security." />
+<title>PoorMad — Installation</title>
+<meta name="description" content="Install the PoorMad agent core, desktop app, and portal on any platform." />
 <link rel="icon" href="favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -60,37 +60,58 @@
   </div>
 </aside>
 <main class="content">
-  <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Introduction</div>
-  <h1>PoorMad documentation</h1>
-  <p class="lede">Everything you need to install, run, extend, and self-host the self-improving AI agent.</p>
+  <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Getting Started</div>
+  <h1>Installation</h1>
+  <p class="lede">Install the PoorMad agent core, desktop app, and portal on any platform.</p>
 
-<p>PoorMad is a <strong>self-improving AI agent</strong>. The same agent core runs across a command line, a native desktop app, a web portal, and 20+ messaging platforms. It learns from experience by writing reusable <a class="inline" href="docs-skills.html">skills</a>, recalls past context through <a class="inline" href="docs-memory.html">memory</a>, and coordinates tools and subagents to get work done.</p>
-<h2 id="what-it-is">What PoorMad is</h2>
-<p>At its heart, PoorMad is one agent brain with many front doors. You can talk to it from a terminal, a desktop window, a browser, or Telegram — and it is the same agent with the same memory and skills behind all of them. That is possible because every surface connects to a single <a class="inline" href="docs-gateway.html">gateway</a> using one JSON-RPC protocol.</p>
-<h3 id="principles">Design principles</h3>
+<p>This guide covers installing the PoorMad agent core on Linux, macOS, and Windows, plus the desktop app and the web portal.</p>
+<h2 id="requirements">Requirements</h2>
 <ul>
-  <li><strong>Local-first.</strong> Memory and skills live in your PoorMad home directory. Nothing leaves your control unless you choose to connect a remote surface.</li>
-  <li><strong>Open source.</strong> MIT licensed, built in the open. Capability compounds locally as the agent writes its own skills.</li>
-  <li><strong>Mono-hue identity.</strong> One violet accent, no noise. Calm, fast, and yours.</li>
-  <li><strong>Learn by doing.</strong> The agent turns repeated work into skills it can reuse, so it gets cheaper and more capable over time.</li>
+  <li><strong>Python</strong> 3.11 or newer (3.13 recommended).</li>
+  <li><strong>pip</strong> and a virtual environment tool (venv or uv).</li>
+  <li>Network access to your chosen model provider (or a local model server).</li>
+  <li>~300 MB disk for the agent core; more for caches and skills.</li>
 </ul>
-<h2 id="who">Who it is for</h2>
-<p>Individuals and small teams who want a personal agent they actually own — developers wiring it into their stack, operators running it on a server, and anyone who would rather self-host than hand their context to a third party.</p>
-<h2 id="next">Next steps</h2>
-<p>Install it in minutes with <a class="inline" href="docs-install.html">Installation</a>, run your first task in <a class="inline" href="docs-quickstart.html">Quickstart</a>, or understand the moving parts in <a class="inline" href="docs-architecture.html">Architecture</a>.</p>
-<div class="callout"><span class="ct">Note</span>PoorMad builds on an MIT-licensed upstream lineage; attribution to that lineage is preserved in the repository's LICENSE file. The product, name, and brand are independent.</div>
+<div class="callout warn"><span class="ct">Heads up</span>On systems with PEP 668 enforcement (recent Debian/Ubuntu/Fedora), install into a virtual environment or use <code>uv</code> — do not <code>pip install</code> into the system Python.</div>
+<h2 id="pip">Install with pip</h2>
+<pre><span class="c"># create and activate a venv</span>
+python3 -m venv ~/.venv/poormad
+<span class="k">source</span> ~/.venv/poormad/bin/activate
+
+<span class="c"># install</span>
+pip install --upgrade pip
+pip install poormad-agent</pre>
+<h2 id="uv">Install with uv (recommended)</h2>
+<pre>uv venv
+<span class="k">source</span> .venv/bin/activate
+uv pip install poormad-agent</pre>
+<h2 id="script">Install script (Linux/macOS)</h2>
+<pre>curl -fsSL https://raw.githubusercontent.com/Tayyaba22/poormad-agent/main/scripts/install.sh | bash</pre>
+<p>On Windows PowerShell use the equivalent install script:</p>
+<pre>iex (irm https://raw.githubusercontent.com/Tayyaba22/poormad-agent/main/scripts/install.ps1)</pre>
+<h2 id="desktop">Desktop app</h2>
+<p>Download the native Windows (<code>.exe</code>) or macOS (<code>.dmg</code>) build from the <a class="inline" href="https://github.com/Tayyaba22/poormad-agent/releases" target="_blank" rel="noopener">releases page</a>. The desktop app bundles its own runtime and connects to your local agent (or a remote gateway you configure).</p>
+<h2 id="portal">Web portal</h2>
+<p>The web portal is a separate static front-end that talks to a running gateway. Host it yourself (see <a class="inline" href="docs-deploy.html">Self-Hosting</a>) or use <a class="inline" href="https://portal.xingabot.com" target="_blank" rel="noopener">portal.xingabot.com</a>.</p>
+<h2 id="verify">Verify the install</h2>
+<pre>poormad --version
+poormad --help</pre>
+<p>If both commands return output, you are ready for the <a class="inline" href="docs-quickstart.html">Quickstart</a>.</p>
 
   <div class="nextprev">
-    <span></span>
-    <a href="docs-install.html" style="text-align:right"><span class="np-t">Next</span>Installation</a>
+    <a href="docs.html"><span class="np-t">Previous</span>Introduction</a>
+    <a href="docs-quickstart.html" style="text-align:right"><span class="np-t">Next</span>Quickstart</a>
   </div>
 </main>
 <aside class="toc">
   <div class="th">On this page</div>
-  <a class="" href="#what-it-is">What PoorMad is</a>
-  <a class="" href="#principles">Design principles</a>
-  <a class="" href="#who">Who it is for</a>
-  <a class="" href="#next">Next steps</a>
+  <a class="" href="#requirements">Requirements</a>
+  <a class="" href="#pip">Install with pip</a>
+  <a class="" href="#uv">Install with uv</a>
+  <a class="" href="#script">Install script</a>
+  <a class="" href="#desktop">Desktop app</a>
+  <a class="" href="#portal">Web portal</a>
+  <a class="" href="#verify">Verify</a>
 </aside>
 </div>
 

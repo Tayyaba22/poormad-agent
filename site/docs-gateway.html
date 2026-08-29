@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PoorMad — Documentation</title>
-<meta name="description" content="Full PoorMad documentation: install, quickstart, architecture, skills, memory, gateway, CLI, desktop, portal, platforms, providers, self-hosting, security." />
+<title>PoorMad — Gateway & Protocol</title>
+<meta name="description" content="The single JSON-RPC/WebSocket server every surface talks to." />
 <link rel="icon" href="favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -60,37 +60,44 @@
   </div>
 </aside>
 <main class="content">
-  <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Introduction</div>
-  <h1>PoorMad documentation</h1>
-  <p class="lede">Everything you need to install, run, extend, and self-host the self-improving AI agent.</p>
+  <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Core Concepts</div>
+  <h1>Gateway &amp; Protocol</h1>
+  <p class="lede">The single JSON-RPC/WebSocket server every surface talks to.</p>
 
-<p>PoorMad is a <strong>self-improving AI agent</strong>. The same agent core runs across a command line, a native desktop app, a web portal, and 20+ messaging platforms. It learns from experience by writing reusable <a class="inline" href="docs-skills.html">skills</a>, recalls past context through <a class="inline" href="docs-memory.html">memory</a>, and coordinates tools and subagents to get work done.</p>
-<h2 id="what-it-is">What PoorMad is</h2>
-<p>At its heart, PoorMad is one agent brain with many front doors. You can talk to it from a terminal, a desktop window, a browser, or Telegram — and it is the same agent with the same memory and skills behind all of them. That is possible because every surface connects to a single <a class="inline" href="docs-gateway.html">gateway</a> using one JSON-RPC protocol.</p>
-<h3 id="principles">Design principles</h3>
+<p>The gateway is the single server every PoorMad surface connects to. It speaks JSON-RPC over WebSocket.</p>
+<h2 id="protocol">Protocol</h2>
+<p>Surfaces open a WebSocket to <code>wss://&lt;host&gt;/api/ws</code> (or <code>ws://127.0.0.1:8765/api/ws</code> locally) and exchange JSON-RPC 2.0 messages: requests, notifications, and results.</p>
+<h2 id="auth">Authentication</h2>
 <ul>
-  <li><strong>Local-first.</strong> Memory and skills live in your PoorMad home directory. Nothing leaves your control unless you choose to connect a remote surface.</li>
-  <li><strong>Open source.</strong> MIT licensed, built in the open. Capability compounds locally as the agent writes its own skills.</li>
-  <li><strong>Mono-hue identity.</strong> One violet accent, no noise. Calm, fast, and yours.</li>
-  <li><strong>Learn by doing.</strong> The agent turns repeated work into skills it can reuse, so it gets cheaper and more capable over time.</li>
+  <li>Local loopback uses an auto-generated session ticket.</li>
+  <li>Remote binds use a token (<code>POORMAD_TOKEN</code>) passed as a query param or header.</li>
+  <li>Use <code>--insecure</code> only for trusted LAN / self-hosted setups.</li>
 </ul>
-<h2 id="who">Who it is for</h2>
-<p>Individuals and small teams who want a personal agent they actually own — developers wiring it into their stack, operators running it on a server, and anyone who would rather self-host than hand their context to a third party.</p>
-<h2 id="next">Next steps</h2>
-<p>Install it in minutes with <a class="inline" href="docs-install.html">Installation</a>, run your first task in <a class="inline" href="docs-quickstart.html">Quickstart</a>, or understand the moving parts in <a class="inline" href="docs-architecture.html">Architecture</a>.</p>
-<div class="callout"><span class="ct">Note</span>PoorMad builds on an MIT-licensed upstream lineage; attribution to that lineage is preserved in the repository's LICENSE file. The product, name, and brand are independent.</div>
+<h2 id="client">GatewayClient</h2>
+<pre><span class="k">from</span> poormad <span class="k">import</span> GatewayClient
+client = <span class="k">GatewayClient</span>(
+    base_url=<span class="s">"wss://your-agent.local/api/ws"</span>,
+    token=os.environ[<span class="s">"POORMAD_TOKEN"</span>],
+)
+<span class="k">await</span> client.connect()</pre>
+<h2 id="config">Configuring the bind</h2>
+<pre><span class="c"># config.yaml</span>
+gateway:
+  bind: 0.0.0.0:8765   <span class="c"># listen on all interfaces</span>
+  token: "${POORMAD_TOKEN}"</pre>
+<div class="callout warn"><span class="ct">Security</span>Binding to <code>0.0.0.0</code> exposes the gateway to your network. Always set a strong <code>token</code> and prefer a reverse proxy with TLS for internet exposure.</div>
 
   <div class="nextprev">
-    <span></span>
-    <a href="docs-install.html" style="text-align:right"><span class="np-t">Next</span>Installation</a>
+    <a href="docs-memory.html"><span class="np-t">Previous</span>Memory</a>
+    <a href="docs-cli.html" style="text-align:right"><span class="np-t">Next</span>CLI</a>
   </div>
 </main>
 <aside class="toc">
   <div class="th">On this page</div>
-  <a class="" href="#what-it-is">What PoorMad is</a>
-  <a class="" href="#principles">Design principles</a>
-  <a class="" href="#who">Who it is for</a>
-  <a class="" href="#next">Next steps</a>
+  <a class="" href="#protocol">Protocol</a>
+  <a class="" href="#auth">Authentication</a>
+  <a class="" href="#client">GatewayClient</a>
+  <a class="" href="#config">Configuring the bind</a>
 </aside>
 </div>
 

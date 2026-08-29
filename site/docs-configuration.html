@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PoorMad — Documentation</title>
-<meta name="description" content="Full PoorMad documentation: install, quickstart, architecture, skills, memory, gateway, CLI, desktop, portal, platforms, providers, self-hosting, security." />
+<title>PoorMad — Configuration</title>
+<meta name="description" content="Every behavioral setting and secret, explained." />
 <link rel="icon" href="favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -60,37 +60,44 @@
   </div>
 </aside>
 <main class="content">
-  <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Introduction</div>
-  <h1>PoorMad documentation</h1>
-  <p class="lede">Everything you need to install, run, extend, and self-host the self-improving AI agent.</p>
+  <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Getting Started</div>
+  <h1>Configuration</h1>
+  <p class="lede">Every behavioral setting and secret, explained.</p>
 
-<p>PoorMad is a <strong>self-improving AI agent</strong>. The same agent core runs across a command line, a native desktop app, a web portal, and 20+ messaging platforms. It learns from experience by writing reusable <a class="inline" href="docs-skills.html">skills</a>, recalls past context through <a class="inline" href="docs-memory.html">memory</a>, and coordinates tools and subagents to get work done.</p>
-<h2 id="what-it-is">What PoorMad is</h2>
-<p>At its heart, PoorMad is one agent brain with many front doors. You can talk to it from a terminal, a desktop window, a browser, or Telegram — and it is the same agent with the same memory and skills behind all of them. That is possible because every surface connects to a single <a class="inline" href="docs-gateway.html">gateway</a> using one JSON-RPC protocol.</p>
-<h3 id="principles">Design principles</h3>
-<ul>
-  <li><strong>Local-first.</strong> Memory and skills live in your PoorMad home directory. Nothing leaves your control unless you choose to connect a remote surface.</li>
-  <li><strong>Open source.</strong> MIT licensed, built in the open. Capability compounds locally as the agent writes its own skills.</li>
-  <li><strong>Mono-hue identity.</strong> One violet accent, no noise. Calm, fast, and yours.</li>
-  <li><strong>Learn by doing.</strong> The agent turns repeated work into skills it can reuse, so it gets cheaper and more capable over time.</li>
-</ul>
-<h2 id="who">Who it is for</h2>
-<p>Individuals and small teams who want a personal agent they actually own — developers wiring it into their stack, operators running it on a server, and anyone who would rather self-host than hand their context to a third party.</p>
-<h2 id="next">Next steps</h2>
-<p>Install it in minutes with <a class="inline" href="docs-install.html">Installation</a>, run your first task in <a class="inline" href="docs-quickstart.html">Quickstart</a>, or understand the moving parts in <a class="inline" href="docs-architecture.html">Architecture</a>.</p>
-<div class="callout"><span class="ct">Note</span>PoorMad builds on an MIT-licensed upstream lineage; attribution to that lineage is preserved in the repository's LICENSE file. The product, name, and brand are independent.</div>
+<p>Behavioral settings live in <code>config.yaml</code> in your PoorMad home. Secrets (API keys, tokens) live in <code>.env</code> — never put credentials in <code>config.yaml</code>.</p>
+<div class="callout"><span class="ct">Rule</span><code>.env</code> is for secrets only. All behavioral settings — timeouts, thresholds, feature flags, display prefs — go in <code>config.yaml</code>.</div>
+<h2 id="location">Where config lives</h2>
+<p>The home directory defaults to <code>~/.poormad/</code> and can be overridden with the <code>POORMAD_HOME</code> environment variable or the <code>--home</code> flag.</p>
+<h2 id="reference">Reference</h2>
+<table>
+<tr><th>Key</th><th>Type</th><th>Default</th><th>Meaning</th></tr>
+<tr><td><code>provider</code></td><td>string</td><td>—</td><td>Model provider id (e.g. <code>openai</code>, <code>anthropic</code>, <code>ollama</code>).</td></tr>
+<tr><td><code>model</code></td><td>string</td><td>—</td><td>Model slug sent to the provider.</td></tr>
+<tr><td><code>home</code></td><td>path</td><td><code>~/.poormad</code></td><td>Agent home directory.</td></tr>
+<tr><td><code>gateway.bind</code></td><td>string</td><td><code>127.0.0.1:8765</code></td><td>Address the gateway listens on.</td></tr>
+<tr><td><code>gateway.token</code></td><td>string</td><td>auto</td><td>Session token for gateway auth.</td></tr>
+<tr><td><code>memory.enabled</code></td><td>bool</td><td><code>true</code></td><td>Enable cross-session recall.</td></tr>
+<tr><td><code>skills.auto_write</code></td><td>bool</td><td><code>false</code></td><td>Let the agent propose skills without prompting.</td></tr>
+<tr><td><code>toolsets</code></td><td>list</td><td>default</td><td>Enabled toolset distribution.</td></tr>
+</table>
+<h2 id="env">Environment variables</h2>
+<pre>POORMAD_HOME=~/.poormad
+POORMAD_API_KEY=sk-...        <span class="c"># provider key (secret)</span>
+POORMAD_TOKEN=...            <span class="c"># gateway session token (secret)</span></pre>
+<h2 id="profiles">Profiles</h2>
+<p>You can keep multiple named profiles (e.g. <code>work</code>, <code>local</code>) and switch with <code>poormad --profile &lt;name&gt;</code>. Each profile is a separate <code>config.yaml</code> under <code>~/.poormad/profiles/</code>.</p>
 
   <div class="nextprev">
-    <span></span>
-    <a href="docs-install.html" style="text-align:right"><span class="np-t">Next</span>Installation</a>
+    <a href="docs-quickstart.html"><span class="np-t">Previous</span>Quickstart</a>
+    <a href="docs-architecture.html" style="text-align:right"><span class="np-t">Next</span>Architecture</a>
   </div>
 </main>
 <aside class="toc">
   <div class="th">On this page</div>
-  <a class="" href="#what-it-is">What PoorMad is</a>
-  <a class="" href="#principles">Design principles</a>
-  <a class="" href="#who">Who it is for</a>
-  <a class="" href="#next">Next steps</a>
+  <a class="" href="#location">Where config lives</a>
+  <a class="" href="#reference">Reference</a>
+  <a class="" href="#env">Environment variables</a>
+  <a class="" href="#profiles">Profiles</a>
 </aside>
 </div>
 
