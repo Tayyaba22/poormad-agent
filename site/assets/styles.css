@@ -202,7 +202,8 @@ h1,h2,h3,h4,h5{font-family:var(--display);font-weight:700;letter-spacing:-.02em;
 
 /* bring real content above the bg. Preserve each element's own z-index
    by leaving z-index unset; we just need to create a stacking context. */
-body > *:not(.pm-bg){position:relative}
+/* fixed bg layers must stay out of normal flow (do NOT let them become relative) */
+body > *:not(.pm-bg):not(.pm-lava):not(.pm-embers){position:relative}
 
 /* ---------- nav scrolled state ---------- */
 .pm-nav-scrolled{background:rgba(10,10,15,.94)!important;
@@ -316,77 +317,98 @@ body > *:not(.pm-bg){position:relative}
    surfaces. Mono-hue violet only. Driven by assets/motion.js.
    ============================================================= */
 
-/* ---- lava canvas (full-viewport, behind content) ---- */
-.pm-lava{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.6;
-  mix-blend-mode:screen;transition:opacity .6s ease}
+/* ---- lava canvas: ambient, kept BEHIND content, calm ---- */
+.pm-lava{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.28;
+  filter:saturate(120%);transition:opacity .6s ease}
 .pm-lava canvas{width:100%;height:100%;display:block}
 
-/* ---- ember sparks layer ---- */
+/* ---- ember sparks layer (sparse, subtle) ---- */
 .pm-embers{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
 .pm-ember{position:absolute;bottom:-12px;border-radius:50%;
-  background:radial-gradient(circle,#f5d0fe,rgba(167,139,250,.0) 70%);
-  filter:blur(.4px);will-change:transform,opacity;animation:pm-ember-rise linear infinite}
+  background:radial-gradient(circle,#e9d5ff,rgba(167,139,250,0) 70%);
+  filter:blur(.6px);will-change:transform,opacity;animation:pm-ember-rise linear infinite}
 @keyframes pm-ember-rise{
   0%{transform:translateY(0) translateX(0) scale(1);opacity:0}
-  12%{opacity:.9}
-  85%{opacity:.7}
+  14%{opacity:.65}
+  85%{opacity:.5}
   100%{transform:translateY(-104vh) translateX(var(--ex,20px)) scale(.3);opacity:0}
 }
 
-/* ---- molten hero: lava lamp blobs behind the headline ---- */
+/* ---- molten hero: lava lamp blooms behind the headline ---- */
 .hero{position:relative}
-.pm-herolava{position:absolute;inset:-10% -10% 0 -10%;z-index:-1;pointer-events:none;
-  filter:blur(28px) saturate(135%);opacity:.55;will-change:transform}
+.pm-herolava{position:absolute;inset:-12% -12% -20% -12%;z-index:-1;pointer-events:none;
+  filter:blur(34px) saturate(130%);opacity:.5;will-change:transform}
 .pm-herolava span{position:absolute;border-radius:50%;
-  background:radial-gradient(circle at 35% 30%,var(--violet-bright),rgba(124,58,237,.15) 70%,transparent 72%);
+  background:radial-gradient(circle at 35% 30%,var(--violet-bright),rgba(124,58,237,.12) 70%,transparent 72%);
   mix-blend-mode:screen}
-.pm-herolava .h1{width:46%;height:46%;left:-6%;top:8%;animation:pm-lava-morph 14s ease-in-out infinite}
-.pm-herolava .h2{width:40%;height:40%;right:-4%;top:0;animation:pm-lava-morph 18s ease-in-out infinite reverse}
-.pm-herolava .h3{width:34%;height:34%;left:32%;top:30%;animation:pm-lava-morph 22s ease-in-out infinite}
+.pm-herolava .h1{width:42%;height:42%;left:-4%;top:10%;animation:pm-lava-morph 16s ease-in-out infinite}
+.pm-herolava .h2{width:38%;height:38%;right:-3%;top:4%;animation:pm-lava-morph 20s ease-in-out infinite reverse}
+.pm-herolava .h3{width:30%;height:30%;left:34%;top:34%;animation:pm-lava-morph 24s ease-in-out infinite}
 @keyframes pm-lava-morph{
   0%,100%{transform:translate(0,0) scale(1) rotate(0deg);border-radius:50% 50% 48% 52% / 52% 48% 52% 48%}
-  33%{transform:translate(8%,-7%) scale(1.12) rotate(40deg);border-radius:62% 38% 55% 45% / 45% 55% 45% 55%}
-  66%{transform:translate(-6%,9%) scale(.9) rotate(-30deg);border-radius:40% 60% 48% 52% / 58% 42% 58% 42%}
+  33%{transform:translate(7%,-6%) scale(1.1) rotate(38deg);border-radius:62% 38% 55% 45% / 45% 55% 45% 55%}
+  66%{transform:translate(-5%,8%) scale(.92) rotate(-26deg);border-radius:40% 60% 48% 52% / 58% 42% 58% 42%}
 }
 
-/* ---- MOLTEN CARD: cards get a lava-filled glass surface on hover ---- */
+/* ---- MOLTEN CARD: clean glass, cursor-tracked lava sheen on hover ---- */
 [data-tilt],.numrow .it,.featrow .f,.content .callout,.qa{
-  position:relative;overflow:hidden}
-/* lava glow that bleeds from the cursor corner of the card */
-[data-tilt]::before{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;
-  background:radial-gradient(240px 200px at var(--mx,50%) var(--my,50%),
-    rgba(167,139,250,.30),rgba(124,58,237,.12) 40%,transparent 70%);
+  position:relative;overflow:hidden;background:var(--panel);
+  border:1px solid var(--border-soft);border-radius:14px}
+.numrow .it,.featrow .f{padding:26px 28px}
+[data-tilt]{transition:transform .25s ease-out,border-color .3s ease,background .3s ease,box-shadow .3s ease}
+/* cursor-tracked lava glow (uses --mx/--my set by the tilt handler) */
+[data-tilt]::before{content:"";position:absolute;inset:0;border-radius:inherit;z-index:0;
+  background:radial-gradient(260px 220px at var(--mx,50%) var(--my,50%),
+    rgba(167,139,250,.16),rgba(124,58,237,.07) 42%,transparent 70%);
   opacity:0;transition:opacity .35s ease;pointer-events:none}
 [data-tilt]:hover::before{opacity:1}
-/* molten rim — gradient border that "melts" brighter on hover */
+/* molten rim — soft gradient border that brightens on hover */
 [data-tilt]::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:0;
-  background:linear-gradient(130deg,var(--violet),transparent 30%,transparent 70%,var(--violet-bright));
+  background:linear-gradient(130deg,rgba(167,139,250,.7),transparent 32%,transparent 68%,rgba(139,92,246,.7));
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
   -webkit-mask-composite:xor;mask-composite:exclude;
   padding:1px;opacity:0;transition:opacity .35s ease;pointer-events:none}
-[data-tilt]:hover::after{opacity:.9}
-/* the molten text shimmer inside cards */
+[data-tilt]:hover::after{opacity:.8}
+[data-tilt] > *{position:relative;z-index:1}
+[data-tilt]:hover{border-color:var(--violet-dim);
+  background:rgba(255,255,255,.04);
+  box-shadow:0 14px 40px rgba(124,58,237,.18)}
+/* molten text shimmer inside cards */
 [data-tilt] .n,[data-tilt] h4{background:linear-gradient(90deg,var(--fg),var(--violet-bright),var(--fg));
-  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
-  -webkit-text-fill-color:transparent;transition:background-position .6s ease}
+  background-size:200% 100%;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;transition:background-position .7s ease}
 [data-tilt]:hover .n,[data-tilt]:hover h4{background-position:100% 0}
 
 /* ---- nav: liquid violet underline that flows from cursor x ---- */
 .topnav-links a::after{left:var(--ux,50%);width:0;transition:width .3s ease,left .3s ease}
 .topnav-links a:hover::after,.topnav-links a.active::after{width:100%;left:0}
 
-/* ---- molten CTA button: flowing gradient + breathing glow ---- */
-.btn{background:linear-gradient(100deg,var(--violet),#7c3aed 45%,var(--violet-bright));
-  background-size:200% 100%;animation:pm-btn-flow 5s linear infinite}
-.btn:hover{animation-duration:2.4s;background-position:100% 0;
+/* ---- CTA button: soft violet gradient + glow bloom on hover ---- */
+.btn{background:linear-gradient(100deg,var(--violet),#7c3aed 48%,var(--violet-bright));
+  background-size:200% 100%;animation:pm-btn-flow 6s linear infinite;
+  box-shadow:0 4px 18px rgba(139,92,246,.28)}
+.btn:hover{animation-duration:2.6s;background-position:100% 0;
   box-shadow:0 10px 34px rgba(139,92,246,.5)}
 @keyframes pm-btn-flow{to{background-position:200% 0}}
 
-/* ---- hero headline: molten drip gradient ---- */
+/* ---- hero headline: slow molten sheen ---- */
 .hero h1{background:linear-gradient(180deg,#fff 0%,var(--violet-bright) 55%,var(--violet) 100%);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-  background-size:100% 200%;animation:pm-h1-molten 9s ease-in-out infinite}
+  background-size:100% 200%;animation:pm-h1-molten 11s ease-in-out infinite}
 @keyframes pm-h1-molten{0%,100%{background-position:0 0}50%{background-position:0 100%}}
+
+/* ---- hero: centered wordmark + body tagline ---- */
+.hero-center{text-align:center;display:flex;flex-direction:column;align-items:center;
+  padding-top:18px;padding-bottom:8px}
+.hero-word{font-family:var(--display);font-weight:700;letter-spacing:.02em;
+  font-size:clamp(64px,13vw,168px);line-height:.96;margin:14px 0 18px;
+  background:linear-gradient(180deg,#fff 0%,var(--violet-bright) 62%,var(--violet) 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  background-size:100% 200%;animation:pm-h1-molten 11s ease-in-out infinite;
+  text-shadow:0 0 60px rgba(139,92,246,.25)}
+.hero-tag{max-width:620px;margin:0 auto;font-size:clamp(15px,2vw,18px);color:var(--muted);
+  text-align:center;font-family:var(--mono)}
+.hero .btn-row{justify-content:center}
 
 /* ---- generic lava divider between sections ---- */
 .pm-lavabar{height:2px;width:100%;margin:0 auto;position:relative;overflow:hidden;
@@ -404,7 +426,7 @@ body > *:not(.pm-bg){position:relative}
   .hero::before{display:none}
   .btn::before,.install::after{display:none}
   .pm-lava,.pm-embers,.pm-herolava{display:none!important}
-  .btn{animation:none;background:var(--violet)}
+  .btn{animation:none;background:var(--violet);box-shadow:none}
   .hero h1{animation:none;-webkit-text-fill-color:var(--fg);color:var(--fg)}
   [data-tilt]::before,[data-tilt]::after{display:none}
   [data-tilt] .n,[data-tilt] h4{background:none;-webkit-text-fill-color:inherit;color:inherit}

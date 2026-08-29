@@ -366,8 +366,8 @@
         if (b.y < -b.r) b.y = H + b.r; if (b.y > H + b.r) b.y = -b.r;
         const rr = b.r * (1 + Math.sin(t * 1.3 + b.ph) * 0.12);
         const g = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, rr);
-        g.addColorStop(0, `hsla(${b.hue},85%,62%,0.42)`);
-        g.addColorStop(0.5, `hsla(${b.hue},80%,55%,0.16)`);
+        g.addColorStop(0, `hsla(${b.hue},80%,60%,0.26)`);
+        g.addColorStop(0.5, `hsla(${b.hue},78%,52%,0.10)`);
         g.addColorStop(1, "hsla(270,80%,50%,0)");
         ctx.fillStyle = g;
         ctx.beginPath(); ctx.arc(b.x, b.y, rr, 0, 6.2832); ctx.fill();
