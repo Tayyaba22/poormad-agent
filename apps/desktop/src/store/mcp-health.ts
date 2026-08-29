@@ -12,9 +12,9 @@
  * the other just learned.
  */
 
-import { getPoorMadConfigRecord, type McpTestResult, testMcpServer } from '@/poormad'
 import { translateNow } from '@/i18n'
 import { classifyProbe, freshProbe, probeCache, probeKey } from '@/lib/mcp-probe-cache'
+import { getPoorMadConfigRecord, type McpTestResult, testMcpServer } from '@/poormad'
 import { notify } from '@/store/notifications'
 import { $activeGatewayProfile, normalizeProfileKey } from '@/store/profile'
 import { $gatewayState } from '@/store/session'

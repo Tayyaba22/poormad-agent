@@ -1,8 +1,8 @@
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
-import type { PoorMadConfigRecord } from '@/poormad'
 import { type I18nConfigClient, I18nProvider } from '@/i18n'
+import type { PoorMadConfigRecord } from '@/poormad'
 import { stubMenuDomApis, stubResizeObserver } from '@/test/jsdom'
 
 import { LanguageSwitcher } from './language-switcher'

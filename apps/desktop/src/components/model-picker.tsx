@@ -8,8 +8,8 @@ import { currentPickerSelection } from '@/lib/model-status-label'
 import { normalize } from '@/lib/text'
 import type { ModelOptionProvider, ModelPricing } from '@/types/poormad'
 
-import type { PoorMadGateway } from '../poormad'
 import { cn } from '../lib/utils'
+import type { PoorMadGateway } from '../poormad'
 import { startManualOnboarding } from '../store/onboarding'
 
 import { InlineNotice } from './notifications'

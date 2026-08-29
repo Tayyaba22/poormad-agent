@@ -1,7 +1,7 @@
 import type { Dispatch, SetStateAction } from 'react'
 
-import type { PoorMadGateway } from '@/poormad'
 import type { IconComponent } from '@/lib/icons'
+import type { PoorMadGateway } from '@/poormad'
 import type { EnvVarInfo } from '@/types/poormad'
 
 export type SettingsView =

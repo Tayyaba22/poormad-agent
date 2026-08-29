@@ -1,9 +1,9 @@
-import { isGatewayReauthRequired, resolveGatewayWsUrl } from '@poormad/shared'
 import { useStore } from '@nanostores/react'
+import { isGatewayReauthRequired, resolveGatewayWsUrl } from '@poormad/shared'
 import { useCallback, useEffect, useRef } from 'react'
 
-import type { PoorMadGateway } from '@/poormad'
 import { RECONNECT_ATTEMPT_TIMEOUT_MS, withTimeout } from '@/lib/with-timeout'
+import type { PoorMadGateway } from '@/poormad'
 import { $gateway, ensureActiveGatewayOpen, isActivePrimary } from '@/store/gateway'
 import { $activeGatewayProfile } from '@/store/profile'
 import { $gatewayState, setConnection } from '@/store/session'

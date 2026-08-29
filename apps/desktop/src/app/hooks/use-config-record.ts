@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 
-import { getPoorMadConfigRecord, type ProfileScope, profileScopeKey } from '@/poormad'
 import { queryClient, writeCache } from '@/lib/query-client'
+import { getPoorMadConfigRecord, type ProfileScope, profileScopeKey } from '@/poormad'
 import type { PoorMadConfigRecord } from '@/types/poormad'
 
 // One shared cache for the whole profile config record (`GET /api/config`).

@@ -1,6 +1,5 @@
 import { resolveGatewayWsUrl } from '@poormad/shared'
 
-import { getApiRequestConnection, getApiRequestProfile, speakText } from '@/poormad'
 import {
   cutSentences,
   directTtsConfig,
@@ -8,6 +7,7 @@ import {
   synthesizeSpeechClientDirect
 } from '@/lib/voice-client-direct'
 import { RECONNECT_ATTEMPT_TIMEOUT_MS, withTimeout } from '@/lib/with-timeout'
+import { getApiRequestConnection, getApiRequestProfile, speakText } from '@/poormad'
 import {
   $voicePlayback,
   setVoicePlaybackState,

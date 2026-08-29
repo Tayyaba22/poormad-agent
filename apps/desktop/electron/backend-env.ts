@@ -154,8 +154,8 @@ export {
   buildDesktopBackendEnv,
   buildDesktopBackendPath,
   delimiterForPlatform,
-  poormadManagedNodePathEntries,
   normalizePoorMadHomeRoot,
   pathEnvKey,
+  poormadManagedNodePathEntries,
   POSIX_SANE_PATH_ENTRIES
 }

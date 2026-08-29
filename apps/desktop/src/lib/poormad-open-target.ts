@@ -155,7 +155,11 @@ export function resolvePoorMadOpenPath(target: PoorMadOpenTarget | null | undefi
  * Build a navigate path from a parsed deep-link payload
  * (`poormad://<kind>/<name>?…` → kind/name/params).
  */
-export function pathFromPoorMadDeepLink(kind: string, name: string, params: Record<string, string> = {}): string | null {
+export function pathFromPoorMadDeepLink(
+  kind: string,
+  name: string,
+  params: Record<string, string> = {}
+): string | null {
   if (!kind || !name) {
     return null
   }

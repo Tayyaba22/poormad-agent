@@ -931,7 +931,8 @@ export const ironmanTheme: DesktopTheme = {
   typography: {
     fontSans: `"Chakra Petch", ${SYSTEM_SANS}`,
     fontMono: `"Oxanium", ${SYSTEM_MONO}`,
-    fontUrl: 'https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Oxanium:wght@500;700&display=swap'
+    fontUrl:
+      'https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Oxanium:wght@500;700&display=swap'
   }
 }
 
@@ -1095,7 +1096,8 @@ export const roboticTheme: DesktopTheme = {
   typography: {
     fontSans: `"Chakra Petch", ${SYSTEM_SANS}`,
     fontMono: `"IBM Plex Mono", ${SYSTEM_MONO}`,
-    fontUrl: 'https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap'
+    fontUrl:
+      'https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=IBM+Plex+Mono:wght@400;500;700&display=swap'
   }
 }
 
@@ -1223,7 +1225,8 @@ export const poormadDarkTheme: DesktopTheme = {
   typography: {
     fontSans: `"Inter", ${SYSTEM_SANS}`,
     fontMono: `"JetBrains Mono", ${SYSTEM_MONO}`,
-    fontUrl: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap'
+    fontUrl:
+      'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap'
   }
 }
 

@@ -1,8 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import {
-  getPoorMadConfigRecord,
   getMcpCatalog,
+  getPoorMadConfigRecord,
   getSkillContent,
   getSkills,
   getToolsets,

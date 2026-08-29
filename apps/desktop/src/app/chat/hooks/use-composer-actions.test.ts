@@ -8,8 +8,8 @@ import {
   attachmentPreviewDataUrl,
   type DroppedFile,
   extractDroppedFiles,
-  POORMAD_PATHS_MIME,
   partitionDroppedFiles,
+  POORMAD_PATHS_MIME,
   useComposerActions
 } from './use-composer-actions'
 

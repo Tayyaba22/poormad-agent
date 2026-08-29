@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
-import { getMemoryProviderOAuthStatus, startMemoryProviderOAuth } from '@/poormad'
 import { Check, ExternalLink, Loader2 } from '@/lib/icons'
+import { getMemoryProviderOAuthStatus, startMemoryProviderOAuth } from '@/poormad'
 import { notifyError } from '@/store/notifications'
 import type { MemoryProviderOAuthStatus } from '@/types/poormad'
 

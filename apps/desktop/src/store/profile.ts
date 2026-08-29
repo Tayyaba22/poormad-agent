@@ -2,7 +2,6 @@ import { LOCAL_CONNECTION_ID } from '@poormad/shared'
 import { atom, batch, computed } from 'nanostores'
 
 import type { PoorMadConnection } from '@/global'
-import { getProfiles, poormadApi, setApiRequestProfile, STARTUP_REQUEST_TIMEOUT_MS } from '@/poormad'
 import { invalidateProfileScopedQueries } from '@/lib/query-client'
 import {
   arraysEqual,
@@ -14,6 +13,7 @@ import {
   storedStringRecord
 } from '@/lib/storage'
 import { withTimeout } from '@/lib/with-timeout'
+import { getProfiles, poormadApi, setApiRequestProfile, STARTUP_REQUEST_TIMEOUT_MS } from '@/poormad'
 import { invalidateCronModelImpactScopeState } from '@/store/cron-model-impact-scope'
 import {
   $gateway,

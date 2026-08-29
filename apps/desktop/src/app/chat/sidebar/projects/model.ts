@@ -2,9 +2,9 @@ import { useStore } from '@nanostores/react'
 import { useEffect, useMemo, useState } from 'react'
 
 import type { PoorMadGitWorktree } from '@/global'
-import type { SessionInfo } from '@/poormad'
 import { desktopGit } from '@/lib/desktop-git'
 import { mapPool } from '@/lib/pool'
+import type { SessionInfo } from '@/poormad'
 import { $sidebarWorkspaceNodeOpen, toggleWorkspaceNodeCollapsed } from '@/store/layout'
 import { $worktreeRefreshToken } from '@/store/projects'
 

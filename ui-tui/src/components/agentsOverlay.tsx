@@ -1,5 +1,5 @@
-import { Box, NoSelect, ScrollBox, type ScrollBoxHandle, Text, useInput, useStdout } from '@poormad/ink'
 import { useStore } from '@nanostores/react'
+import { Box, NoSelect, ScrollBox, type ScrollBoxHandle, Text, useInput, useStdout } from '@poormad/ink'
 import { type ReactNode, useEffect, useMemo, useRef, useState } from 'react'
 
 import {

@@ -1,5 +1,5 @@
-import { Box, stringWidth, Text } from '@poormad/ink'
 import { useStore } from '@nanostores/react'
+import { Box, stringWidth, Text } from '@poormad/ink'
 import type { ReactNode } from 'react'
 
 import { useGateway } from '../app/gatewayContext.js'

@@ -7,9 +7,9 @@ import {
   appendUniquePathEntries,
   buildDesktopBackendEnv,
   buildDesktopBackendPath,
-  poormadManagedNodePathEntries,
   normalizePoorMadHomeRoot,
   pathEnvKey,
+  poormadManagedNodePathEntries,
   POSIX_SANE_PATH_ENTRIES
 } from './backend-env'
 

@@ -1,4 +1,4 @@
-import { getGlobalModelOptions, type PoorMadGateway, type ModelOptionsResponse } from '@/poormad'
+import { getGlobalModelOptions, type ModelOptionsResponse, type PoorMadGateway } from '@/poormad'
 import type { ModelOptionProvider } from '@/types/poormad'
 
 /**
