@@ -9,7 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/styles.css?v=20260829b" />
+<script defer src="assets/motion.js?v=20260829b"></script>
 </head>
 <body>
 
@@ -26,8 +27,8 @@
       <a href="contact.html">Contact</a>
     </nav>
     <div class="topnav-right">
-      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter Portal →</a>
+      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener" data-magnetic="0.2">GitHub</a>
+      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener" data-magnetic="0.2">Enter Portal →</a>
     </div>
   </div>
 </header>
@@ -61,13 +62,13 @@
 </aside>
 <main class="content">
   <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Core Concepts</div>
-  <h1>Skills</h1>
+  <h1 data-reveal="fade-up" data-reveal-delay="0">Skills</h1>
   <p class="lede">PoorMad's unit of learned capability — write, recall, and apply.</p>
 
 <p>Skills are PoorMad's unit of learned capability — reusable procedures the agent can write, recall, and apply.</p>
-<h2 id="what">What a skill is</h2>
+<h2 id="what" data-reveal="fade-up" data-reveal-delay="80">What a skill is</h2>
 <p>A skill is a folder with a <code>SKILL.md</code> (frontmatter + markdown body), and optionally references, scripts, and templates. It encodes a workflow the agent has learned so it does not re-derive it each time.</p>
-<h2 id="write">Writing a skill</h2>
+<h2 id="write" data-reveal="fade-up" data-reveal-delay="160">Writing a skill</h2>
 <p>Ask the agent to capture a repeated task, or author one directly:</p>
 <pre><span class="c"># skills/shell-audit/SKILL.md</span>
 ---
@@ -77,13 +78,13 @@ description: Audit shell history for risky patterns and suggest aliases.
 1. Read ~/.bash_history (last 200 lines).
 2. Flag sudo/rm -rf/curl|sh patterns.
 3. Propose three aliases from frequent commands.</pre>
-<h2 id="load">How skills load</h2>
+<h2 id="load" data-reveal="fade-up" data-reveal-delay="240">How skills load</h2>
 <ul>
   <li>Skills are indexed at startup from <code>~/.poormad/skills/</code>.</li>
   <li>The agent selects a skill when its description matches the task.</li>
   <li>Trigger conditions and numbered steps keep execution deterministic.</li>
 </ul>
-<h2 id="best">Best practices</h2>
+<h2 id="best" data-reveal="fade-up" data-reveal-delay="320">Best practices</h2>
 <ul>
   <li>One idea per skill. Name it for the job, not the tool.</li>
   <li>Keep the body step-by-step; the agent follows it literally.</li>

@@ -9,7 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/styles.css?v=20260829b" />
+<script defer src="assets/motion.js?v=20260829b"></script>
 </head>
 <body>
 
@@ -26,8 +27,8 @@
       <a href="contact.html">Contact</a>
     </nav>
     <div class="topnav-right">
-      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter Portal →</a>
+      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener" data-magnetic="0.2">GitHub</a>
+      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener" data-magnetic="0.2">Enter Portal →</a>
     </div>
   </div>
 </header>
@@ -61,15 +62,15 @@
 </aside>
 <main class="content">
   <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Surfaces</div>
-  <h1>CLI</h1>
+  <h1 data-reveal="fade-up" data-reveal-delay="0">CLI</h1>
   <p class="lede">The terminal surface — a REPL that writes its own skills.</p>
 
 <p>The CLI is the original surface — a terminal session that writes its own skills.</p>
-<h2 id="start">Start a session</h2>
+<h2 id="start" data-reveal="fade-up" data-reveal-delay="80">Start a session</h2>
 <pre>poormad                 <span class="c"># interactive REPL</span>
 poormad "summarize x"    <span class="c"># one-shot prompt</span>
 poormad -f task.md      <span class="c"># prompt from a file</span></pre>
-<h2 id="flags">Common flags</h2>
+<h2 id="flags" data-reveal="fade-up" data-reveal-delay="160">Common flags</h2>
 <table>
 <tr><th>Flag</th><th>Meaning</th></tr>
 <tr><td><code>--home PATH</code></td><td>Override the PoorMad home directory.</td></tr>
@@ -77,9 +78,9 @@ poormad -f task.md      <span class="c"># prompt from a file</span></pre>
 <tr><td><code>--model SLUG</code></td><td>Override the model for this run.</td></tr>
 <tr><td><code>--no-memory</code></td><td>Disable cross-session recall for this run.</td></tr>
 </table>
-<h2 id="skins">Themes &amp; skins</h2>
+<h2 id="skins" data-reveal="fade-up" data-reveal-delay="240">Themes &amp; skins</h2>
 <p>The CLI has its own skin engine (<code>skins/*.yaml</code>) independent of the desktop theme. Set the active skin with <code>/skin &lt;name&gt;</code> inside a session.</p>
-<h2 id="pipe">Piping</h2>
+<h2 id="pipe" data-reveal="fade-up" data-reveal-delay="320">Piping</h2>
 <pre>cat error.log | poormad "explain this and propose a fix"</pre>
 <p>See the full list in <a class="inline" href="docs-cli-reference.html">CLI Reference</a>.</p>
 

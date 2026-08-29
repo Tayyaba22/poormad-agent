@@ -9,7 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/styles.css?v=20260829b" />
+<script defer src="assets/motion.js?v=20260829b"></script>
 </head>
 <body>
 
@@ -26,8 +27,8 @@
       <a href="contact.html">Contact</a>
     </nav>
     <div class="topnav-right">
-      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter Portal →</a>
+      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener" data-magnetic="0.2">GitHub</a>
+      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener" data-magnetic="0.2">Enter Portal →</a>
     </div>
   </div>
 </header>
@@ -61,20 +62,20 @@
 </aside>
 <main class="content">
   <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Surfaces</div>
-  <h1>Desktop App</h1>
+  <h1 data-reveal="fade-up" data-reveal-delay="0">Desktop App</h1>
   <p class="lede">A native Windows/macOS client, themed in violet, local-first.</p>
 
 <p>The desktop app is a native client for Windows and macOS built on Electron, themed in violet and connected to your agent's memory.</p>
-<h2 id="install">Install</h2>
+<h2 id="install" data-reveal="fade-up" data-reveal-delay="80">Install</h2>
 <p>Download the latest <code>.exe</code> (Windows) or <code>.dmg</code> (macOS) from the <a class="inline" href="https://github.com/Tayyaba22/poormad-agent/releases" target="_blank" rel="noopener">releases page</a>. Run the installer; the app appears in your Applications / Start menu.</p>
-<h2 id="connect">Connect to the agent</h2>
+<h2 id="connect" data-reveal="fade-up" data-reveal-delay="160">Connect to the agent</h2>
 <ul>
   <li><strong>Local:</strong> the app auto-discovers a gateway running on <code>127.0.0.1:8765</code>.</li>
   <li><strong>Remote:</strong> open Settings → Gateway and enter your <code>wss://</code> URL + token.</li>
 </ul>
-<h2 id="theme">Theme</h2>
+<h2 id="theme" data-reveal="fade-up" data-reveal-delay="240">Theme</h2>
 <p>The default window paints the <code>poormad-dark</code> theme at boot — violet mono-hue, distinct from the upstream default. You can switch themes in Settings; user themes sync from the backend skin engine.</p>
-<h2 id="build">Building your own</h2>
+<h2 id="build" data-reveal="fade-up" data-reveal-delay="320">Building your own</h2>
 <p>Installers are produced by the repo's CI workflow (<code>build-desktop-installers.yml</code>) on Windows/macOS runners. Bump <code>apps/desktop/package.json</code> version, push, then dispatch the workflow. Linux can only build an AppImage/deb locally.</p>
 <div class="callout"><span class="ct">Note</span>Auto-update is not yet wired — check the releases page for new versions.</div>
 

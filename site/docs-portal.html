@@ -9,7 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/styles.css?v=20260829b" />
+<script defer src="assets/motion.js?v=20260829b"></script>
 </head>
 <body>
 
@@ -26,8 +27,8 @@
       <a href="contact.html">Contact</a>
     </nav>
     <div class="topnav-right">
-      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter Portal →</a>
+      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener" data-magnetic="0.2">GitHub</a>
+      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener" data-magnetic="0.2">Enter Portal →</a>
     </div>
   </div>
 </header>
@@ -61,21 +62,21 @@
 </aside>
 <main class="content">
   <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Surfaces</div>
-  <h1>Web Portal</h1>
+  <h1 data-reveal="fade-up" data-reveal-delay="0">Web Portal</h1>
   <p class="lede">A browser front-end that speaks the same gateway protocol.</p>
 
 <p>The web portal is a browser front-end for chatting, browsing sessions, and managing skills. It speaks the same gateway protocol as every other surface.</p>
-<h2 id="use">Using the hosted portal</h2>
+<h2 id="use" data-reveal="fade-up" data-reveal-delay="80">Using the hosted portal</h2>
 <p>Open <a class="inline" href="https://portal.xingabot.com" target="_blank" rel="noopener">portal.xingabot.com</a>, sign in, and connect it to your agent's gateway URL + token. Accounts, billing, and hosting live here.</p>
-<h2 id="self">Self-hosting the portal</h2>
+<h2 id="self" data-reveal="fade-up" data-reveal-delay="160">Self-hosting the portal</h2>
 <p>The portal is a static front-end. Build it and serve the <code>dist</code> from any static host (see <a class="inline" href="docs-deploy.html">Self-Hosting</a>). Point it at your gateway via <code>window.__POORMAD_GATEWAY_WS__</code> or the <code>?gw=</code> query param.</p>
-<h2 id="features">What you can do</h2>
+<h2 id="features" data-reveal="fade-up" data-reveal-delay="240">What you can do</h2>
 <ul>
   <li>Chat with the agent and review full session transcripts.</li>
   <li>Manage skills, models, and connected platforms.</li>
   <li>Configure OAuth and billing for shared use.</li>
 </ul>
-<h2 id="conn">Connecting to a remote agent</h2>
+<h2 id="conn" data-reveal="fade-up" data-reveal-delay="320">Connecting to a remote agent</h2>
 <pre><span class="c"># visit with the gateway URL baked in</span>
 https://portal.example.com/?gw=wss://agent.local/api/ws&amp;token=YOUR_TOKEN</pre>
 

@@ -9,7 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/styles.css?v=20260829b" />
+<script defer src="assets/motion.js?v=20260829b"></script>
 </head>
 <body>
 
@@ -26,8 +27,8 @@
       <a href="contact.html">Contact</a>
     </nav>
     <div class="topnav-right">
-      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter Portal →</a>
+      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener" data-magnetic="0.2">GitHub</a>
+      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener" data-magnetic="0.2">Enter Portal →</a>
     </div>
   </div>
 </header>
@@ -61,23 +62,23 @@
 </aside>
 <main class="content">
   <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Surfaces</div>
-  <h1>Messaging Platforms</h1>
+  <h1 data-reveal="fade-up" data-reveal-delay="0">Messaging Platforms</h1>
   <p class="lede">Run the agent on 20+ platforms: Telegram, Discord, Slack, and more.</p>
 
 <p>PoorMad runs where you already are. The messenger layer adapts the same agent core to 20+ platforms.</p>
-<h2 id="supported">Supported platforms</h2>
+<h2 id="supported" data-reveal="fade-up" data-reveal-delay="80">Supported platforms</h2>
 <ul>
   <li><strong>Telegram</strong> — bot-based, supports groups and topics.</li>
   <li><strong>Discord</strong> — slash commands and thread-aware replies.</li>
   <li><strong>Slack</strong> — app home and channel mentions.</li>
   <li><strong>WhatsApp</strong>, <strong>Signal</strong>, <strong>Matrix</strong>, and 16+ more via the gateway adapters.</li>
 </ul>
-<h2 id="link">Linking a platform</h2>
+<h2 id="link" data-reveal="fade-up" data-reveal-delay="160">Linking a platform</h2>
 <pre>poormad platforms link telegram   <span class="c"># walks you through the bot token</span>
 poormad platforms list</pre>
-<h2 id="routing">Routing</h2>
+<h2 id="routing" data-reveal="fade-up" data-reveal-delay="240">Routing</h2>
 <p>Each platform connection maps to a channel. The agent keeps per-channel context and respects platform rate limits. Set a default platform in <code>config.yaml</code> under <code>toolsets.messaging</code>.</p>
-<h2 id="limits">Limits &amp; etiquette</h2>
+<h2 id="limits" data-reveal="fade-up" data-reveal-delay="320">Limits &amp; etiquette</h2>
 <ul>
   <li>Obey each platform's API rate limits — the agent backsoff automatically.</li>
   <li>Never put secrets in chat; the agent will not echo tokens back.</li>

@@ -9,7 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/styles.css?v=20260829b" />
+<script defer src="assets/motion.js?v=20260829b"></script>
 </head>
 <body>
 
@@ -26,8 +27,8 @@
       <a href="contact.html">Contact</a>
     </nav>
     <div class="topnav-right">
-      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter Portal →</a>
+      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener" data-magnetic="0.2">GitHub</a>
+      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener" data-magnetic="0.2">Enter Portal →</a>
     </div>
   </div>
 </header>
@@ -61,26 +62,26 @@
 </aside>
 <main class="content">
   <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Core Concepts</div>
-  <h1>Gateway &amp; Protocol</h1>
+  <h1 data-reveal="fade-up" data-reveal-delay="0">Gateway &amp; Protocol</h1>
   <p class="lede">The single JSON-RPC/WebSocket server every surface talks to.</p>
 
 <p>The gateway is the single server every PoorMad surface connects to. It speaks JSON-RPC over WebSocket.</p>
-<h2 id="protocol">Protocol</h2>
+<h2 id="protocol" data-reveal="fade-up" data-reveal-delay="80">Protocol</h2>
 <p>Surfaces open a WebSocket to <code>wss://&lt;host&gt;/api/ws</code> (or <code>ws://127.0.0.1:8765/api/ws</code> locally) and exchange JSON-RPC 2.0 messages: requests, notifications, and results.</p>
-<h2 id="auth">Authentication</h2>
+<h2 id="auth" data-reveal="fade-up" data-reveal-delay="160">Authentication</h2>
 <ul>
   <li>Local loopback uses an auto-generated session ticket.</li>
   <li>Remote binds use a token (<code>POORMAD_TOKEN</code>) passed as a query param or header.</li>
   <li>Use <code>--insecure</code> only for trusted LAN / self-hosted setups.</li>
 </ul>
-<h2 id="client">GatewayClient</h2>
+<h2 id="client" data-reveal="fade-up" data-reveal-delay="240">GatewayClient</h2>
 <pre><span class="k">from</span> poormad <span class="k">import</span> GatewayClient
 client = <span class="k">GatewayClient</span>(
     base_url=<span class="s">"wss://your-agent.local/api/ws"</span>,
     token=os.environ[<span class="s">"POORMAD_TOKEN"</span>],
 )
 <span class="k">await</span> client.connect()</pre>
-<h2 id="config">Configuring the bind</h2>
+<h2 id="config" data-reveal="fade-up" data-reveal-delay="320">Configuring the bind</h2>
 <pre><span class="c"># config.yaml</span>
 gateway:
   bind: 0.0.0.0:8765   <span class="c"># listen on all interfaces</span>

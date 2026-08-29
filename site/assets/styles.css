@@ -1,7 +1,7 @@
 /* PoorMad — documentation-portal design system (Stripe/VitePress style).
    Top nav + left sidebar + content + right "on this page" TOC.
    Dark, violet mono-hue (#8b5cf6), Space Grotesk + JetBrains Mono.
-   No starfield, no terminal, no pixel art, no "Hermes" anywhere. */
+   No starfield, no terminal, no pixel art. */
 
 :root{
   --bg:#0a0a0f; --bg2:#0c0c14; --panel:rgba(255,255,255,.025);
@@ -152,8 +152,262 @@ h1,h2,h3,h4,h5{font-family:var(--display);font-weight:700;letter-spacing:-.02em;
 
 @media(max-width:1080px){.docs{grid-template-columns:var(--sidebar-w) minmax(0,1fr)}.toc{display:none}}
 @media(max-width:820px){
-  .docs{grid-template-columns:1fr}.sidebar{display:none}
-  .content{padding:28px 22px 70px}
-  .numrow,.featrow,.dev2{grid-template-columns:1fr}
-  .topnav-links{display:none}
+ .docs{grid-template-columns:1fr}.sidebar{display:none}
+ .content{padding:28px 22px 70px}
+ .numrow,.featrow,.dev2{grid-template-columns:1fr}
+ .topnav-links{display:none}
+}
+/* =============================================================
+   MOTION LAYER — wow pass (Framer-Motion feel, vanilla impl)
+   Loaded via /assets/motion.js
+   ============================================================= */
+
+/* ---------- scroll progress bar ---------- */
+.pm-scrollbar{position:fixed;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--violet),var(--violet-bright));
+  transform-origin:0 50%;transform:scaleX(0);z-index:200;
+  box-shadow:0 0 12px var(--violet-dim);
+  transition:transform .12s linear;pointer-events:none}
+
+/* ---------- background canvas: grid + orbs + noise ---------- */
+.pm-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.pm-grid{position:absolute;inset:-2px;
+  background-image:
+    linear-gradient(rgba(139,92,246,.06) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(139,92,246,.06) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(900px 600px at 50% 0%,#000 30%,transparent 75%);
+  -webkit-mask-image:radial-gradient(900px 600px at 50% 0%,#000 30%,transparent 75%);
+  animation:pm-grid-drift 60s linear infinite}
+@keyframes pm-grid-drift{
+  from{background-position:0 0,0 0}
+  to{background-position:64px 64px,64px 64px}
+}
+.pm-orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.35;
+  will-change:transform}
+.pm-orb-a{width:520px;height:520px;left:-180px;top:-160px;
+  background:radial-gradient(circle,var(--violet),transparent 70%);
+  animation:pm-orb-float-a 24s ease-in-out infinite}
+.pm-orb-b{width:420px;height:420px;right:-160px;top:30%;
+  background:radial-gradient(circle,#7c3aed,transparent 70%);
+  animation:pm-orb-float-b 32s ease-in-out infinite}
+.pm-orb-c{width:380px;height:380px;left:35%;bottom:-180px;
+  background:radial-gradient(circle,var(--violet-bright),transparent 70%);
+  animation:pm-orb-float-c 28s ease-in-out infinite}
+@keyframes pm-orb-float-a{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,30px) scale(1.1)}}
+@keyframes pm-orb-float-b{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-30px,40px) scale(1.15)}}
+@keyframes pm-orb-float-c{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(20px,-30px) scale(1.05)}}
+.pm-noise{position:absolute;inset:0;opacity:.04;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+
+/* bring real content above the bg. Preserve each element's own z-index
+   by leaving z-index unset; we just need to create a stacking context. */
+body > *:not(.pm-bg){position:relative}
+
+/* ---------- nav scrolled state ---------- */
+.pm-nav-scrolled{background:rgba(10,10,15,.94)!important;
+  border-bottom-color:var(--border)!important;box-shadow:0 6px 24px rgba(0,0,0,.5)}
+
+/* ---------- hero glow + animated gradient line ---------- */
+.hero{position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;left:50%;top:-1px;width:62%;height:1px;
+  background:linear-gradient(90deg,transparent,var(--violet),transparent);
+  transform:translateX(-50%);animation:pm-hero-line 6s ease-in-out infinite}
+@keyframes pm-hero-line{0%,100%{opacity:.4;width:42%}50%{opacity:1;width:72%}}
+.hero h1{background:linear-gradient(180deg,var(--fg) 0%,var(--fg) 60%,rgba(243,241,248,.7) 100%);
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent}
+
+/* ---------- SCROLL REVEAL base ---------- */
+[data-reveal]{opacity:0;transition:opacity .8s cubic-bezier(.2,.7,.2,1),
+  transform .8s cubic-bezier(.2,.7,.2,1),filter .8s ease-out;
+  will-change:transform,opacity}
+[data-reveal="fade-up"]{transform:translateY(28px)}
+[data-reveal="fade-in"]{transform:none}
+[data-reveal="slide-left"]{transform:translateX(-30px)}
+[data-reveal="slide-right"]{transform:translateX(30px)}
+[data-reveal="scale"]{transform:scale(.94)}
+[data-reveal="blur"]{transform:translateY(14px);filter:blur(8px)}
+[data-reveal].pm-in{opacity:1;transform:none;filter:none}
+
+/* ---------- HERO TEXT-MASK ---------- */
+.pm-split{display:inline}
+.pm-word{display:inline-block;white-space:pre}
+.pm-char{display:inline-block;transform:translateY(110%);
+  transition:transform .7s cubic-bezier(.2,.8,.2,1),opacity .7s ease;opacity:0}
+.pm-char-in{transform:translateY(0);opacity:1}
+
+/* ---------- TYPEWRITER ---------- */
+.pm-tw-cursor::after{content:"▍";color:var(--violet-bright);
+  animation:pm-blink 1s steps(1) infinite;margin-left:2px;font-weight:400}
+@keyframes pm-blink{50%{opacity:0}}
+
+/* ---------- MAGNETIC BUTTONS ---------- */
+[data-magnetic]{transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,background .2s}
+
+/* ---------- 3D TILT CARDS ---------- */
+[data-tilt]{position:relative;transform-style:preserve-3d;
+  transition:transform .25s ease-out,border-color .25s,background .25s;
+  background:var(--panel)}
+/* spotlight follows cursor via CSS vars --mx / --my */
+[data-tilt]::after{content:"";position:absolute;inset:0;border-radius:inherit;
+  background:radial-gradient(220px 180px at var(--mx,50%) var(--my,50%),
+    rgba(167,139,250,.18),transparent 70%);
+  opacity:0;transition:opacity .25s;pointer-events:none;z-index:0}
+[data-tilt]:hover::after{opacity:1}
+[data-tilt] > *{position:relative;z-index:1}
+[data-tilt]{border:1px solid var(--border-soft)}
+[data-tilt]:hover{border-color:var(--violet-dim);background:rgba(255,255,255,.035)}
+
+/* ---------- ANIMATED GRADIENT BORDER on hero card / .card-like surfaces ---------- */
+.pm-border-grad{position:relative;isolation:isolate}
+.pm-border-grad::before{content:"";position:absolute;inset:-1px;border-radius:inherit;
+  padding:1px;background:conic-gradient(from var(--pm-a,0deg),
+    var(--violet) 0%,transparent 25%,var(--violet-bright) 50%,
+    transparent 75%,var(--violet) 100%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  animation:pm-spin 8s linear infinite;z-index:0;pointer-events:none}
+@keyframes pm-spin{to{--pm-a:360deg}}
+@property --pm-a{syntax:"<angle>";initial-value:0deg;inherits:false}
+
+/* ---------- nav links: animated underline on hover ---------- */
+.topnav-links a{position:relative}
+.topnav-links a::after{content:"";position:absolute;left:50%;bottom:-4px;
+  width:0;height:1px;background:var(--violet-bright);
+  transition:width .25s,left .25s}
+.topnav-links a:hover::after,.topnav-links a.active::after{width:100%;left:0}
+
+/* ---------- btn shine sweep ---------- */
+.btn{position:relative;overflow:hidden}
+.btn::before{content:"";position:absolute;inset:0;
+  background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.25) 50%,transparent 70%);
+  transform:translateX(-110%);transition:transform .6s}
+.btn:hover::before{transform:translateX(110%)}
+
+/* ---------- code-typing cursor visibility on .install ---------- */
+.install{display:inline-flex;align-items:center;gap:10px;
+  background:#07070c;border:1px solid var(--border);border-radius:9px;
+  padding:13px 17px;font-family:var(--mono);font-size:13.5px;color:var(--fg);
+  position:relative;overflow:hidden}
+.install::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(139,92,246,.07),transparent);
+  transform:translateX(-100%);animation:pm-install-shine 4s ease-in-out infinite}
+@keyframes pm-install-shine{0%,60%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+
+/* ---------- chips row: gentle wave on hover ---------- */
+.strip .pill,.chip{transition:transform .2s,border-color .2s,background .2s}
+.strip .pill:hover,.chip:hover{transform:translateY(-2px);
+  border-color:var(--violet-dim);background:rgba(139,92,246,.08);
+  color:var(--fg)}
+
+/* ---------- docs TOC: smooth indicator on active ---------- */
+.toc a{transition:color .2s,border-color .2s,padding-left .2s}
+.toc a:hover{padding-left:18px}
+
+/* ---------- footer: subtle gradient on hover ---------- */
+.footer .col a{position:relative;display:inline-block;transition:color .2s,transform .2s}
+.footer .col a:hover{color:var(--violet-bright);transform:translateX(3px)}
+
+/* =============================================================
+   LAVA SYSTEM — molten, fluid, interactive (appended)
+   A reactive WebGL-free canvas of metaball "lava" blobs that
+   flow toward the pointer, plus cursor embers + molten card
+   surfaces. Mono-hue violet only. Driven by assets/motion.js.
+   ============================================================= */
+
+/* ---- lava canvas (full-viewport, behind content) ---- */
+.pm-lava{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.6;
+  mix-blend-mode:screen;transition:opacity .6s ease}
+.pm-lava canvas{width:100%;height:100%;display:block}
+
+/* ---- ember sparks layer ---- */
+.pm-embers{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.pm-ember{position:absolute;bottom:-12px;border-radius:50%;
+  background:radial-gradient(circle,#f5d0fe,rgba(167,139,250,.0) 70%);
+  filter:blur(.4px);will-change:transform,opacity;animation:pm-ember-rise linear infinite}
+@keyframes pm-ember-rise{
+  0%{transform:translateY(0) translateX(0) scale(1);opacity:0}
+  12%{opacity:.9}
+  85%{opacity:.7}
+  100%{transform:translateY(-104vh) translateX(var(--ex,20px)) scale(.3);opacity:0}
+}
+
+/* ---- molten hero: lava lamp blobs behind the headline ---- */
+.hero{position:relative}
+.pm-herolava{position:absolute;inset:-10% -10% 0 -10%;z-index:-1;pointer-events:none;
+  filter:blur(28px) saturate(135%);opacity:.55;will-change:transform}
+.pm-herolava span{position:absolute;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,var(--violet-bright),rgba(124,58,237,.15) 70%,transparent 72%);
+  mix-blend-mode:screen}
+.pm-herolava .h1{width:46%;height:46%;left:-6%;top:8%;animation:pm-lava-morph 14s ease-in-out infinite}
+.pm-herolava .h2{width:40%;height:40%;right:-4%;top:0;animation:pm-lava-morph 18s ease-in-out infinite reverse}
+.pm-herolava .h3{width:34%;height:34%;left:32%;top:30%;animation:pm-lava-morph 22s ease-in-out infinite}
+@keyframes pm-lava-morph{
+  0%,100%{transform:translate(0,0) scale(1) rotate(0deg);border-radius:50% 50% 48% 52% / 52% 48% 52% 48%}
+  33%{transform:translate(8%,-7%) scale(1.12) rotate(40deg);border-radius:62% 38% 55% 45% / 45% 55% 45% 55%}
+  66%{transform:translate(-6%,9%) scale(.9) rotate(-30deg);border-radius:40% 60% 48% 52% / 58% 42% 58% 42%}
+}
+
+/* ---- MOLTEN CARD: cards get a lava-filled glass surface on hover ---- */
+[data-tilt],.numrow .it,.featrow .f,.content .callout,.qa{
+  position:relative;overflow:hidden}
+/* lava glow that bleeds from the cursor corner of the card */
+[data-tilt]::before{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;
+  background:radial-gradient(240px 200px at var(--mx,50%) var(--my,50%),
+    rgba(167,139,250,.30),rgba(124,58,237,.12) 40%,transparent 70%);
+  opacity:0;transition:opacity .35s ease;pointer-events:none}
+[data-tilt]:hover::before{opacity:1}
+/* molten rim — gradient border that "melts" brighter on hover */
+[data-tilt]::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:0;
+  background:linear-gradient(130deg,var(--violet),transparent 30%,transparent 70%,var(--violet-bright));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  padding:1px;opacity:0;transition:opacity .35s ease;pointer-events:none}
+[data-tilt]:hover::after{opacity:.9}
+/* the molten text shimmer inside cards */
+[data-tilt] .n,[data-tilt] h4{background:linear-gradient(90deg,var(--fg),var(--violet-bright),var(--fg));
+  background-size:220% 100%;-webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;transition:background-position .6s ease}
+[data-tilt]:hover .n,[data-tilt]:hover h4{background-position:100% 0}
+
+/* ---- nav: liquid violet underline that flows from cursor x ---- */
+.topnav-links a::after{left:var(--ux,50%);width:0;transition:width .3s ease,left .3s ease}
+.topnav-links a:hover::after,.topnav-links a.active::after{width:100%;left:0}
+
+/* ---- molten CTA button: flowing gradient + breathing glow ---- */
+.btn{background:linear-gradient(100deg,var(--violet),#7c3aed 45%,var(--violet-bright));
+  background-size:200% 100%;animation:pm-btn-flow 5s linear infinite}
+.btn:hover{animation-duration:2.4s;background-position:100% 0;
+  box-shadow:0 10px 34px rgba(139,92,246,.5)}
+@keyframes pm-btn-flow{to{background-position:200% 0}}
+
+/* ---- hero headline: molten drip gradient ---- */
+.hero h1{background:linear-gradient(180deg,#fff 0%,var(--violet-bright) 55%,var(--violet) 100%);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  background-size:100% 200%;animation:pm-h1-molten 9s ease-in-out infinite}
+@keyframes pm-h1-molten{0%,100%{background-position:0 0}50%{background-position:0 100%}}
+
+/* ---- generic lava divider between sections ---- */
+.pm-lavabar{height:2px;width:100%;margin:0 auto;position:relative;overflow:hidden;
+  background:linear-gradient(90deg,transparent,rgba(139,92,246,.5),transparent)}
+.pm-lavabar::before{content:"";position:absolute;left:-30%;top:0;height:100%;width:30%;
+  background:linear-gradient(90deg,transparent,var(--violet-bright),transparent);
+  animation:pm-lava-sweep 5.5s ease-in-out infinite}
+@keyframes pm-lava-sweep{0%{left:-30%}100%{left:100%}}
+
+/* ---- reduce motion: keep lava off, keep readable ---- */
+@media(prefers-reduced-motion:reduce){
+  .pm-bg,.pm-orb,.pm-grid,.pm-noise,.pm-scrollbar{display:none}
+  [data-reveal]{opacity:1!important;transform:none!important;filter:none!important}
+  .pm-char{transform:none!important;opacity:1!important}
+  .hero::before{display:none}
+  .btn::before,.install::after{display:none}
+  .pm-lava,.pm-embers,.pm-herolava{display:none!important}
+  .btn{animation:none;background:var(--violet)}
+  .hero h1{animation:none;-webkit-text-fill-color:var(--fg);color:var(--fg)}
+  [data-tilt]::before,[data-tilt]::after{display:none}
+  [data-tilt] .n,[data-tilt] h4{background:none;-webkit-text-fill-color:inherit;color:inherit}
+  *{animation-duration:.001s!important;animation-iteration-count:1!important;
+    transition-duration:.001s!important}
 }

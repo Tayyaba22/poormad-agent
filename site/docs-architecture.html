@@ -9,7 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/styles.css?v=20260829b" />
+<script defer src="assets/motion.js?v=20260829b"></script>
 </head>
 <body>
 
@@ -26,8 +27,8 @@
       <a href="contact.html">Contact</a>
     </nav>
     <div class="topnav-right">
-      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter Portal →</a>
+      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener" data-magnetic="0.2">GitHub</a>
+      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener" data-magnetic="0.2">Enter Portal →</a>
     </div>
   </div>
 </header>
@@ -61,11 +62,11 @@
 </aside>
 <main class="content">
   <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Core Concepts</div>
-  <h1>Architecture</h1>
+  <h1 data-reveal="fade-up" data-reveal-delay="0">Architecture</h1>
   <p class="lede">A narrow-waist design: one core, one gateway, capability at the edges.</p>
 
 <p>PoorMad follows a narrow-waist design: one agent core, one gateway protocol, and capability pushed to the edges (skills, plugins, surfaces).</p>
-<h2 id="layers">Layers</h2>
+<h2 id="layers" data-reveal="fade-up" data-reveal-delay="80">Layers</h2>
 <table>
 <tr><th>Layer</th><th>Job</th></tr>
 <tr><td><strong>Surfaces</strong></td><td>CLI, desktop, portal, messengers. Thin front-ends that render and capture input.</td></tr>
@@ -73,11 +74,11 @@
 <tr><td><strong>Agent core</strong></td><td>Reasoning loop, tool dispatch, memory, and skill execution.</td></tr>
 <tr><td><strong>Edges</strong></td><td>Skills, plugins, toolset distributions, and provider adapters.</td></tr>
 </table>
-<h2 id="narrow">The narrow waist</h2>
+<h2 id="narrow" data-reveal="fade-up" data-reveal-delay="160">The narrow waist</h2>
 <p>Every model tool is sent on every API call, so the core stays small on purpose. New capability should arrive as a CLI command + skill, a service-gated tool, a plugin, or an MCP server — not as a new core tool. This keeps the agent cheap to run and easy to extend.</p>
-<h2 id="caching">Prompt caching</h2>
+<h2 id="caching" data-reveal="fade-up" data-reveal-delay="240">Prompt caching</h2>
 <p>Per-conversation prompt caching is sacred. A long-lived conversation reuses a cached prefix every turn; anything that mutates past context mid-conversation invalidates that cache and multiplies your cost. The core preserves a byte-stable system prompt for the life of a conversation.</p>
-<h2 id="flow">Request flow</h2>
+<h2 id="flow" data-reveal="fade-up" data-reveal-delay="320">Request flow</h2>
 <pre><span class="c"># surface -> gateway -> core -> tools -> model -> core -> surface</span>
 portal --&gt; wss://agent/api/ws
        --&gt; GatewayClient.connect(token)

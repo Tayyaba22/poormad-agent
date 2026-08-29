@@ -9,7 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/styles.css?v=20260829b" />
+<script defer src="assets/motion.js?v=20260829b"></script>
 </head>
 <body>
 
@@ -26,8 +27,8 @@
       <a href="contact.html">Contact</a>
     </nav>
     <div class="topnav-right">
-      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter Portal →</a>
+      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener" data-magnetic="0.2">GitHub</a>
+      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener" data-magnetic="0.2">Enter Portal →</a>
     </div>
   </div>
 </header>
@@ -61,11 +62,11 @@
 </aside>
 <main class="content">
   <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Getting Started</div>
-  <h1>Quickstart</h1>
+  <h1 data-reveal="fade-up" data-reveal-delay="0">Quickstart</h1>
   <p class="lede">Run your first self-improving agent session in under five minutes.</p>
 
 <p>Run your first agent session end to end in under five minutes.</p>
-<h2 id="auth">1. Point at a model</h2>
+<h2 id="auth" data-reveal="fade-up" data-reveal-delay="80">1. Point at a model</h2>
 <p>PoorMad is provider-agnostic. Set your provider and API key in the config (or environment):</p>
 <pre><span class="c"># config.yaml (recommended)</span>
 provider: openai
@@ -74,21 +75,21 @@ model: gpt-4o-mini
 <span class="c"># or environment</span>
 <span class="k">export</span> POORMAD_API_KEY=sk-...</pre>
 <p>See <a class="inline" href="docs-providers.html">Models &amp; Providers</a> for the full list of supported providers and how to use a local model.</p>
-<h2 id="run">2. Run the agent</h2>
+<h2 id="run" data-reveal="fade-up" data-reveal-delay="160">2. Run the agent</h2>
 <pre>poormad</pre>
 <p>You land in an interactive session. Try a real task:</p>
 <pre><span class="c">&gt;</span> Summarize the last 20 lines of my shell history and suggest three aliases.</pre>
-<h2 id="skills">3. Watch it learn</h2>
+<h2 id="skills" data-reveal="fade-up" data-reveal-delay="240">3. Watch it learn</h2>
 <p>When you repeat a class of task, ask the agent to capture it as a skill:</p>
 <pre><span class="c">&gt;</span> Save what you just did as a skill called "shell-audit"</pre>
 <p>The skill is written to your PoorMad home and reused on future sessions. Read more in <a class="inline" href="docs-skills.html">Skills</a>.</p>
-<h2 id="surfaces">4. Connect other surfaces</h2>
+<h2 id="surfaces" data-reveal="fade-up" data-reveal-delay="320">4. Connect other surfaces</h2>
 <ul>
   <li><strong>Desktop:</strong> open the app — it finds your local gateway automatically.</li>
   <li><strong>Portal:</strong> start the dashboard server and open the browser UI.</li>
   <li><strong>Messaging:</strong> link Telegram, Discord, or Slack in <a class="inline" href="docs-platforms.html">Messaging Platforms</a>.</li>
 </ul>
-<h2 id="next">Where to go next</h2>
+<h2 id="next" data-reveal="fade-up" data-reveal-delay="400">Where to go next</h2>
 <ul>
   <li><a class="inline" href="docs-configuration.html">Configuration</a> — every setting, explained.</li>
   <li><a class="inline" href="docs-memory.html">Memory</a> — how cross-session recall works.</li>

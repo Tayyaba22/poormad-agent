@@ -9,7 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/styles.css?v=20260829b" />
+<script defer src="assets/motion.js?v=20260829b"></script>
 </head>
 <body>
 
@@ -26,8 +27,8 @@
       <a href="contact.html">Contact</a>
     </nav>
     <div class="topnav-right">
-      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter Portal →</a>
+      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener" data-magnetic="0.2">GitHub</a>
+      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener" data-magnetic="0.2">Enter Portal →</a>
     </div>
   </div>
 </header>
@@ -61,11 +62,11 @@
 </aside>
 <main class="content">
   <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Guides</div>
-  <h1>Models &amp; Providers</h1>
+  <h1 data-reveal="fade-up" data-reveal-delay="0">Models &amp; Providers</h1>
   <p class="lede">Bring your own model — cloud or local, with fallback.</p>
 
 <p>PoorMad is provider-agnostic. Bring your own model — cloud or local.</p>
-<h2 id="cloud">Cloud providers</h2>
+<h2 id="cloud" data-reveal="fade-up" data-reveal-delay="80">Cloud providers</h2>
 <table>
 <tr><th>Provider</th><th>Set in config</th></tr>
 <tr><td>OpenAI</td><td><code>provider: openai</code></td></tr>
@@ -73,16 +74,16 @@
 <tr><td>Google Gemini</td><td><code>provider: gemini</code></td></tr>
 <tr><td>Groq / OpenRouter / others</td><td>OpenAI-compatible base URLs</td></tr>
 </table>
-<h2 id="local">Local models</h2>
+<h2 id="local" data-reveal="fade-up" data-reveal-delay="160">Local models</h2>
 <p>Run a local server (Ollama, llama.cpp, vLLM) and point PoorMad at it:</p>
 <pre><span class="c"># config.yaml</span>
 provider: ollama
 model: llama3.1:8b
 base_url: http://127.0.0.1:11434</pre>
-<h2 id="key">API keys</h2>
+<h2 id="key" data-reveal="fade-up" data-reveal-delay="240">API keys</h2>
 <p>Keys are secrets — store them in <code>.env</code>, never in <code>config.yaml</code>:</p>
 <pre>POORMAD_API_KEY=sk-...</pre>
-<h2 id="fallback">Fallback chain</h2>
+<h2 id="fallback" data-reveal="fade-up" data-reveal-delay="320">Fallback chain</h2>
 <p>You can define a fallback order so a failed provider rolls over to the next:</p>
 <pre>provider: openai
 fallback:

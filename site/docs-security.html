@@ -9,7 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/styles.css?v=20260829b" />
+<script defer src="assets/motion.js?v=20260829b"></script>
 </head>
 <body>
 
@@ -26,8 +27,8 @@
       <a href="contact.html">Contact</a>
     </nav>
     <div class="topnav-right">
-      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter Portal →</a>
+      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener" data-magnetic="0.2">GitHub</a>
+      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener" data-magnetic="0.2">Enter Portal →</a>
     </div>
   </div>
 </header>
@@ -61,25 +62,25 @@
 </aside>
 <main class="content">
   <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Guides</div>
-  <h1>Security &amp; Privacy</h1>
+  <h1 data-reveal="fade-up" data-reveal-delay="0">Security &amp; Privacy</h1>
   <p class="lede">Local-first by default. Your context stays under your control.</p>
 
 <p>Local-first is the default security posture: your context stays under your control.</p>
-<h2 id="model">Threat model</h2>
+<h2 id="model" data-reveal="fade-up" data-reveal-delay="80">Threat model</h2>
 <ul>
   <li><strong>Local data.</strong> Memory and skills live in <code>~/.poormad/</code> on your machine. Deleting it erases everything.</li>
   <li><strong>Transit.</strong> Surfaces talk to the gateway over WebSocket. Use TLS (<code>wss://</code>) for any non-local connection.</li>
   <li><strong>Secrets.</strong> API keys and gateway tokens are secrets — they live in <code>.env</code>, never committed or logged.</li>
 </ul>
-<h2 id="auth">Gateway auth</h2>
+<h2 id="auth" data-reveal="fade-up" data-reveal-delay="160">Gateway auth</h2>
 <ul>
   <li>Local loopback: auto session ticket, no token needed.</li>
   <li>Remote: require a strong <code>token</code>; prefer a reverse proxy with mTLS for sensitive setups.</li>
   <li>Never bind to <code>0.0.0.0</code> without a token.</li>
 </ul>
-<h2 id="telemetry">Telemetry</h2>
+<h2 id="telemetry" data-reveal="fade-up" data-reveal-delay="240">Telemetry</h2>
 <p>PoorMad ships no outbound telemetry or attribution by default. Any analytics requires an explicit opt-in config gate.</p>
-<h2 id="sharing">Sharing context</h2>
+<h2 id="sharing" data-reveal="fade-up" data-reveal-delay="320">Sharing context</h2>
 <p>The agent only sends data to a provider when you prompt it. It will not echo tokens back into chat. Review what a skill touches before enabling <code>skills.auto_write</code>.</p>
 
   <div class="nextprev">

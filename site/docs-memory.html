@@ -9,7 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/styles.css?v=20260829b" />
+<script defer src="assets/motion.js?v=20260829b"></script>
 </head>
 <body>
 
@@ -26,8 +27,8 @@
       <a href="contact.html">Contact</a>
     </nav>
     <div class="topnav-right">
-      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter Portal →</a>
+      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener" data-magnetic="0.2">GitHub</a>
+      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener" data-magnetic="0.2">Enter Portal →</a>
     </div>
   </div>
 </header>
@@ -61,27 +62,27 @@
 </aside>
 <main class="content">
   <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Core Concepts</div>
-  <h1>Memory</h1>
+  <h1 data-reveal="fade-up" data-reveal-delay="0">Memory</h1>
   <p class="lede">How PoorMad recalls across sessions — local-first, yours only.</p>
 
 <p>Memory is how PoorMad recalls across sessions so it does not start from zero each time.</p>
-<h2 id="kinds">Kinds of memory</h2>
+<h2 id="kinds" data-reveal="fade-up" data-reveal-delay="80">Kinds of memory</h2>
 <table>
 <tr><th>Type</th><th>What it stores</th></tr>
 <tr><td><strong>Session</strong></td><td>Transient context for the current conversation.</td></tr>
 <tr><td><strong>Long-term</strong></td><td>Durable facts, preferences, and corrections you want kept.</td></tr>
 <tr><td><strong>Skill memory</strong></td><td>Learned procedures (see <a class="inline" href="docs-skills.html">Skills</a>).</td></tr>
 </table>
-<h2 id="location">Where it lives</h2>
+<h2 id="location" data-reveal="fade-up" data-reveal-delay="160">Where it lives</h2>
 <p>All memory lives under <code>~/.poormad/</code> on your machine. Nothing is sent to a third party unless you connect a remote surface and explicitly share context.</p>
-<h2 id="save">Saving a memory</h2>
+<h2 id="save" data-reveal="fade-up" data-reveal-delay="240">Saving a memory</h2>
 <pre><span class="c">&gt;</span> Remember that I prefer concise responses and Python 3.13.
 <span class="c">&gt;</span> Remember we deploy to an Oracle VPS, not AWS.</pre>
-<h2 id="recall">Recall</h2>
+<h2 id="recall" data-reveal="fade-up" data-reveal-delay="320">Recall</h2>
 <p>On each session start, relevant long-term memories are injected into context. You can ask the agent to search or forget specific memories:</p>
 <pre><span class="c">&gt;</span> What do you remember about my deploy setup?
 <span class="c">&gt;</span> Forget the note about AWS.</pre>
-<h2 id="privacy">Privacy</h2>
+<h2 id="privacy" data-reveal="fade-up" data-reveal-delay="400">Privacy</h2>
 <p>Memory is local-first. Deleting <code>~/.poormad/</code> erases everything. See <a class="inline" href="docs-security.html">Security &amp; Privacy</a> for the full model.</p>
 
   <div class="nextprev">

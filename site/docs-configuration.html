@@ -9,7 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/styles.css?v=20260829b" />
+<script defer src="assets/motion.js?v=20260829b"></script>
 </head>
 <body>
 
@@ -26,8 +27,8 @@
       <a href="contact.html">Contact</a>
     </nav>
     <div class="topnav-right">
-      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter Portal →</a>
+      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener" data-magnetic="0.2">GitHub</a>
+      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener" data-magnetic="0.2">Enter Portal →</a>
     </div>
   </div>
 </header>
@@ -61,14 +62,14 @@
 </aside>
 <main class="content">
   <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Getting Started</div>
-  <h1>Configuration</h1>
+  <h1 data-reveal="fade-up" data-reveal-delay="0">Configuration</h1>
   <p class="lede">Every behavioral setting and secret, explained.</p>
 
 <p>Behavioral settings live in <code>config.yaml</code> in your PoorMad home. Secrets (API keys, tokens) live in <code>.env</code> — never put credentials in <code>config.yaml</code>.</p>
 <div class="callout"><span class="ct">Rule</span><code>.env</code> is for secrets only. All behavioral settings — timeouts, thresholds, feature flags, display prefs — go in <code>config.yaml</code>.</div>
-<h2 id="location">Where config lives</h2>
+<h2 id="location" data-reveal="fade-up" data-reveal-delay="80">Where config lives</h2>
 <p>The home directory defaults to <code>~/.poormad/</code> and can be overridden with the <code>POORMAD_HOME</code> environment variable or the <code>--home</code> flag.</p>
-<h2 id="reference">Reference</h2>
+<h2 id="reference" data-reveal="fade-up" data-reveal-delay="160">Reference</h2>
 <table>
 <tr><th>Key</th><th>Type</th><th>Default</th><th>Meaning</th></tr>
 <tr><td><code>provider</code></td><td>string</td><td>—</td><td>Model provider id (e.g. <code>openai</code>, <code>anthropic</code>, <code>ollama</code>).</td></tr>
@@ -80,11 +81,11 @@
 <tr><td><code>skills.auto_write</code></td><td>bool</td><td><code>false</code></td><td>Let the agent propose skills without prompting.</td></tr>
 <tr><td><code>toolsets</code></td><td>list</td><td>default</td><td>Enabled toolset distribution.</td></tr>
 </table>
-<h2 id="env">Environment variables</h2>
+<h2 id="env" data-reveal="fade-up" data-reveal-delay="240">Environment variables</h2>
 <pre>POORMAD_HOME=~/.poormad
 POORMAD_API_KEY=sk-...        <span class="c"># provider key (secret)</span>
 POORMAD_TOKEN=...            <span class="c"># gateway session token (secret)</span></pre>
-<h2 id="profiles">Profiles</h2>
+<h2 id="profiles" data-reveal="fade-up" data-reveal-delay="320">Profiles</h2>
 <p>You can keep multiple named profiles (e.g. <code>work</code>, <code>local</code>) and switch with <code>poormad --profile &lt;name&gt;</code>. Each profile is a separate <code>config.yaml</code> under <code>~/.poormad/profiles/</code>.</p>
 
   <div class="nextprev">

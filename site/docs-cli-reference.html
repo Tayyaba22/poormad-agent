@@ -9,7 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css" />
+<link rel="stylesheet" href="assets/styles.css?v=20260829b" />
+<script defer src="assets/motion.js?v=20260829b"></script>
 </head>
 <body>
 
@@ -26,8 +27,8 @@
       <a href="contact.html">Contact</a>
     </nav>
     <div class="topnav-right">
-      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">GitHub</a>
-      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter Portal →</a>
+      <a class="btn btn-ghost" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener" data-magnetic="0.2">GitHub</a>
+      <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener" data-magnetic="0.2">Enter Portal →</a>
     </div>
   </div>
 </header>
@@ -61,11 +62,11 @@
 </aside>
 <main class="content">
   <div class="breadcrumb"><a href="index.html">Home</a> / <a href="docs.html">Docs</a> / Guides</div>
-  <h1>CLI Reference</h1>
+  <h1 data-reveal="fade-up" data-reveal-delay="0">CLI Reference</h1>
   <p class="lede">Every poormad command and flag, with examples.</p>
 
 <p>Every <code>poormad</code> command, with the flags that matter.</p>
-<h2 id="commands">Commands</h2>
+<h2 id="commands" data-reveal="fade-up" data-reveal-delay="80">Commands</h2>
 <table>
 <tr><th>Command</th><th>Purpose</th></tr>
 <tr><td><code>poormad</code></td><td>Start an interactive session.</td></tr>
@@ -79,7 +80,7 @@
 <tr><td><code>poormad update</code></td><td>Pull the latest from <code>origin/main</code>.</td></tr>
 <tr><td><code>poormad --version</code></td><td>Print the version.</td></tr>
 </table>
-<h2 id="flags">Global flags</h2>
+<h2 id="flags" data-reveal="fade-up" data-reveal-delay="160">Global flags</h2>
 <table>
 <tr><th>Flag</th><th>Meaning</th></tr>
 <tr><td><code>--home PATH</code></td><td>Override PoorMad home.</td></tr>
@@ -88,7 +89,7 @@
 <tr><td><code>--no-memory</code></td><td>Disable cross-session recall.</td></tr>
 <tr><td><code>--insecure</code></td><td>Bind gateway without a token (trusted LAN only).</td></tr>
 </table>
-<h2 id="examples">Examples</h2>
+<h2 id="examples" data-reveal="fade-up" data-reveal-delay="240">Examples</h2>
 <pre>poormad "write a skill that lints this repo"
 poormad gateway --bind 127.0.0.1:8765
 poormad --profile work "summarize my standup notes"</pre>
