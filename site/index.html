@@ -3,108 +3,26 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>PoorMad — Built to be yours</title>
-<meta name="description" content="PoorMad is a self-improving AI agent. A product suite for an agent that learns — skills, memory, orchestration, and a portal. Open source. Local-first." />
+<title>PoorMad — The self-improving AI agent</title>
+<meta name="description" content="PoorMad is a self-improving AI agent. One brain across CLI, desktop, web portal, and 20+ messaging platforms. Local-first, open source, yours only." />
 <link rel="icon" href="favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-<style>
-:root{
-  --bg:#0a0a0f; --bg2:#0d0d15; --panel:rgba(255,255,255,.025); --panel2:rgba(255,255,255,.05);
-  --border:rgba(139,92,246,.16); --border-soft:rgba(255,255,255,.07);
-  --violet:#8b5cf6; --violet-bright:#a78bfa; --violet-dim:rgba(139,92,246,.5);
-  --fg:#f2f0f7; --muted:#9b95ad; --muted2:#6f6a80;
-  --display:'Space Grotesk',system-ui,sans-serif; --mono:'JetBrains Mono',ui-monospace,monospace;
-  --maxw:1160px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--fg);font-family:var(--mono);font-size:15px;line-height:1.65;
-  -webkit-font-smoothing:antialiased;overflow-x:hidden}
-::selection{background:rgba(139,92,246,.3);color:#fff}
-a{color:inherit;text-decoration:none}
-.kick{font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--violet-bright)}
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
-
-/* nav */
-.nav{position:sticky;top:0;z-index:50;background:rgba(10,10,15,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--border-soft)}
-.nav-in{display:flex;align-items:center;justify-content:space-between;height:66px;gap:20px}
-.logo{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:.05em;display:flex;align-items:center;gap:10px}
-.logo .moon{width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#c4b5fd,#7c3aed);box-shadow:0 0 14px var(--violet);animation:pulse 3s infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 14px var(--violet)}50%{box-shadow:0 0 5px var(--violet)}}
-.nav-links{display:flex;gap:26px}
-.nav-links a{font-family:var(--mono);font-size:13.5px;color:var(--muted);transition:.2s}
-.nav-links a:hover{color:var(--fg)}
-.btn{font-family:var(--display);font-weight:600;font-size:14px;background:var(--violet);color:#0a0a0f;padding:11px 20px;border-radius:8px;border:none;cursor:pointer;transition:transform .18s,box-shadow .25s,background .2s}
-.btn:hover{transform:translateY(-2px);background:var(--violet-bright);box-shadow:0 10px 30px rgba(139,92,246,.4)}
-.btn-ghost{background:var(--panel2);color:var(--fg);border:1px solid var(--border)}
-.btn-ghost:hover{background:rgba(255,255,255,.1);box-shadow:none}
-
-/* hero */
-.hero{padding:90px 0 70px;text-align:center;position:relative}
-.badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--violet-bright);
-  border:1px solid var(--border);background:var(--panel);padding:7px 14px;border-radius:999px;margin-bottom:28px}
-.badge .d{width:7px;height:7px;border-radius:50%;background:var(--violet);box-shadow:0 0 8px var(--violet)}
-.hero h1{font-family:var(--display);font-weight:700;font-size:clamp(40px,7vw,86px);line-height:1.02;letter-spacing:-.02em;max-width:900px;margin:0 auto 22px}
-.hero h1 .vi{color:var(--violet-bright)}
-.hero .sub{font-family:var(--mono);font-size:clamp(15px,2vw,18px);color:var(--muted);max-width:620px;margin:0 auto 34px}
-.hero .btn-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
-.strip{margin-top:46px;display:flex;flex-wrap:wrap;justify-content:center;gap:14px}
-.strip .pill{font-family:var(--mono);font-size:12.5px;color:var(--muted);border:1px solid var(--border-soft);background:var(--panel);border-radius:999px;padding:8px 15px}
-.strip .pill b{color:var(--fg);font-weight:500}
-
-/* section */
-.sec{padding:90px 0;border-top:1px solid var(--border-soft)}
-.sec .idx{font-family:var(--mono);font-size:12px;color:var(--violet);letter-spacing:.22em;text-transform:uppercase;margin-bottom:14px}
-.sec h2{font-family:var(--display);font-weight:700;font-size:clamp(30px,5vw,56px);line-height:1.04;letter-spacing:-.02em;margin-bottom:16px;max-width:720px}
-.sec p.lead{font-family:var(--mono);font-size:clamp(15px,1.8vw,17px);color:var(--muted);max-width:640px;margin-bottom:14px}
-
-/* product suite grid */
-.suite{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:40px}
-.card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:30px;transition:border-color .25s,transform .25s;position:relative;overflow:hidden}
-.card:hover{border-color:var(--violet-dim);transform:translateY(-3px)}
-.card .num{font-family:var(--mono);font-size:13px;color:var(--violet);margin-bottom:16px}
-.card h3{font-family:var(--display);font-weight:600;font-size:23px;margin-bottom:10px}
-.card p{font-family:var(--mono);font-size:14px;color:var(--muted);margin-bottom:18px}
-.card .tag{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);border:1px solid var(--border-soft);border-radius:999px;padding:5px 12px}
-.card .go{margin-top:16px;font-family:var(--mono);font-size:13px;color:var(--violet-bright)}
-.card a.cardlink{position:absolute;inset:0}
-
-/* 3 feature columns */
-.feat3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
-.feat3 .f{background:var(--panel);border:1px solid var(--border-soft);border-radius:14px;padding:26px}
-.feat3 .f h4{font-family:var(--display);font-weight:600;font-size:18px;margin-bottom:10px}
-.feat3 .f p{font-family:var(--mono);font-size:14px;color:var(--muted)}
-.feat3 .f .k{font-family:var(--mono);font-size:11px;color:var(--violet);letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px}
-
-/* developer section */
-.dev{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;margin-top:30px}
-.dev .big{font-family:var(--display);font-weight:500;font-size:clamp(22px,3vw,30px);line-height:1.25;color:var(--fg);margin-bottom:18px}
-.code{background:#07070c;border:1px solid var(--border-soft);border-radius:12px;padding:22px;font-family:var(--mono);font-size:13px;line-height:1.8;overflow-x:auto}
-.code .c{color:var(--muted2)}.code .k{color:var(--violet-bright)}.code .s{color:#7fdca4}
-.install{margin-top:16px;display:inline-flex;align-items:center;gap:10px;background:#07070c;border:1px solid var(--border);border-radius:8px;padding:12px 16px;font-family:var(--mono);font-size:13.5px;color:var(--fg)}
-.install .p{color:var(--violet)}
-
-/* footer */
-.footer{border-top:1px solid var(--border-soft);padding:54px 0 40px;margin-top:30px}
-.footer-in{display:flex;justify-content:space-between;flex-wrap:wrap;gap:26px}
-.footer .col h4{font-family:var(--mono);font-size:12px;color:var(--muted2);letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px}
-.footer .col a{display:block;color:var(--muted);font-family:var(--mono);font-size:13.5px;margin-bottom:9px;transition:.15s}
-.footer .col a:hover{color:var(--violet-bright)}
-.footer .tag{color:var(--muted2);font-family:var(--mono);font-size:12.5px;max-width:280px}
-.footer-base{border-top:1px solid var(--border-soft);margin-top:34px;padding-top:20px;color:var(--muted2);font-family:var(--mono);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
-.magic{color:var(--violet-bright)}
-@media(max-width:820px){.suite,.feat3,.dev{grid-template-columns:1fr}.nav-links{display:none}}
-</style>
+<link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
 <header class="nav">
   <div class="wrap nav-in">
     <a class="logo" href="index.html"><span class="moon"></span>POORMAD</a>
     <nav class="nav-links">
-      <a href="#suite">Products</a><a href="#features">Platform</a><a href="#developers">Developers</a>
-      <a href="about.html">About</a><a href="docs.html">Docs</a><a href="faq.html">FAQ</a>
+      <a href="index.html" class="active">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About</a>
+      <a href="docs.html">Docs</a>
+      <a href="faq.html">FAQ</a>
+      <a href="brand.html">Brand</a>
+      <a href="contact.html">Contact</a>
     </nav>
     <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter Portal →</a>
   </div>
@@ -113,9 +31,9 @@ a{color:inherit;text-decoration:none}
 <section class="hero wrap">
   <div class="badge"><span class="d"></span> built by one person · from one room</div>
   <h1>An AI agent that <span class="vi">learns, remembers,</span><br/>and stays yours.</h1>
-  <p class="sub">PoorMad is a self-improving AI agent. A product suite for an agent that writes its own skills, recalls across sessions, and runs anywhere — local-first and open source.</p>
+  <p class="sub">PoorMad is a self-improving AI agent — one brain across the CLI, a native desktop app, a web portal, and 20+ messaging platforms. Local-first and open source.</p>
   <div class="btn-row">
-    <a class="btn" href="https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-win-x64.exe">⬇ Download</a>
+    <a class="btn" id="download-btn" href="https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-win-x64.exe">⬇ Download <span id="os-name"></span></a>
     <a class="btn btn-ghost" href="https://portal.xingabot.com" target="_blank" rel="noopener">Open Portal</a>
   </div>
   <div class="strip">
@@ -153,7 +71,7 @@ a{color:inherit;text-decoration:none}
       <div class="num">04</div><h3>Messenger Connect</h3>
       <p>Run the agent where you already are — 20+ platforms including Telegram, Discord, Slack, WhatsApp, and more.</p>
       <span class="tag">20+ platforms</span><div class="go">See all surfaces ↗</div>
-      <a class="cardlink" href="docs.html#platforms" target="_blank" rel="noopener"></a>
+      <a class="cardlink" href="docs.html#platforms" rel="noopener"></a>
     </div>
   </div>
 </section>
@@ -179,7 +97,7 @@ a{color:inherit;text-decoration:none}
     <div>
       <p class="big">One command to run the agent. The same gateway powers the desktop app, the web portal, and every messenger.</p>
       <div class="install"><span class="p">$</span> pip install poormad-agent</div>
-      <div style="margin-top:18px" class="btn-row" style="justify-content:flex-start">
+      <div style="margin-top:20px" class="btn-row" style="justify-content:flex-start">
         <a class="btn" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">View on GitHub</a>
         <a class="btn btn-ghost" href="docs.html">Read the docs</a>
       </div>
@@ -204,7 +122,7 @@ client = <span class="k">GatewayClient</span>(<br/>
         <a class="logo" href="index.html" style="margin-bottom:14px"><span class="moon"></span>POORMAD</a>
         <p class="tag">The self-improving AI agent.<br/>When the light is blocked, the stars align.</p>
       </div>
-      <div class="col"><h4>Product</h4><a href="#suite">Agent</a><a href="#suite">Desktop</a><a href="#suite">Portal</a><a href="#suite">Messengers</a></div>
+      <div class="col"><h4>Product</h4><a href="products.html">Agent</a><a href="products.html">Desktop</a><a href="products.html">Portal</a><a href="products.html">Messengers</a></div>
       <div class="col"><h4>Resources</h4><a href="docs.html">Docs</a><a href="faq.html">FAQ</a><a href="about.html">About</a><a href="https://github.com/Tayyaba22/poormad-agent/releases" target="_blank" rel="noopener">Downloads</a></div>
       <div class="col"><h4>Project</h4><a href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">GitHub</a><a href="https://github.com/Tayyaba22/poormad-agent/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a><a href="https://portal.xingabot.com" target="_blank" rel="noopener">Portal login</a></div>
     </div>
@@ -214,5 +132,18 @@ client = <span class="k">GatewayClient</span>(<br/>
     </div>
   </div>
 </footer>
+
+<script>
+(function () {
+  var WIN = "https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-win-x64.exe";
+  var DMG = "https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0-mac-arm64.dmg";
+  var ua = navigator.userAgent, btn = document.getElementById("download-btn"),
+      label = document.getElementById("os-name");
+  if (!btn || !label) return;
+  if (/Mac|iPhone|iPad/i.test(ua))      { btn.href = DMG;  label.textContent = "for macOS"; }
+  else if (/Win/i.test(ua))             { btn.href = WIN;  label.textContent = "for Windows"; }
+  else if (/Linux/i.test(ua))           { btn.href = "https://github.com/Tayyaba22/poormad-agent/releases/tag/v0.18.0"; label.textContent = "· Linux"; }
+})();
+</script>
 </body>
 </html>

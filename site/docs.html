@@ -4,61 +4,72 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>PoorMad — Docs</title>
-<meta name="description" content="Getting started with PoorMad: install, connect surfaces, the learning loop, and the 20+ supported platforms." />
+<meta name="description" content="PoorMad docs: install the agent, connect any surface to the gateway, and extend it with skills." />
 <link rel="icon" href="favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-<style>
-:root{--bg:#0a0a0f;--panel:rgba(255,255,255,.025);--border:rgba(139,92,246,.16);--border-soft:rgba(255,255,255,.07);--violet:#8b5cf6;--violet-bright:#a78bfa;--fg:#f2f0f7;--muted:#9b95ad;--muted2:#6f6a80;--display:'Space Grotesk',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace;--maxw:1160px}
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--bg);color:var(--fg);font-family:var(--mono);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}::selection{background:rgba(139,92,246,.3);color:#fff}a{color:inherit;text-decoration:none}.wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
-.nav{position:sticky;top:0;z-index:50;background:rgba(10,10,15,.8);backdrop-filter:blur(14px);border-bottom:1px solid var(--border-soft)}.nav-in{display:flex;align-items:center;justify-content:space-between;height:66px;gap:20px}.logo{font-family:var(--display);font-weight:700;font-size:20px;letter-spacing:.05em;display:flex;align-items:center;gap:10px}.logo .moon{width:20px;height:20px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#c4b5fd,#7c3aed);box-shadow:0 0 14px var(--violet);animation:pulse 3s infinite}@keyframes pulse{0%,100%{box-shadow:0 0 14px var(--violet)}50%{box-shadow:0 0 5px var(--violet)}}.nav-links{display:flex;gap:26px}.nav-links a{font-family:var(--mono);font-size:13.5px;color:var(--muted);transition:.2s}.nav-links a:hover{color:var(--fg)}.btn{font-family:var(--display);font-weight:600;font-size:14px;background:var(--violet);color:#0a0a0f;padding:11px 20px;border-radius:8px;border:none;cursor:pointer;transition:transform .18s,box-shadow .25s,background .2s}.btn:hover{transform:translateY(-2px);background:var(--violet-bright);box-shadow:0 10px 30px rgba(139,92,246,.4)}
-.sec{padding:90px 0;border-top:1px solid var(--border-soft)}.sec h1{font-family:var(--display);font-weight:700;font-size:clamp(32px,5vw,60px);letter-spacing:-.02em;margin-bottom:16px}.sec .idx{font-family:var(--mono);font-size:12px;color:var(--violet);letter-spacing:.22em;text-transform:uppercase;margin-bottom:14px}
-.sec h2{font-family:var(--display);font-weight:600;font-size:26px;margin:38px 0 12px}.sec h3{font-family:var(--display);font-weight:600;font-size:19px;margin:24px 0 8px;color:var(--violet-bright)}.sec p{font-family:var(--mono);font-size:16px;color:var(--muted);max-width:760px;margin-bottom:12px}.sec p b{color:var(--fg);font-weight:500}
-.code{background:#07070c;border:1px solid var(--border-soft);border-radius:12px;padding:20px;font-family:var(--mono);font-size:13.5px;line-height:1.8;overflow-x:auto;margin:12px 0 18px;color:#c9c2e6}.code .c{color:var(--muted2)}.code .k{color:var(--violet-bright)}.code .s{color:#7fdca4}
-.chips{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}.chip{font-family:var(--mono);font-size:13px;color:var(--muted);border:1px solid var(--border-soft);background:var(--panel);border-radius:999px;padding:8px 15px}
-.footer{border-top:1px solid var(--border-soft);padding:54px 0 40px;margin-top:30px}.footer-in{display:flex;justify-content:space-between;flex-wrap:wrap;gap:26px}.footer .col a{display:block;color:var(--muted);font-family:var(--mono);font-size:13.5px;margin-bottom:9px}.footer .col a:hover{color:var(--violet-bright)}.footer .tag{color:var(--muted2);font-family:var(--mono);font-size:12.5px;max-width:280px}.footer-base{border-top:1px solid var(--border-soft);margin-top:34px;padding-top:20px;color:var(--muted2);font-family:var(--mono);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}.magic{color:var(--violet-bright)}
-@media(max-width:820px){.nav-links{display:none}}
-</style>
+<link rel="stylesheet" href="assets/styles.css" />
 </head>
 <body>
-<header class="nav"><div class="wrap nav-in">
-  <a class="logo" href="index.html"><span class="moon"></span>POORMAD</a>
-  <nav class="nav-links"><a href="index.html#suite">Products</a><a href="index.html#features">Platform</a><a href="index.html#developers">Developers</a><a href="about.html">About</a><a href="docs.html">Docs</a><a href="faq.html">FAQ</a></nav>
-  <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter Portal →</a>
-</div></header>
 
-<section class="sec wrap">
-  <div class="idx">Docs</div>
-  <h1>Getting started</h1>
-  <p>PoorMad runs as a single agent behind a gateway. Every surface — CLI, desktop, web portal, messengers — connects to that gateway and shares the same memory.</p>
-
-  <h2>Install</h2>
-  <div class="code"><span class="c"># Python</span><br/><span class="k">pip install</span> poormad-agent<br/><br/><span class="c"># or download the desktop app</span><br/>→ <a href="https://github.com/Tayyaba22/poormad-agent/releases" target="_blank" rel="noopener" style="color:var(--violet-bright)">github.com/.../releases</a></div>
-
-  <h2>Connect a surface</h2>
-  <div class="code"><span class="c"># every surface talks JSON-RPC over WebSocket</span><br/><span class="k">from</span> poormad <span class="k">import</span> GatewayClient<br/>client = <span class="k">GatewayClient</span>(<span class="s">"wss://your-agent.local/api/ws"</span>)<br/><span class="k">await</span> client.connect()</div>
-
-  <h2 id="platforms">Platforms</h2>
-  <p>One brain, twenty-plus fronts. The agent runs wherever you do:</p>
-  <div class="chips" id="plat">
-    <span class="chip">Telegram</span><span class="chip">Discord</span><span class="chip">Slack</span><span class="chip">WhatsApp</span><span class="chip">Signal</span><span class="chip">iMessage</span><span class="chip">Teams</span><span class="chip">Matrix</span><span class="chip">IRC</span><span class="chip">Email</span><span class="chip">Terminal / CLI</span><span class="chip">Desktop</span><span class="chip">Web Portal</span><span class="chip">X / Twitter</span><span class="chip">Reddit</span><span class="chip">LINE</span><span class="chip">WeChat</span><span class="chip">Google Chat</span><span class="chip">Twilio SMS</span>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="logo" href="index.html"><span class="moon"></span>POORMAD</a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="products.html">Products</a>
+      <a href="about.html">About</a>
+      <a href="docs.html">Docs</a>
+      <a href="faq.html">FAQ</a>
+      <a href="brand.html">Brand</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <a class="btn" href="https://portal.xingabot.com" target="_blank" rel="noopener">Enter Portal →</a>
   </div>
+</header>
+<section class="pagehead wrap">
+  <div class="kick">DEVELOPER FIRST · POORMAD</div>
+  <h1>Built for developers. Ready for teams.</h1>
+  <p class="sub">Data interfaces and AI modules, ready to integrate into your stack.</p>
+</section>
+<section class="sec wrap">
 
-  <h2>The learning loop</h2>
-  <h3>Skills</h3><p>When the agent solves something non-trivial, it writes a reusable skill, then sharpens it on the next run. Capability compounds locally.</p>
-  <h3>Memory</h3><p>A deepening model of who you are, searchable by meaning. No re-explaining context every session.</p>
-  <h3>Orchestration</h3><p>Tools, subagents, and scheduled jobs. Point it at any model and let it coordinate.</p>
+<p class="lead">Start the agent, point it at a model, and it begins to learn. No account required to begin.</p>
+<h3 id="install">Install</h3>
+<div class="code"><span class="c"># install the agent</span><br/>pip install poormad-agent<br/><br/><span class="c"># run it</span><br/>poormad</div>
+<h3 id="platforms">Connect a surface</h3>
+<p>Every surface — desktop, portal, messenger — talks to one gateway. Point it at your running agent:</p>
+<div class="code"><span class="k">from</span> poormad <span class="k">import</span> GatewayClient<br/>client = <span class="k">GatewayClient</span>(base_url=<span class="s">"wss://your-agent.local/api/ws"</span>, token=os.environ[<span class="s">"POORMAD_TOKEN"</span>])<br/><span class="k">await</span> client.connect()</div>
+<h3>Platforms</h3>
+<ul>
+  <li>CLI — terminal, anywhere Python runs</li>
+  <li>Desktop — native Windows &amp; macOS app</li>
+  <li>Web Portal — <a class="inline" href="https://portal.xingabot.com" target="_blank" rel="noopener">portal.xingabot.com</a></li>
+  <li>Messaging — Telegram, Discord, Slack, WhatsApp, and 20+ more</li>
+</ul>
+<h3>Skills &amp; memory</h3>
+<p>The agent writes reusable skills from experience and recalls them across sessions. Skills live in your PoorMad home and stay local.</p>
+<div class="btn-row" style="margin-top:30px"><a class="btn btn-lg" href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">Full documentation on GitHub</a><a class="btn btn-lg btn-ghost" href="faq.html">FAQ</a></div>
 
-  <h2>Portal</h2>
-  <p>The web portal is where PoorMad meets you in a browser — chat, browse sessions, and manage skills. Accounts, billing, and hosting will live there. <a href="https://portal.xingabot.com" target="_blank" rel="noopener" style="color:var(--violet-bright)">portal.xingabot.com →</a></p>
 </section>
 
-<footer class="footer"><div class="wrap"><div class="footer-in">
-  <div class="col" style="max-width:300px"><a class="logo" href="index.html" style="margin-bottom:14px"><span class="moon"></span>POORMAD</a><p class="tag">The self-improving AI agent.<br/>When the light is blocked, the stars align.</p></div>
-  <div class="col"><h4>Product</h4><a href="index.html#suite">Agent</a><a href="index.html#suite">Desktop</a><a href="index.html#suite">Portal</a><a href="index.html#suite">Messengers</a></div>
-  <div class="col"><h4>Resources</h4><a href="docs.html">Docs</a><a href="faq.html">FAQ</a><a href="about.html">About</a><a href="https://github.com/Tayyaba22/poormad-agent/releases" target="_blank" rel="noopener">Downloads</a></div>
-  <div class="col"><h4>Project</h4><a href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">GitHub</a><a href="https://github.com/Tayyaba22/poormad-agent/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a><a href="https://portal.xingabot.com" target="_blank" rel="noopener">Portal login</a></div>
-</div><div class="footer-base"><span>© 2026 PoorMad · built by one person, from one room.</span><span class="magic">MIT licensed · yours only</span></div></div></footer>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-in">
+      <div class="col" style="max-width:300px">
+        <a class="logo" href="index.html" style="margin-bottom:14px"><span class="moon"></span>POORMAD</a>
+        <p class="tag">The self-improving AI agent.<br/>When the light is blocked, the stars align.</p>
+      </div>
+      <div class="col"><h4>Product</h4><a href="products.html">Agent</a><a href="products.html">Desktop</a><a href="products.html">Portal</a><a href="products.html">Messengers</a></div>
+      <div class="col"><h4>Resources</h4><a href="docs.html">Docs</a><a href="faq.html">FAQ</a><a href="about.html">About</a><a href="https://github.com/Tayyaba22/poormad-agent/releases" target="_blank" rel="noopener">Downloads</a></div>
+      <div class="col"><h4>Project</h4><a href="https://github.com/Tayyaba22/poormad-agent" target="_blank" rel="noopener">GitHub</a><a href="https://github.com/Tayyaba22/poormad-agent/blob/main/LICENSE" target="_blank" rel="noopener">MIT License</a><a href="https://portal.xingabot.com" target="_blank" rel="noopener">Portal login</a></div>
+    </div>
+    <div class="footer-base">
+      <span>© 2026 PoorMad · built by one person, from one room.</span>
+      <span class="magic">MIT licensed · yours only</span>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
