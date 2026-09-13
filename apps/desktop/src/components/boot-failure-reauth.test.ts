@@ -182,9 +182,7 @@ describe('signInLabel', () => {
   })
 
   it('OAuth gateway names the provider', () => {
-    expect(signInLabel({ url: 'x', isPassword: false, providerLabel: 'PoorMad' })).toBe(
-      'Sign in with PoorMad'
-    )
+    expect(signInLabel({ url: 'x', isPassword: false, providerLabel: 'PoorMad' })).toBe('Sign in with PoorMad')
   })
 
   it('null reauth falls back to the generic provider phrase', () => {

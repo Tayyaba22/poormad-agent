@@ -1,5 +1,5 @@
-import { Box, Text, useStdout } from '@poormad/ink'
 import { useStore } from '@nanostores/react'
+import { Box, Text, useStdout } from '@poormad/ink'
 import { type ReactNode } from 'react'
 
 import { $uiTheme } from '../app/uiStore.js'

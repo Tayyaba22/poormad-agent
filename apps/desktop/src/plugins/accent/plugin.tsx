@@ -13,7 +13,7 @@
  * authored.
  */
 
-import type { PoorMadPlugin, PaletteContribution } from '@poormad/plugin-sdk'
+import type { PaletteContribution, PoorMadPlugin } from '@poormad/plugin-sdk'
 import { $accentOverride, PALETTE_AREA, setAccentOverride, STATUSBAR_AREAS } from '@poormad/plugin-sdk'
 
 import { AccentPickerTrigger } from './picker'

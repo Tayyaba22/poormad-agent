@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
 import { useEffect, useMemo, useRef, useState } from 'react'
 
-import { getElevenLabsVoices, getPoorMadConfigSchema, savePoorMadConfig } from '@/poormad'
 import { useI18n } from '@/i18n'
+import { getElevenLabsVoices, getPoorMadConfigSchema, savePoorMadConfig } from '@/poormad'
 import { notifyError } from '@/store/notifications'
 import type { PoorMadConfigRecord } from '@/types/poormad'
 

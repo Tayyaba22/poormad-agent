@@ -8,8 +8,8 @@ import {
 } from '@/app/right-sidebar/terminal/terminal-font'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { savePoorMadConfig } from '@/poormad'
 import { useI18n } from '@/i18n'
+import { savePoorMadConfig } from '@/poormad'
 import { notifyError } from '@/store/notifications'
 import type { PoorMadConfigRecord } from '@/types/poormad'
 

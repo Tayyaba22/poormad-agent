@@ -2,9 +2,9 @@ import { type ConnectionState, type GatewayEvent, registryBackendScopeKey, resol
 import { atom } from 'nanostores'
 
 import type { PoorMadConnection } from '@/global'
-import { PoorMadGateway, setApiRequestConnection } from '@/poormad'
 import { reconnectBackoffDelayMs } from '@/lib/reconnect-backoff'
 import { RECONNECT_ATTEMPT_TIMEOUT_MS, withTimeout } from '@/lib/with-timeout'
+import { PoorMadGateway, setApiRequestConnection } from '@/poormad'
 import { markNativeNotifyBaseline } from '@/store/notify-baseline'
 import { setConnection, setGatewayState } from '@/store/session'
 

@@ -4,13 +4,13 @@ import type {
   CustomEndpointUpdate,
   CustomEndpointValidationResponse,
   EnvVarInfo,
-  PoorMadConfig,
-  PoorMadConfigRecord,
   LogsResponse,
   OAuthPollResponse,
   OAuthProvidersResponse,
   OAuthStartResponse,
   OAuthSubmitResponse,
+  PoorMadConfig,
+  PoorMadConfigRecord,
   StatusResponse
 } from '@/types/poormad'
 

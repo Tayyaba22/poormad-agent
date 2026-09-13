@@ -47,7 +47,7 @@ import {
 import { dashboardFallbackArgs, sourceDeclaresServe } from './backend-command'
 import { createBackendConnectionState } from './backend-connection-state'
 import { BackendDialClaims } from './backend-dial-claim'
-import { buildDesktopBackendEnv, poormadManagedNodePathEntries, normalizePoorMadHomeRoot } from './backend-env'
+import { buildDesktopBackendEnv, normalizePoorMadHomeRoot, poormadManagedNodePathEntries } from './backend-env'
 import {
   isReauthRequiredError,
   makePoorMadCloudBackendDownError,
@@ -4634,7 +4634,8 @@ function createActiveBackend(backendArgs) {
 function resolvePoorMadBackend(backendArgs) {
   // 1. Explicit override -- POORMAD_DESKTOP_POORMAD_ROOT points at a developer
   //    checkout. Honour it as-is (no bootstrap; the user is driving).
-  const overrideRoot = process.env.POORMAD_DESKTOP_POORMAD_ROOT && path.resolve(process.env.POORMAD_DESKTOP_POORMAD_ROOT)
+  const overrideRoot =
+    process.env.POORMAD_DESKTOP_POORMAD_ROOT && path.resolve(process.env.POORMAD_DESKTOP_POORMAD_ROOT)
 
   if (overrideRoot && isPoorMadSourceRoot(overrideRoot)) {
     const backend = createPythonBackend(overrideRoot, `PoorMad source at ${overrideRoot}`, backendArgs)

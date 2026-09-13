@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest'
 
 import {
   normalizePoorMadOpenString,
-  pathFromPoorMadDeepLink,
   pathFromOpenDeepLink,
+  pathFromPoorMadDeepLink,
   resolvePoorMadOpenPath
 } from './poormad-open-target'
 

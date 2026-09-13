@@ -106,8 +106,8 @@ export {
   GatewayReauthRequiredError,
   type GatewayWsConnection,
   type GatewayWsUrlResult,
-  type PoorMadWebSocketUrlOptions,
   isGatewayReauthRequired,
+  type PoorMadWebSocketUrlOptions,
   resolveGatewayWsUrl,
   type ResolveGatewayWsUrlDeps,
   type WebSocketAuthParam

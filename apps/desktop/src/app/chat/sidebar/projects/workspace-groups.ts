@@ -1,6 +1,6 @@
 import type { PoorMadGitWorktree } from '@/global'
-import type { ProjectInfo, SessionInfo } from '@/poormad'
 import { normalize } from '@/lib/text'
+import type { ProjectInfo, SessionInfo } from '@/poormad'
 
 import { rankSessions } from '../order'
 

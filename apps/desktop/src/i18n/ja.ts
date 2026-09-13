@@ -1096,7 +1096,8 @@ export const ja = defineLocale({
       activeBackend: '使用中',
       activeBackendHint: 'これが現在アクティブなバックエンドです',
       useBackend: 'このバックエンドを使う',
-      nousIncluded: 'PoorMad サブスクリプションに含まれています。有効にするには PoorMad Portal にサインインしてください。',
+      nousIncluded:
+        'PoorMad サブスクリプションに含まれています。有効にするには PoorMad Portal にサインインしてください。',
       nousAuthNeededTitle: 'PoorMad Portal にサインイン',
       nousAuthNeededMessage: provider =>
         `${provider} は保存されましたが、PoorMad Portal にサインインするまで有効になりません。`,
@@ -2247,7 +2248,8 @@ export const ja = defineLocale({
     done: '完了',
     applyingBody:
       'PoorMad アップデーターが独自のウィンドウで引き継ぎ、完了後に自動的に PoorMad を再度開きます。更新中はご自分で PoorMad を開き直さないでください。',
-    applyingBodyBackend: 'リモートバックエンドが更新を適用して再起動します。復帰すると PoorMad が自動的に再接続します。',
+    applyingBodyBackend:
+      'リモートバックエンドが更新を適用して再起動します。復帰すると PoorMad が自動的に再接続します。',
     applyingClose: 'このウィンドウは更新中に閉じ、その後 PoorMad が自動的に再度開きます。',
     errorTitle: '更新が完了しませんでした',
     errorBody: 'ご安心ください。何も失われていません。今すぐ再試行できます。',

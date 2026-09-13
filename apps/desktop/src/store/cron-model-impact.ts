@@ -1,5 +1,5 @@
-import { getApiRequestProfile, setModelAssignment } from '@/poormad'
 import { translateNow } from '@/i18n'
+import { getApiRequestProfile, setModelAssignment } from '@/poormad'
 import { requestCronReview } from '@/store/cron'
 import {
   beginCronModelImpactAssignment,
