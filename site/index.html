@@ -5,12 +5,23 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>PoorMad — The self-improving AI agent</title>
 <meta name="description" content="PoorMad is a self-improving AI agent. One brain across CLI, desktop, web portal, and 20+ messaging platforms. Local-first, open source, yours only." />
+<meta name="theme-color" content="#0a0a0f" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="PoorMad" />
+<meta property="og:title" content="POORMAD — The self-improving AI agent" />
+<meta property="og:description" content="One brain across CLI, desktop, web portal, and 20+ messaging platforms. Local-first, open source, yours only." />
+<meta property="og:url" content="https://xingabot.com/" />
+<meta property="og:image" content="https://xingabot.com/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="POORMAD — The self-improving AI agent" />
+<meta name="twitter:description" content="Local-first, open-source AI agent. One brain, six surfaces, 20+ messengers." />
+<meta name="twitter:image" content="https://xingabot.com/og-image.png" />
 <link rel="icon" href="favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css?v=20260829c" />
-<script defer src="assets/motion.js?v=20260829c"></script>
+<link rel="stylesheet" href="assets/styles.css?v=20260829m" />
+<script defer src="assets/motion.js?v=20260829m"></script>
 </head>
 <body>
 <header class="topnav">
@@ -25,21 +36,44 @@
 </header>
 
 <section class="hero">
+  <div class="hero-dots"></div>
+  <!-- hero art: concentric violet orbits -->
+  <svg class="hero-art" viewBox="0 0 900 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <radialGradient id="hg" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#a78bfa" stop-opacity=".9"/>
+        <stop offset="55%" stop-color="#7c3aed" stop-opacity=".35"/>
+        <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <circle cx="450" cy="250" r="210" fill="url(#hg)"/>
+    <g stroke="#8b5cf6" stroke-opacity=".5" fill="none">
+      <ellipse cx="450" cy="250" rx="300" ry="120"/>
+      <ellipse cx="450" cy="250" rx="300" ry="120" transform="rotate(60 450 250)"/>
+      <ellipse cx="450" cy="250" rx="300" ry="120" transform="rotate(120 450 250)"/>
+    </g>
+    <circle cx="450" cy="250" r="34" fill="#c4b5fd"/>
+    <circle cx="450" cy="250" r="34" fill="#7c3aed" fill-opacity=".4"/>
+  </svg>
   <div class="page hero-center" data-parallax="0.05">
     <div class="kick" data-reveal="fade-up" data-reveal-delay="100">built by one person · from one room</div>
-    <h1 class="hero-word" data-reveal="fade-up" data-reveal-delay="200">POORMAD</h1>
+    <h1 class="hero-word" data-reveal="fade-up" data-reveal-delay="200"><span class="hw-l1">POORMAD</span><span class="hw-l2">AGENT</span></h1>
     <p class="sub hero-tag" data-reveal="fade-up" data-reveal-delay="380">An AI agent that learns, remembers, and stays yours. One brain across the CLI, a native desktop app, a web portal, and 20+ messaging platforms. Local-first and open source.</p>
     <div class="btn-row" data-reveal="fade-up" data-reveal-delay="520">
       <a class="btn btn-lg" data-magnetic="0.3" id="download-btn" href="https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-win-x64.exe">⬇ Download <span id="os-name"></span></a>
       <a class="btn btn-lg btn-ghost" data-magnetic="0.3" href="https://portal.xingabot.com" target="_blank" rel="noopener">Open Portal</a>
+    </div>
+    <div class="strip" data-reveal="fade-up" data-reveal-delay="640" style="gap:10px">
+      <a class="pill" href="https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0/PoorMad-0.18.0-win-x64.exe">Windows</a>
+      <a class="pill" href="https://github.com/Tayyaba22/poormad-agent/releases/download/v0.18.0-mac-arm64.dmg">macOS</a>
+      <a class="pill" href="https://github.com/Tayyaba22/poormad-agent#install">Linux / Source</a>
+      <a class="pill" href="https://portal.xingabot.com">Web Portal</a>
     </div>
     <div class="strip" data-reveal="fade-up" data-reveal-delay="800">
       <span class="pill"><b>CLI</b> · Terminal</span><span class="pill"><b>Desktop</b> · Windows / macOS</span>
       <span class="pill"><b>Web Portal</b></span><span class="pill"><b>20+</b> Messaging platforms</span>
       <span class="pill"><b>MIT</b> · Open source</span>
     </div>
-
-    <!-- LIVE STATS — count-up -->
     <div class="strip" data-reveal="fade-up" data-reveal-delay="950" style="margin-top:26px;gap:18px">
       <span class="pill" style="padding:9px 16px"><b data-count="20" data-count-dur="1600">0</b> platforms</span>
       <span class="pill" style="padding:9px 16px"><b data-count="6" data-count-dur="1100">0</b> surfaces</span>
@@ -47,7 +81,32 @@
       <span class="pill" style="padding:9px 16px"><b data-count="1" data-count-dur="600">0</b> agent core</span>
     </div>
   </div>
+  <div class="hero-scroll" aria-hidden="true"><span class="mouse"></span><span>scroll</span></div>
 </section>
+
+<!-- INTERACTIVE TERMINAL DEMO -->
+<section class="sec"><div class="page">
+  <div class="idx" data-reveal="fade-up">Try it live</div>
+  <h2 data-reveal="fade-up" data-reveal-delay="80">Talk to your agent. Right here.</h2>
+  <p class="lead" data-reveal="fade-up" data-reveal-delay="160">A real feel for the PoorMad loop — commands, subagents, and memory. Type anything below.</p>
+  <div class="term" data-reveal="fade-up" data-reveal-delay="240">
+    <div class="term-bar"><i class="r"></i><i class="y"></i><i class="g"></i><span class="t">poormad — zsh</span></div>
+    <div class="term-body"></div>
+    <div class="term-input"><span class="pr">$</span><input type="text" placeholder="type a command and press Enter…" aria-label="terminal input" /></div>
+  </div>
+  <div class="term-hints" data-reveal="fade-up" data-reveal-delay="340">
+    <span class="th-t">try</span>
+    <button class="th-chip" data-cmd="help">help</button>
+    <button class="th-chip" data-cmd="whoami">whoami</button>
+    <button class="th-chip" data-cmd="joke">joke</button>
+    <button class="th-chip" data-cmd="quote">quote</button>
+    <button class="th-chip" data-cmd="skills">skills</button>
+    <button class="th-chip" data-cmd="coffee">coffee</button>
+    <button class="th-chip" data-cmd="hack">hack</button>
+    <button class="th-chip" data-cmd="star">star</button>
+    <button class="th-chip" data-cmd="clear">clear</button>
+  </div>
+</div></section>
 
 <section class="sec"><div class="page">
   <div class="idx" data-reveal="fade-up">Product Suite</div>
@@ -61,6 +120,24 @@
   </div>
 </div></section>
 
+<!-- SHOWCASE: SVG capability cards -->
+<section class="sec"><div class="page">
+  <div class="idx" data-reveal="fade-up">Capabilities</div>
+  <h2 data-reveal="fade-up" data-reveal-delay="80">What makes it feel alive</h2>
+  <p class="lead" data-reveal="fade-up" data-reveal-delay="160">Small details, compounding locally — the agent gets better the more you use it.</p>
+  <div class="featrow" data-reveal-group>
+    <div class="f" data-tilt="3">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.6"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="3.2"/></svg>
+      <div class="k" style="margin-top:12px">Self-learning</div><h4>Skills that stick</h4><p>Every solved task can become a reusable skill — your agent's toolkit grows without you lifting a finger.</p></div>
+    <div class="f" data-tilt="3">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.6"><path d="M4 7h16M4 12h16M4 17h10"/><circle cx="19" cy="17" r="2"/></svg>
+      <div class="k" style="margin-top:12px">Memory</div><h4>Recall across sessions</h4><p>Lessons, preferences, and context persist in your PoorMad home — nothing resets when you close the app.</p></div>
+    <div class="f" data-tilt="3">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#a78bfa" stroke-width="1.6"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><path d="M6 8.4v4a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-4M12 14.4V16"/></svg>
+      <div class="k" style="margin-top:12px">Orchestration</div><h4>Subagents &amp; tools</h4><p>Spawns focused workers, drives a real terminal and browser, and coordinates long-running jobs in parallel.</p></div>
+  </div>
+</div></section>
+
 <section class="sec"><div class="page">
   <div class="idx" data-reveal="fade-up">Platform</div>
   <h2 data-reveal="fade-up" data-reveal-delay="80">Built for control. Built to be yours.</h2>
@@ -69,6 +146,19 @@
     <div class="f" data-tilt="3"><div class="k">API Access</div><h4>One gateway</h4><p>A single WebSocket/JSON-RPC gateway connects every surface to the agent. Bring your own model.</p></div>
     <div class="f" data-tilt="3"><div class="k">Security</div><h4>Local-first</h4><p>Memory and skills live in your PoorMad home. Privacy by default — nothing leaves your control unless you choose.</p></div>
     <div class="f" data-tilt="3"><div class="k">Modular Design</div><h4>Skills &amp; tools</h4><p>Clear module boundaries. The agent extends itself by writing skills, so capability compounds locally.</p></div>
+  </div>
+</div></section>
+
+<!-- WHY LOCAL-FIRST -->
+<section class="sec"><div class="page">
+  <div class="idx" data-reveal="fade-up">Why local-first</div>
+  <h2 data-reveal="fade-up" data-reveal-delay="80">Your data stays in your room.</h2>
+  <p class="lead" data-reveal="fade-up" data-reveal-delay="160">Most agents ship your context to someone else's servers. PoorMad keeps the brain where you are.</p>
+  <div class="numrow" data-reveal-group>
+    <div class="it" data-tilt="3"><div class="n">PRIVATE</div><h4>On-device memory</h4><p>Memory, skills, and sessions live in your PoorMad home — encrypted at rest, never sold, never mined.</p></div>
+    <div class="it" data-tilt="3"><div class="n">OPEN</div><h4>MIT licensed</h4><p>Read the source. Fork it. Run it on your own hardware. No lock-in, no black box.</p></div>
+    <div class="it" data-tilt="3"><div class="n">PORTABLE</div><h4>Bring your model</h4><p>Point PoorMad at any OpenAI-compatible endpoint or provider — DeepSeek, GLM, or your own rig.</p></div>
+    <div class="it" data-tilt="3"><div class="n">ALWAYS ON</div><h4>20+ surfaces</h4><p>One agent core, reachable from the terminal, desktop, web, and every messenger you already use.</p></div>
   </div>
 </div></section>
 
@@ -86,6 +176,9 @@
       </div>
     </div>
     <div class="code" data-reveal="slide-left" data-reveal-delay="200">
+      <div class="term" style="margin:0">
+        <div class="term-bar"><i class="r"></i><i class="y"></i><i class="g"></i><span class="t">poormad — python</span></div>
+        <div class="term-body" style="min-height:auto">
 <span class="c"># connect any surface to the gateway</span><br/>
 <span class="k">from</span> poormad <span class="k">import</span> GatewayClient<br/><br/>
 client = <span class="k">GatewayClient</span>(<br/>
@@ -94,6 +187,8 @@ client = <span class="k">GatewayClient</span>(<br/>
 )<br/>
 <span class="k">await</span> client.connect()<br/>
 <span class="c"># same brain, every front</span>
+        </div>
+      </div>
     </div>
   </div>
 </div></section>

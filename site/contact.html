@@ -9,8 +9,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/styles.css?v=20260829c" />
-<script defer src="assets/motion.js?v=20260829c"></script>
+<link rel="stylesheet" href="assets/styles.css?v=20260829m" />
+<script defer src="assets/motion.js?v=20260829m"></script>
 </head>
 <body>
 <header class="topnav">
@@ -27,11 +27,12 @@
 <div class="idx" data-reveal="fade-up">Contact</div>
 <h2 data-reveal="fade-up" data-reveal-delay="0">Reach out</h2>
 <p class="lead" data-reveal="fade-up">Questions, partnerships, or just want to say hi? We read everything.</p>
-<form onsubmit="return false">
-  <div class="field"><label>Name</label><input type="text" placeholder="Your name" /></div>
-  <div class="field"><label>Email</label><input type="email" placeholder="you@domain.com" /></div>
-  <div class="field"><label>Message</label><textarea rows="5" placeholder="What's on your mind?"></textarea></div>
-  <a class="btn btn-lg" href="mailto:tayyabafakhar.biz@gmail.com" data-magnetic="0.2">Send a note</a>
+<form id="contact-form" novalidate>
+  <div class="field"><label>Name</label><input type="text" id="cf-name" placeholder="Your name" autocomplete="name" /></div>
+  <div class="field"><label>Email</label><input type="email" id="cf-email" placeholder="you@domain.com" autocomplete="email" /></div>
+  <div class="field"><label>Message</label><textarea rows="5" id="cf-msg" placeholder="What's on your mind?"></textarea></div>
+  <button type="submit" class="btn btn-lg" data-magnetic="0.2">Send a note</button>
+  <p class="note" id="cf-status" style="margin-top:14px;min-height:1.2em"></p>
 </form>
 <p class="note" style="margin-top:20px">Or email us directly at <a class="inline" href="mailto:tayyabafakhar.biz@gmail.com">tayyabafakhar.biz@gmail.com</a>.</p>
 </div></section>

@@ -167,7 +167,7 @@
   }
 
   /* ---------- PARALLAX ---------- */
-  if (!reduce) {
+  if (!reduce && !matchMedia("(pointer:coarse)").matches) {
     const onScroll = () => {
       const y = window.scrollY;
       R("[data-parallax]").forEach((el) => {
@@ -306,6 +306,7 @@
   /* ---------- LAVA ENGINE ---------- */
   (() => {
     if (reduce) return;
+    if (matchMedia("(pointer:coarse)").matches) return; // skip on touch: perf/smoothness
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
     /* --- Lava metaball canvas (background flow) --- */
@@ -414,6 +415,214 @@
       hero.insertBefore(lava, hero.firstChild);
     });
   })();
+
+  /* ---------- CUSTOM LAVA CURSOR ---------- */
+  if (!reduce && matchMedia("(hover:hover) and (pointer:fine)").matches) {
+    const cur = document.createElement("div"); cur.className = "pm-cursor";
+    const dot = document.createElement("div"); dot.className = "pm-cursor-dot";
+    document.body.appendChild(cur); document.body.appendChild(dot);
+    document.body.classList.add("pm-cursor-on");
+    let cx = innerWidth / 2, cy = innerHeight / 2, dx = cx, dy = cy;
+    addEventListener("pointermove", (e) => {
+      dx = e.clientX; dy = e.clientY;
+      dot.style.transform = `translate(${dx}px,${dy}px) translate(-50%,-50%)`;
+    });
+    const loop = () => {
+      cx += (dx - cx) * 0.18; cy += (dy - cy) * 0.18;
+      cur.style.transform = `translate(${cx}px,${cy}px) translate(-50%,-50%)`;
+      requestAnimationFrame(loop);
+    };
+    loop();
+    // grow on interactive elements
+    R("a,button,.btn,[data-tilt],input,.term").forEach((el) => {
+      el.addEventListener("mouseenter", () => cur.classList.add("pm-hover"));
+      el.addEventListener("mouseleave", () => cur.classList.remove("pm-hover"));
+    });
+  }
+
+  /* ---------- INTERACTIVE TERMINAL DEMO ---------- */
+  const BANNER = [
+    '  ____   _    _  ____  ____  __  __  ____   ___  ',
+    ' |  _ \\ | |  | |/ ___||  _ \\|  \\/  ||  _ \\ / _ \\ ',
+    ' | |_) || |  | |\\___ \\| | | | |\\/| || |_) | | | |',
+    ' |  __/ | |__| | ___)| |_| | |  | ||  __/| |_| |',
+    ' |_|     \\____/ |____/|____/|_|  |_||_|    \\___/ ',
+    '',
+    '<span class="dim">PoorMad terminal · v0.18.0 · type <span class="pr">help</span> for fun commands</span>',
+  ].map((l) => ({ t: `<span class="pr">${l.replace(/</g, "&lt;")}</span>`, d: 60 }));
+  const FUN = {
+    help: '<span class="dim">try:</span> whoami · joke · quote · skills · coffee · hack · star · moon · sleep · clear',
+    whoami: 'poormad — a self-improving AI agent. one brain, six surfaces, 20+ messengers.',
+    joke: 'Why did the agent cross the terminal? To get to the other <span class="pr">~</span>.',
+    quote: '<span class="ok">“When the light is blocked, the stars align.”</span>',
+    skills: '🧠 142 skills learned · 38 written this week · memory growing locally.',
+    coffee: '<span class="ok">☕ brewing…</span> agent is now 12% more awake. (just kidding, it is always awake)',
+    hack: '<span class="ok">▮▮▮ hacking the mainframe…</span> <span class="dim">just kidding — everything you see runs on your own machine. try: skills</span>',
+    star: '<span class="ok">★ thanks!</span> github.com/Tayyaba22/poormad-agent — star it if you feel the vibe.',
+    moon: 'the moon you see in the logo? that is the <span class="pr">light being blocked</span>. the stars aligned anyway.',
+    sleep: '<span class="dim">zzz…</span> <span class="ok">resting 0.4s</span> — done. agents dream in <span class="pr">curl</span>.',
+    clear: '__CLEAR__',
+  };
+  R(".term").forEach((term) => {
+    const body = ONE(".term-body", term);
+    const input = ONE(".term-input input", term);
+    if (!body || !input) return;
+    const seq = [
+      ...BANNER,
+      { t: '<span class="pr">poormad</span> <span class="dim">~</span> $ poormad --version', d: 240 },
+      { t: '<span class="ok">PoorMad v0.18.0</span> · agent core online', d: 460 },
+      { t: '<span class="pr">poormad</span> <span class="dim">~</span> $ poormad chat "summarize my repo"', d: 260 },
+      { t: '▍ <span class="dim">spawning subagents · reading memory · 12 files scanned</span>', d: 700 },
+      { t: '<span class="ok">✓ done</span> — wrote summary to <span class="pr">~/notes/repo.md</span>', d: 440 },
+      { t: '<span class="dim">one brain · cli · desktop · portal · 20+ messengers — try typing below ↓</span>', d: 200 },
+    ];
+    let i = 0;
+    let stopped = false;
+    const play = () => {
+      if (stopped) return;
+      if (i >= seq.length) { input.parentElement.style.display = ""; return; }
+      const ln = document.createElement("div");
+      ln.className = "ln"; ln.innerHTML = seq[i].t;
+      body.appendChild(ln);
+      i++;
+      setTimeout(play, seq[i - 1].d + 200);
+    };
+    input.parentElement.style.display = "none";
+    if (body.getBoundingClientRect().top < innerHeight && body.getBoundingClientRect().bottom > 0) play();
+    else {
+      const obs = new IntersectionObserver((es) => {
+        es.forEach((e) => { if (e.isIntersecting) { play(); obs.disconnect(); } });
+      }, { threshold: 0.3 });
+      obs.observe(term);
+    }
+    input.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter") return;
+      const v = input.value.trim();
+      if (!v) return;
+      stopped = true;
+      const cmd = document.createElement("div");
+      cmd.className = "ln";
+      cmd.innerHTML = `<span class="pr">poormad</span> <span class="dim">~</span> $ ${v.replace(/</g, "&lt;")}`;
+      body.appendChild(cmd);
+      const key = v.toLowerCase().split(" ")[0];
+      let out = FUN[key];
+      if (out === "__CLEAR__") { body.innerHTML = ""; }
+      else if (out) {
+        const r = document.createElement("div"); r.className = "ln"; r.innerHTML = out; body.appendChild(r);
+      } else {
+        const r = document.createElement("div");
+        r.className = "ln dim";
+        r.textContent = `“${v}” — connect a model to run real commands. This is a live demo. (try: help)`;
+        body.appendChild(r);
+      }
+      body.scrollTop = body.scrollHeight;
+      input.value = "";
+    });
+    // clickable hint chips → run the command
+    R(".th-chip", term.parentElement).forEach((c) => {
+      c.addEventListener("click", () => {
+        input.value = c.dataset.cmd;
+        input.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter", bubbles: true }));
+      });
+    });
+  });
+
+  /* ---------- hero subtle dot pattern drift ---------- */
+  const hdots = ONE(".hero-dots");
+  if (hdots && !reduce) {
+    addEventListener("pointermove", (e) => {
+      const dx = (e.clientX / innerWidth - 0.5) * 18;
+      const dy = (e.clientY / innerHeight - 0.5) * 18;
+      hdots.style.backgroundPosition = `${dx}px ${dy}px`;
+    }, { passive: true });
+  }
+
+  /* ---------- hero scroll hint: fade once user scrolls ---------- */
+  const hscroll = ONE(".hero-scroll");
+  if (hscroll) {
+    document.addEventListener("scroll", () => {
+      hscroll.classList.toggle("scrolled", scrollY > 90);
+    }, { passive: true });
+  }
+
+  /* ---------- CONTACT FORM: real mailto submission (no backend) ---------- */
+  const cf = ONE("#contact-form");
+  if (cf) {
+    const status = ONE("#cf-status");
+    cf.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = (ONE("#cf-name").value || "").trim();
+      const email = (ONE("#cf-email").value || "").trim();
+      const msg = (ONE("#cf-msg").value || "").trim();
+      if (!email || !msg) {
+        if (status) { status.textContent = "Add your email and a message so we can reply."; status.style.color = "var(--muted)"; }
+        return;
+      }
+      const subject = encodeURIComponent(`PoorMad contact — ${name || "hello"}`);
+      const body = encodeURIComponent(`${msg}\n\n— ${name || "anon"}\n${email}`);
+      window.location.href = `mailto:tayyabafakhar.biz@gmail.com?subject=${subject}&body=${body}`;
+      if (status) { status.textContent = "Opening your mail app… if nothing happens, email tayyabafakhar.biz@gmail.com"; status.style.color = "var(--violet-bright)"; }
+    });
+  }
+
+  /* ---------- MOBILE MENU (hamburger + slide-down panel) ---------- */
+  const topnavEl = ONE(".topnav");
+  if (topnavEl) {
+    const links = ONE(".topnav-links", topnavEl);
+    const right = ONE(".topnav-right", topnavEl);
+    if (links) {
+      const burger = document.createElement("button");
+      burger.className = "pm-burger";
+      burger.setAttribute("aria-label", "Menu");
+      burger.setAttribute("aria-expanded", "false");
+      burger.innerHTML = "<span></span><span></span><span></span>";
+      topnavEl.querySelector(".topnav-in").appendChild(burger);
+      const panel = document.createElement("div");
+      panel.className = "pm-mmenu";
+      panel.setAttribute("role", "dialog");
+      const clone = links.cloneNode(true);
+      clone.classList.remove("topnav-links");
+      clone.classList.add("pm-mlinks");
+      panel.appendChild(clone);
+      if (right) {
+        const r2 = right.cloneNode(true);
+        r2.classList.remove("topnav-right");
+        r2.classList.add("pm-mright");
+        panel.appendChild(r2);
+      }
+      topnavEl.appendChild(panel);
+      const close = () => {
+        burger.classList.remove("open");
+        panel.classList.remove("open");
+        burger.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("pm-menu-open");
+      };
+      burger.addEventListener("click", () => {
+        const open = panel.classList.toggle("open");
+        burger.classList.toggle("open", open);
+        burger.setAttribute("aria-expanded", String(open));
+        document.body.classList.toggle("pm-menu-open", open);
+      });
+      panel.addEventListener("click", (e) => { if (e.target.closest("a")) close(); });
+      document.addEventListener("click", (e) => {
+        if (!e.target.closest(".topnav") && panel.classList.contains("open")) close();
+      });
+      addEventListener("resize", () => { if (innerWidth > 900) close(); });
+    }
+  }
+
+  /* ---------- reveal safety: never leave blank invisible blocks ---------- */
+  addEventListener("load", () => {
+    setTimeout(() => {
+      R("[data-reveal]").forEach((el) => el.classList.add("is-visible"));
+    }, 1200);
+  });
+  // also reveal anything still hidden shortly after first scroll
+  let _safeFired = false;
+  addEventListener("scroll", () => {
+    if (_safeFired) return; _safeFired = true;
+    setTimeout(() => R("[data-reveal]:not(.is-visible)").forEach((el) => el.classList.add("is-visible")), 600);
+  }, { once: true, passive: true });
 
   /* ---------- OS-AWARE DOWNLOAD (existing) ---------- */
   const dl = ONE("#download-btn");

@@ -383,8 +383,8 @@ $script:ResolvedPathReport = @{
 # Configuration
 # ============================================================================
 
-$RepoUrlSsh = "git@github.com:PoorMad/poormad-agent.git"
-$RepoUrlHttps = "https://github.com/Tayyaba22/poormad-agent.git"
+$RepoUrlSsh = "git@github.com:M-hammad007/poormad-agent.git"
+$RepoUrlHttps = "https://github.com/M-hammad007/poormad-agent.git"
 $PythonVersion = "3.11"
 # Minor versions the installer accepts when the requested $PythonVersion isn't
 # available, in preference order.  uv discovers both uv-managed and system
