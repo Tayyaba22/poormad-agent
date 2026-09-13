@@ -2281,13 +2281,13 @@ function Install-Repository {
                 # for.  GitHub supports archive URLs for commits, tags, and
                 # branches; we honour Commit > Tag > Branch.
                 if ($Commit) {
-                    $zipUrl = "https://github.com/Tayyaba22/poormad-agent/archive/$Commit.zip"
+                    $zipUrl = "https://github.com/M-hammad007/poormad-agent/archive/$Commit.zip"
                     $zipLabel = $Commit
                 } elseif ($Tag) {
-                    $zipUrl = "https://github.com/Tayyaba22/poormad-agent/archive/refs/tags/$Tag.zip"
+                    $zipUrl = "https://github.com/M-hammad007/poormad-agent/archive/refs/tags/$Tag.zip"
                     $zipLabel = $Tag
                 } else {
-                    $zipUrl = "https://github.com/Tayyaba22/poormad-agent/archive/refs/heads/$Branch.zip"
+                    $zipUrl = "https://github.com/M-hammad007/poormad-agent/archive/refs/heads/$Branch.zip"
                     $zipLabel = $Branch
                 }
                 $zipPath = "$env:TEMP\poormad-agent-$zipLabel.zip"
